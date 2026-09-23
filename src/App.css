@@ -1,0 +1,29 @@
+.product-card-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 40px 24px 64px;
+}
+
+.product-card-grid {
+  align-items: start;
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1080px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .product-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .product-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 340px;
+  }
+}

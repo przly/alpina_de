@@ -1,0 +1,371 @@
+@property --card-zoom {
+  inherits: true;
+  initial-value: 1;
+  syntax: '<number>';
+}
+
+.product-card {
+  --ease-card: cubic-bezier(0.23, 1, 0.32, 1);
+  --duration-card-enter: 320ms;
+  --duration-card-exit: 180ms;
+  max-width: 340px;
+  position: relative;
+  transition: transform 220ms var(--ease-card);
+  width: 100%;
+}
+
+.product-card:active {
+  transform: scale(0.98);
+  transition-duration: 160ms;
+}
+
+/* Inner controls press themselves, not the card underneath them. */
+.product-card:has(.product-card__thumbnail:active),
+.product-card:has(.product-card__wishlist:active) {
+  transform: none;
+}
+
+.product-card__main-img {
+  --card-zoom: 1.04;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  position: relative;
+  transition:
+    background-color var(--duration-card-exit) var(--ease-card),
+    --card-zoom var(--duration-card-exit) var(--ease-card);
+}
+
+.product-card:hover .product-card__main-img {
+  --card-zoom: 1;
+  transition-duration: var(--duration-card-enter);
+}
+
+.product-card:hover .product-card__main-img[data-hover-image='true'] {
+  background-color: #e5e5e5;
+}
+
+.product-card__main-img[data-hover-image='false']::after {
+  background-color: rgba(0, 0, 0, 0.06);
+  content: '';
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity var(--duration-card-exit) var(--ease-card);
+}
+
+.product-card:hover .product-card__main-img[data-hover-image='false']::after {
+  opacity: 1;
+  transition-duration: var(--duration-card-enter);
+}
+
+.product-card__slides {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.product-card__slide {
+  align-items: center;
+  display: none;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.product-card__slide.is-active {
+  display: flex;
+}
+
+.product-card__slide img {
+  max-height: 85%;
+  max-width: 85%;
+  mix-blend-mode: multiply;
+  object-fit: contain;
+}
+
+/*
+ * No transition declared here on purpose: every layer derives its scale from
+ * the ancestor's --card-zoom, which is what actually animates (above). Reading
+ * the live inherited value keeps all layers pixel-identical every frame,
+ * whether a card has a hover-image or not, instead of layering a second,
+ * independently-eased transition on top.
+ */
+.product-card__slide img,
+.product-card__hover-image {
+  transform: scale(var(--card-zoom));
+}
+
+.product-card__hover-image {
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity var(--duration-card-exit) var(--ease-card);
+  will-change: opacity, transform;
+}
+
+.product-card:hover .product-card__hover-image {
+  opacity: 1;
+  transition-duration: var(--duration-card-enter);
+}
+
+.product-card__hover-image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-card__wishlist {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-radius: 100%;
+  color: #171717;
+  cursor: pointer;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  transition:
+    background-color 300ms var(--ease-card),
+    transform 140ms var(--ease-card);
+  width: 36px;
+  z-index: 2;
+}
+
+.product-card__wishlist:active {
+  transform: scale(0.98);
+  transition-duration: 100ms;
+}
+
+.product-card__wishlist-icon {
+  pointer-events: none;
+  transition: color 300ms var(--ease-card);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card__wishlist:hover {
+    background-color: #ffffff;
+  }
+}
+
+.product-card__wishlist.is-active {
+  background-color: #ed1c24;
+}
+
+.product-card__wishlist.is-active .product-card__wishlist-icon {
+  color: #ffffff;
+}
+
+.product-card__top-tag,
+.product-card__bottom-tag {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.product-card__top-tag {
+  left: 12px;
+  top: 12px;
+}
+
+.product-card__bottom-tag {
+  bottom: 12px;
+  left: 12px;
+}
+
+.product-card__tag.tag {
+  align-items: center;
+  background-color: #ed1c24;
+  border-radius: 100px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 600;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+  min-height: 23px;
+  padding: 4px 12px;
+  text-align: center;
+}
+
+.product-card__tag.tag.blue {
+  background-color: #9ddcf9;
+  color: #266b82;
+}
+
+.product-card__thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.product-card__thumbnail {
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  pointer-events: auto;
+  transition:
+    border-color 300ms var(--ease-card),
+    transform 140ms var(--ease-card);
+  width: 44px;
+}
+
+.product-card__thumbnail:active {
+  transform: scale(0.98);
+  transition-duration: 100ms;
+}
+
+.product-card__thumbnail.is-active {
+  border-color: #a1a1a1;
+}
+
+.product-card__thumbnail img {
+  max-height: 75%;
+  max-width: 75%;
+  mix-blend-mode: multiply;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.product-card__title {
+  color: #171717;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-top: 12px;
+}
+
+.product-card__text {
+  color: #737373;
+  font-size: 12px;
+  letter-spacing: 0.24px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.product-card__footer {
+  margin-top: 12px;
+}
+
+.product-card__price-slashed {
+  color: #737373;
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.product-card__footer-bottom {
+  align-items: flex-end;
+  display: flex;
+  gap: 8px;
+}
+
+.product-card__price {
+  color: #171717;
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.product-card__footer-bottom .product-card__tag.tag {
+  flex-shrink: 0;
+  position: relative;
+  top: 1px;
+}
+
+.product-card__lowest-price {
+  color: #737373;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+  margin-left: auto;
+  text-align: right;
+}
+
+.product-card__link {
+  inset: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .product-card__title {
+    font-size: 18px;
+  }
+
+  .product-card__footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .product-card__lowest-price {
+    margin: 0;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-card__main-img,
+  .product-card:hover .product-card__main-img,
+  .product-card__wishlist,
+  .product-card__wishlist-icon,
+  .product-card__thumbnail {
+    transition: none;
+  }
+
+  /* Swap the press-down scale for a non-motion dim — still confirms the tap landed. */
+  .product-card:active {
+    transform: none;
+    opacity: 0.85;
+  }
+
+  /* These already confirm the tap via their own state change (border/background), no substitute needed. */
+  .product-card__wishlist:active,
+  .product-card__thumbnail:active {
+    transform: none;
+  }
+
+  /* Pinned at rest and on hover, so the coupled scale() never moves any layer. */
+  .product-card__main-img {
+    --card-zoom: 1;
+  }
+
+  /* Keep a short cross-fade — the reduced-motion-safe stand-in for the scale-and-fade reveal. */
+  .product-card__hover-image {
+    transition: opacity 150ms ease;
+  }
+
+  .product-card:hover .product-card__hover-image {
+    transition-duration: 150ms;
+  }
+}
