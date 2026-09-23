@@ -41,15 +41,6 @@
     --card-zoom var(--duration-card-exit) var(--ease-card);
 }
 
-.product-card:hover .product-card__main-img {
-  --card-zoom: 1;
-  transition-duration: var(--duration-card-enter);
-}
-
-.product-card:hover .product-card__main-img[data-hover-image='true'] {
-  background-color: #e5e5e5;
-}
-
 .product-card__main-img[data-hover-image='false']::after {
   background-color: rgba(0, 0, 0, 0.06);
   content: '';
@@ -60,9 +51,21 @@
   transition: opacity var(--duration-card-exit) var(--ease-card);
 }
 
-.product-card:hover .product-card__main-img[data-hover-image='false']::after {
-  opacity: 1;
-  transition-duration: var(--duration-card-enter);
+/* Hover-driven zoom/crossfade/dim only apply on devices that actually hover — never on touch/tap. */
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-card__main-img {
+    --card-zoom: 1;
+    transition-duration: var(--duration-card-enter);
+  }
+
+  .product-card:hover .product-card__main-img[data-hover-image='true'] {
+    background-color: #e5e5e5;
+  }
+
+  .product-card:hover .product-card__main-img[data-hover-image='false']::after {
+    opacity: 1;
+    transition-duration: var(--duration-card-enter);
+  }
 }
 
 .product-card__slides {
@@ -111,9 +114,11 @@
   will-change: opacity, transform;
 }
 
-.product-card:hover .product-card__hover-image {
-  opacity: 1;
-  transition-duration: var(--duration-card-enter);
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-card__hover-image {
+    opacity: 1;
+    transition-duration: var(--duration-card-enter);
+  }
 }
 
 .product-card__hover-image img {
