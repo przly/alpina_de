@@ -1,27 +1,11 @@
 # Alpina Animations
 
-A React + Vite sandbox for prototyping UI motion for the Alpina site before it's
-built into the real theme. Currently holds a recreation of the product card
-(`source/components/02-molecules/product-card/`) from the
-[`164-1-alpina-prenova`](ssh://git@code.specto.si:22015/alpina/164-1-alpina-prenova.git)
-repo, rebuilt in React with reworked hover/press animations.
-
 ## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
-
-## Favicon (dev vs. prod)
-
-The tab icon differs by build mode, wired through Vite's `%VITE_*%` HTML
-interpolation — no JS involved:
-
-- `.env.development` → `/favicon-dev.png` (used by `npm run dev`)
-- `.env.production` → `/favicon-prod.png` (used by `npm run build`, i.e. Vercel)
-
-`index.html` references `%VITE_FAVICON%`; Vite substitutes it per-mode.
 
 ## What changed from the original `product-card` component
 
