@@ -1,0 +1,56 @@
+/* No site header on this page, so drop the header offset and centre the trigger on screen */
+.language-popup-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Options are buttons here instead of radio labels, so they need to fill the row */
+.language-switch__form .dropdown__list-option {
+  text-align: left;
+}
+
+.language-switch__form .dropdown__placeholder {
+  text-align: left;
+}
+
+/* Open/close motion from ngen_design's /modal-demo (`.t-modal` + `.t-modal-backdrop`):
+   scale 0.96 → 1 with a fade, 250ms in / 150ms out on one curve. The Alpina form fades
+   backdrop and panel together, so its opacity drives both and the inner panel only scales. */
+.language-switch__form {
+  --modal-open-dur: 250ms;
+  --modal-close-dur: 150ms;
+  --modal-scale: 0.96;
+  --modal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition:
+    opacity var(--modal-close-dur) var(--modal-ease),
+    visibility 0s linear var(--modal-close-dur);
+}
+
+.language-switch__form.is-open {
+  transition:
+    opacity var(--modal-open-dur) var(--modal-ease),
+    visibility 0s;
+}
+
+.language-switch__form-inner {
+  transform: scale(var(--modal-scale));
+  transition: transform var(--modal-close-dur) var(--modal-ease);
+  will-change: transform;
+}
+
+.language-switch__form.is-open .language-switch__form-inner {
+  transform: scale(1);
+  transition: transform var(--modal-open-dur) var(--modal-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-switch__form,
+  .language-switch__form-inner {
+    transition: none !important;
+  }
+}

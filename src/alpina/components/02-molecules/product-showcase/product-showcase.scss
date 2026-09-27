@@ -1,0 +1,297 @@
+// **************************************************
+// Product Showcase
+// **************************************************
+
+@import '../../../scss/import';
+
+.product-showcase {
+	max-width: 921px;
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+
+	// ##################################################
+
+	&__main {
+		flex: auto;
+
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			width: calc(100% - 104px);
+			overflow: hidden;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			width: 100%;
+		}
+
+		// ##################################################
+
+		.swiper {
+			height: 100%;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			// ##################################################
+
+			&-wrapper {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					width: auto;
+				}
+			}
+		}
+
+		// ##################################################
+
+		.swiper-scrollbar {
+			@extend %enable_scrollbar_sync;
+			position: relative;
+			width: calc(100% - 40px);
+			height: 4px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 8;
+			margin: 16px 0 0;
+			bottom: auto;
+			top: auto;
+			background-color: var(--color-gray-100);
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				width: calc(100% - 32px);
+			}
+
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				display: none;
+			}
+		}
+
+		.swiper-scrollbar-thumb {
+			background-color: var(--color-gray-950);
+		}
+	}
+
+	// ##################################################
+
+	[data-slider-parent] .swiper {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			width: 100%;
+			margin-left: 0;
+			padding-left: 0;
+			padding-right: 0;
+
+			&::before,
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__image {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 652px;
+		background-color: var(--color-gray-100);
+
+		// Tablet L and down
+		@media #{$breakpoint-md-down} {
+			height: 500px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			height: 600px;
+			padding: 12px 12px 46px;
+		}
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			height: 0;
+			padding-bottom: 90%;
+		}
+
+		// ##################################################
+
+		&-wrap {
+			position: relative;
+		}
+
+		// ##################################################
+
+		&--main {
+			cursor: pointer;
+		}
+	}
+
+	// ##################################################
+
+	&__thumb {
+		width: 98px;
+		flex: 0 0 98px;
+		position: relative;
+
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			padding-left: 8px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			display: none;
+		}
+
+		// ##################################################
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 40px;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+			z-index: 3;
+		}
+
+		// ##################################################
+
+		.swiper {
+			height: 652px;
+			padding-bottom: 44px;
+
+			// Tablet L and down
+			@media #{$breakpoint-md-down} {
+				height: 500px;
+			}
+		}
+
+		// ##################################################
+
+		.swiper-scrollbar {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__thumb-image {
+		aspect-ratio: 1/1;
+		padding: 6px;
+		cursor: pointer;
+		position: relative;
+		transition: transform 50ms var(--easing-slow);
+
+		// ##################################################
+
+		&:hover {
+			background-color: var(--color-gray-100);
+
+			// stylelint-disable-next-line
+			.#{$class_active_thumb_slide} & {
+				background-color: var(--color-gray-50);
+			}
+		}
+
+		// ##################################################
+
+		&:active {
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				transform: scale(0.95);
+			}
+		}
+
+		@media (hover: none) {
+			&:active {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					transform: scale(0.95);
+				}
+			}
+		}
+
+		// ##################################################
+		// Animated Border
+
+		&::before {
+			@extend %content;
+			border: 2px solid var(--color-gray-950);
+			z-index: 3;
+			opacity: 0;
+			pointer-events: none;
+			border-radius: inherit;
+
+			// stylelint-disable-next-line
+			.#{$class_active_thumb_slide} & {
+				opacity: 1;
+			}
+		}
+
+		// ##################################################
+
+		img {
+			// width: 100%;
+			// height: auto;
+			// object-fit: contain;
+		}
+	}
+
+	.swiper-slide {
+		height: auto;
+	}
+
+	// ##################################################
+
+	.no-cropping {
+		img {
+			object-fit: contain !important;
+			object-position: center;
+		}
+	}
+
+	// ##################################################
+
+	.swiper-scrollbar {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: none;
+		}
+	}
+
+	// ##################################################
+
+	img {
+		mix-blend-mode: multiply;
+	}
+
+	// ##################################################
+
+	&--single-slide {
+		.product-showcase__main {
+			width: 100%;
+		}
+	}
+}

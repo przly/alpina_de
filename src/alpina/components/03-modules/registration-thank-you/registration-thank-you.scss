@@ -1,0 +1,18 @@
+@import '../../../scss/import';
+
+.registration-thank-you {
+	padding: 80px 0;
+
+	&__content {
+		max-width: 686px;
+		margin: 0 auto;
+	}
+
+	&__text {
+		margin: 24px 0 40px;
+	}
+
+	@media #{$breakpoint-sm-down} {
+		padding: 48px 0;
+	}
+}

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated from src/alpina/scss by scripts/build-alpina-css.mjs
+src/alpina/css

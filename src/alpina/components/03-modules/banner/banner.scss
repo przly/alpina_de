@@ -1,0 +1,99 @@
+// **************************************************
+// Banner
+// **************************************************
+
+@import '../../../scss/import';
+
+.banner {
+	// ##################################################
+
+	.container {
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			max-width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	.breadcrumbs {
+		position: relative;
+		z-index: 3;
+		color: var(--color-white);
+
+		&__item {
+			opacity: 0.5;
+
+			&:last-child {
+				opacity: 1;
+				color: var(--color-white);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__body {
+		height: 450px;
+		display: flex;
+		flex-direction: column;
+		padding: 48px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			height: 380px;
+			padding: 32px;
+		}
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			padding: 24px;
+			height: 320px;
+			border-radius: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__image {
+		// Overlay
+		&::after {
+			@extend %content;
+			background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
+			z-index: 2;
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		z-index: 3;
+		display: grid;
+		grid-gap: 24px;
+		margin-top: auto;
+	}
+
+	// ##################################################
+
+	.title {
+		color: var(--color-white);
+	}
+
+	// ##################################################
+
+	&__buttons {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	// ##################################################
+
+	.btn {
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			min-height: 26px;
+			padding: 4px 12px;
+		}
+	}
+}

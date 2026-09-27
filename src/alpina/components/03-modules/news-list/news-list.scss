@@ -1,0 +1,48 @@
+@import '../../../scss/import';
+
+.news-list {
+	&__more {
+		margin-top: 32px;
+		text-align: center;
+	}
+
+	&__items {
+		margin-top: 32px;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 40px 20px;
+
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr 1fr;
+
+			.news-card {
+				max-width: 100%;
+			}
+		}
+
+		@media #{$breakpoint-xs-only} {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__title {
+		margin-bottom: 12px;
+	}
+
+	&__filters {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+
+		.btn {
+			&.is-active {
+				color: $cgp_white;
+				background-color: $cgp_red_500;
+			}
+		}
+	}
+
+	&__main-card {
+		margin-bottom: 60px;
+	}
+}

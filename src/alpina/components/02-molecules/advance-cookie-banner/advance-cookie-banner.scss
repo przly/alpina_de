@@ -1,0 +1,329 @@
+// ##################################################
+// Cookie banner
+// ##################################################
+
+@import '../../../scss/import';
+
+.advance-cookie-banner {
+	font-size: 16px;
+	line-height: 1.5;
+
+	// ##################################################
+
+	&__bar {
+		position: fixed;
+		right: 24px;
+		width: calc(100% - 40px);
+		bottom: 24px;
+		z-index: $zindex_cookie_notice;
+		max-height: 100vh;
+		transition: opacity 0.5s ease;
+		padding: 24px;
+		opacity: 0;
+		pointer-events: none;
+		background-color: $cgp_gray_50;
+		max-width: 550px;
+		border-radius: 16px;
+		font-size: 12px;
+		line-height: 1.5;
+		letter-spacing: 0.02em;
+
+		@media #{$breakpoint-sm-down} {
+			right: 20px;
+			bottom: 20px;
+			padding: 24px 20px;
+		}
+
+		// If Cookie is not set
+		// stylelint-disable-next-line
+		.#{$class_cookie_not_set} & {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+
+	// ##################################################
+
+	&__inner {
+		position: relative;
+		z-index: 3;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-gap: 24px;
+		align-items: center;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr;
+			grid-gap: 20px;
+		}
+	}
+
+	// ##################################################
+
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	// ##################################################
+
+	&__button {
+		display: flex;
+		align-items: center;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-wrap: wrap;
+			gap: 15px;
+		}
+	}
+
+	// ##################################################
+
+	.btn {
+		// ##################################################
+
+		&--cookie-setting {
+			white-space: nowrap;
+			transition: color 0.3s ease;
+			color: $cgp_gray_500;
+			font-size: 14px;
+		}
+
+		// ##################################################
+
+		&--accept-cookie {
+			margin-left: 24px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				margin-left: 0;
+			}
+		}
+
+		// ##################################################
+
+		&[disabled] {
+			pointer-events: none;
+			opacity: 0.4;
+
+			&::after {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: $zindex_modal;
+		opacity: 0;
+		pointer-events: none;
+		overflow: auto;
+		transition: opacity 0.4s ease;
+		padding: 28px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			padding: 18px 10px;
+			font-size: 14px;
+		}
+
+		// stylelint-disable-next-line
+		&.#{$class_open_modal} {
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		// ##################################################
+
+		&-close {
+			position: absolute;
+			top: 20px;
+			z-index: 9;
+			right: 20px;
+			padding: 10px;
+
+			.icon {
+				pointer-events: none;
+				width: 20px;
+				height: 20px;
+			}
+		}
+
+		// ##################################################
+
+		&-overlay {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba($cgp_black, 0.8);
+			z-index: #{$zindex_cookie_notice + 1};
+		}
+
+		// ##################################################
+
+		&-body {
+			position: relative;
+			margin: 0 auto;
+			width: 100%;
+			max-width: 830px;
+			border-radius: 16px;
+			background-color: $cgp_gray_50;
+			z-index: #{$zindex_cookie_notice + 2};
+			padding: 40px;
+			padding-top: 28px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				padding: 20px;
+				padding-top: 24px;
+				border-radius: 12px;
+			}
+		}
+
+		// ##################################################
+
+		&-header {
+			border-bottom: 0.5px solid currentColor;
+			padding: 0 0 20px 0;
+			margin-bottom: 40px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				padding: 0 0 16px;
+				margin-bottom: 30px;
+			}
+		}
+
+		// ##################################################
+
+		&-content {
+			// ##################################################
+
+			.editor-text {
+				margin-bottom: 18px;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					margin-bottom: 22px;
+				}
+
+				// ##################################################
+
+				p {
+					margin-top: 20px;
+					margin-bottom: 20px;
+
+					// ##################################################
+
+					&:first-child {
+						margin-top: 0;
+					}
+
+					// ##################################################
+
+					a {
+						text-decoration: underline;
+
+						&:hover {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-item {
+			margin-bottom: 18px;
+			position: relative;
+
+			&.is-necessary {
+				.mod-toggle {
+					pointer-events: none;
+					opacity: 0;
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-cookie-title {
+			margin-bottom: 18px;
+			padding-right: 140px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				padding-right: 80px;
+				margin-bottom: 8px;
+			}
+		}
+
+		// ##################################################
+
+		&-active-label {
+			position: absolute;
+			right: 12px;
+			top: 0;
+			font-weight: 600;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				font-size: 12px;
+				top: 4px;
+			}
+		}
+
+		// ##################################################
+
+		&-footer {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 36px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				flex-direction: column;
+				gap: 16px;
+			}
+
+			// ##################################################
+
+			.btn {
+				&__text {
+					// Tablet P and Up
+					@media #{$breakpoint-sm-up} {
+						flex-shrink: 0;
+					}
+				}
+			}
+		}
+
+		// ##################################################
+
+		.mod-toggle {
+			position: absolute;
+			right: 14px;
+			top: 0;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				right: 0;
+			}
+		}
+	}
+}

@@ -7,7 +7,13 @@ npm install
 npm run dev
 ```
 
-## What changed from the original `product-card` component
+`npm run dev` / `npm run build` first compile the Alpina SCSS in
+`src/alpina` into `src/alpina/css/bundle.css` (gitignored), mirroring the
+repo's gulp CSS task. Routes: `/` (product card), `/activities-module`,
+`/language-popup`. A route switcher sits in the top-right corner of every
+page (sandbox-only, not part of Alpina).
+
+## product-card animation changes and fixes
 
 Not a 1:1 port — the motion was redesigned. For porting back into
 `164-1-alpina-prenova`:
@@ -38,3 +44,46 @@ Not a 1:1 port — the motion was redesigned. For porting back into
 
 Everything else (typography, spacing, tag variants, DOM structure) matches
 the original.
+
+## activities-module animation changes and fixes
+
+Rendered with the original markup and the site stylesheet; only the motion
+and the buttons differ. For porting back into `164-1-alpina-prenova`:
+
+- **Directional image shift on desktop hover.** Was a plain Swiper
+  crossfade. Now, hovering a lower title makes the outgoing image drift down
+  `56px` while the incoming one drops in from `-56px` above (reversed when
+  moving up), on top of the `400ms` crossfade. Done with the Web Animations
+  API, starting from the image's current transform so an interrupted hover
+  never jumps. Images overscan the frame by `56px` top and bottom
+  (`top: -56px; height: calc(100% + 112px)`) so the shift never shows an
+  edge. Skipped under `prefers-reduced-motion`.
+- **Button moves with the image.** `.activities-module__buttons` gets the
+  same shift, same direction and timing, but only `24px`.
+- **One curve for the whole module.** Image shift, desktop fade and tablet
+  slide all use `cubic-bezier(0.23, 1, 0.32, 1)` (was Swiper's default ease).
+- **One button per category.** Was the same "Shop Women" / "Shop Men" pair
+  on every card; now a single `Shop <category>` button (e.g. "Shop Alpine").
+- **Static pattern on desktop.** The per-slide `pattern-animation` is
+  replaced by one pattern over the slider so it stays put while images
+  change, at half the repo's desktop sizes (`315 / 200 / 125px`).
+
+## language popup (`language-switch__form`) animation changes
+
+Clone of the language popup on `/language-popup`, opened from a centred
+button. The repo only had the SCSS here, so the markup (title, country /
+language dropdowns with `dropdown--tertiary`, Confirm button) is rebuilt
+from the class names; content is placeholder. For porting back:
+
+- **Open/close motion replaced** with the modal transition from
+  `ngen_design`'s `/modal-demo` (`.t-modal` + `.t-modal-backdrop`). Was a
+  flat `0.3s ease` fade with the panel scaling `0.9 → 1` over `600ms`. Now
+  the panel scales `0.96 → 1`, with the backdrop and panel fading together:
+  `250ms` open, `150ms` close, both on `cubic-bezier(0.22, 1, 0.36, 1)`.
+  Tokens: `--modal-open-dur`, `--modal-close-dur`, `--modal-scale`,
+  `--modal-ease`. Disabled under `prefers-reduced-motion`.
+- **Closing:** ✕, backdrop click, Escape and Confirm. The first Escape
+  closes an open dropdown before the popup; only one dropdown opens at a
+  time; focus returns to the trigger on close.
+- **Not ported:** flags load from flagcdn.com (no flag assets in this
+  sandbox); Confirm only closes the popup.

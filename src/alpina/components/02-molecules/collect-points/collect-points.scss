@@ -1,0 +1,88 @@
+// **************************************************
+// Collect Points
+// **************************************************
+
+@import '../../../scss/import';
+
+.collect-points {
+	position: relative;
+	width: 100%;
+	max-width: 1040px;
+	margin: 0 auto;
+	display: grid;
+	grid-gap: 24px;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__body {
+		padding: 48px 24px;
+		flex-direction: column;
+		gap: 8px;
+		text-align: center;
+		box-shadow: var(--shadow-soft);
+	}
+
+	// ##################################################
+
+	&__top {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+		margin-bottom: 20px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			gap: 24px;
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		display: flex;
+		gap: 12px;
+		align-items: center;
+	}
+
+	// ##################################################
+
+	&__arrow {
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			rotate: 90deg;
+		}
+	}
+
+	// ##################################################
+
+	&__circle {
+		flex-shrink: 0;
+		width: 64px;
+		height: 64px;
+		border-radius: 100%;
+		color: var(--color-white) !important;
+		box-shadow: 0 25px 7px 0 rgba(0, 0, 0, 0), 0 16px 6px 0 rgba(0, 0, 0, 0.01), 0 9px 5px 0 rgba(0, 0, 0, 0.05),
+			0 4px 4px 0 rgba(0, 0, 0, 0.09), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+		background-color: var(--color-red-500);
+		border: 0.5px solid var(--color-red-400);
+	}
+
+	// ##################################################
+
+	&__title {
+		letter-spacing: 0;
+	}
+
+	// ##################################################
+
+	&__title,
+	&__text {
+		max-width: 540px;
+		text-align: center;
+	}
+}

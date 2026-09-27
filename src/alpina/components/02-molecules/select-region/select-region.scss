@@ -1,0 +1,167 @@
+// **************************************************
+// Select Region
+// **************************************************
+
+@import '../../../scss/import';
+
+.select-region {
+	width: 100%;
+	position: fixed;
+	z-index: $zindex_landing_modal;
+	left: 0;
+	top: 0;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	padding: 24px;
+	background-color: var(--color-white);
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.4s var(--easing-ease);
+
+	// Tablet L and up
+	@media #{$breakpoint-md-up} {
+		@include scrollbar(4px, rgba($cgp_gray_400, 0.5), transparent, 8px);
+	}
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		gap: 0;
+	}
+
+	// ##################################################
+
+	// stylelint-disable-next-line
+	&.#{$class_open_region_modal},
+	.#{$class_open_region_modal} & {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	// ##################################################
+
+	&__header {
+		padding-bottom: 24px;
+	}
+
+	// ##################################################
+
+	&__logo {
+		img {
+			width: auto;
+			height: 29px;
+			object-fit: contain;
+			object-position: left center;
+		}
+	}
+
+	// ##################################################
+
+	&__body {
+		flex: auto;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-gap: 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr;
+			grid-gap: 24px;
+		}
+	}
+
+	// ##################################################
+
+	&__left {
+		padding: 40px 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		min-height: 100%;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			padding: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__right {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			order: -1;
+			padding-bottom: 56.24%;
+			height: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__form {
+		max-width: 450px;
+	}
+
+	// ##################################################
+
+	&__separator {
+		position: relative;
+		display: flex;
+		height: 1px;
+		border-top: 0.5px solid var(--color-gray-200);
+
+		span {
+			padding: 0 10px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			background-color: var(--color-white);
+			z-index: 3;
+		}
+	}
+
+	// ##################################################
+
+	&__button {
+		margin-top: 40px;
+
+		.btn {
+			width: 100%;
+
+			.icon {
+				width: 18px;
+				height: 12px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.language-form {
+		margin: 28px 0 40px;
+	}
+
+	// ##################################################
+
+	.hero-module__pattern {
+		width: 380px;
+		transform: translate(23%, 33%);
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 150px;
+		}
+	}
+
+	// ##################################################
+
+	.dropdown {
+		&__label {
+			margin-bottom: 8px;
+		}
+	}
+}

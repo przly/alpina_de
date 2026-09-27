@@ -1,0 +1,312 @@
+// **************************************************
+// Modal
+// **************************************************
+
+@import '../../../scss/import';
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1002;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	will-change: opacity, visibility;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+
+	// Tablet L and up
+	@media #{$breakpoint-md-up} {
+		@include scrollbar(4px, rgba($cgp_gray_400, 0.5), transparent, 8px);
+	}
+
+	// ###########################################################
+
+	// stylelint-disable-next-line
+	&.#{$class_open_modal} {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+	}
+
+	// ##################################################
+
+	&__overlay {
+		position: fixed;
+		pointer-events: all;
+		background-color: rgba($cgp_black, 0.25);
+	}
+
+	// ##################################################
+
+	&__inner {
+		max-width: 922px;
+		width: 100%;
+		margin: auto;
+		border-radius: 16px;
+		background-color: var(--color-white);
+		position: relative;
+		z-index: 4;
+		transform: scale(0.95);
+		will-change: transform;
+		border: 0.5px solid var(--color-gray-200);
+		box-shadow: var(--shadow-soft);
+		transition: transform 0.3s var(--easing-expressive-in-out);
+
+		// ###########################################################
+		// stylelint-disable-next-line
+		.#{$class_open_modal} & {
+			transform: scale(1);
+		}
+	}
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px;
+		align-items: center;
+		padding: 24px;
+		border-bottom: 0.5px solid var(--color-gray-200);
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			padding: 20px;
+		}
+
+		// ##################################################
+
+		.title {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				font-size: 20px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__close {
+		position: relative;
+		margin-left: auto;
+		flex-shrink: 0;
+	}
+
+	// ##################################################
+
+	&__body {
+		display: grid;
+		grid-template-columns: 1fr 29.5%;
+		align-items: flex-start;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr 35%;
+		}
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			grid-template-columns: 1fr;
+		}
+
+		// ##################################################
+
+		&-left {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		// ##################################################
+
+		&-right {
+			padding: 20px;
+			height: 100%;
+			border-left: 0.5px solid var(--color-gray-200);
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				order: -1;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.store-card {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.product-card {
+		&__title {
+			font-size: 16px;
+		}
+
+		// ##################################################
+
+		&__price {
+			font-size: 12px;
+		}
+	}
+
+	// ##################################################
+
+	&__store-list {
+		padding: 0 4px;
+		position: relative;
+		flex: auto;
+		height: 100%;
+
+		// ##################################################
+
+		&::before,
+		&::after {
+			@extend %content;
+			height: 4px;
+			background: linear-gradient(0deg, rgba(255, 255, 255, 0.3) 0%, rgb(255, 255, 255) 100%);
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				display: none;
+			}
+		}
+
+		// ##################################################
+
+		&::after {
+			top: initial;
+			bottom: 0;
+			transform: scaleY(-1);
+		}
+
+		// ##################################################
+
+		&-inner {
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				height: 560px;
+				overflow: auto;
+				padding: 4px 0;
+				min-height: 100%;
+			}
+
+			// ##################################################
+
+			&::-webkit-scrollbar {
+				width: 0;
+				display: none;
+			}
+
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				@include scrollbar(4px, rgba($cgp_gray_400, 0.5), transparent, 8px);
+			}
+		}
+
+		// ##################################################
+
+		&-not-found {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				position: relative;
+				height: auto;
+			}
+
+			// ##################################################
+
+			&-inner {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					margin: 40px 0;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	.mod-search {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__search-bar {
+		padding: 8px;
+		border-top: 0.5px solid var(--color-gray-200);
+	}
+
+	// ##################################################
+
+	&__filter {
+		margin-top: 16px;
+		padding-top: 16px;
+		border-top: 0.5px solid var(--color-gray-200);
+		display: grid;
+		grid-gap: 16px;
+		justify-items: center;
+
+		// ##################################################
+
+		&-clear,
+		&-clear.btn {
+			display: none;
+		}
+
+		// ##################################################
+
+		.dropdown {
+			min-width: 1px;
+			max-width: 100%;
+		}
+
+		// ##################################################
+
+		&:has(.dropdown__list-inner input:checked) {
+			.modal__filter-clear,
+			.modal__filter-clear.btn {
+				display: flex;
+			}
+		}
+	}
+}
+
+// ##################################################
+
+.login-modal {
+	text-align: center;
+
+	.title {
+		margin-bottom: 20px;
+	}
+
+	// ##################################################
+
+	.modal__inner {
+		padding: 60px;
+		max-width: 480px;
+	}
+
+	// ##################################################
+
+	.form-component__form {
+		max-width: 460px;
+	}
+
+	// ##################################################
+
+	.fv-plugins-message-container,
+	.validation-message {
+		text-align: left;
+	}
+}

@@ -1,0 +1,152 @@
+@import '../../../scss/import';
+
+.store-map {
+	position: relative;
+	height: 636px;
+	width: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+
+	&__title {
+		margin-bottom: 24px;
+	}
+
+	// ##################################################
+
+	&__inner {
+		position: relative;
+		z-index: 3;
+		pointer-events: none;
+		padding: 12px;
+		height: 100%;
+		display: flex;
+	}
+
+	// ##################################################
+
+	.location-popup {
+		pointer-events: all;
+		max-height: 100%;
+
+		@media #{$breakpoint-sm-down} {
+			max-width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	&__popup {
+		&-trigger {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			background-color: var(--color-white);
+			line-height: 1;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			min-height: 50px;
+			border-radius: 24px;
+			pointer-events: all;
+			padding: 8px 20px;
+			z-index: -1;
+			font-size: 14px;
+			font-weight: 500;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				min-height: 45px;
+				border-radius: 18px;
+			}
+
+			// ##################################################
+
+			.icon {
+				width: 12px;
+				height: 12px;
+			}
+		}
+
+		// ##################################################
+
+		&-wrapper {
+			max-width: 386px;
+			width: 100%;
+			flex-shrink: 0;
+			display: flex;
+			align-items: flex-end;
+			flex-wrap: wrap;
+			position: relative;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				overflow: hidden;
+				border-radius: 24px;
+				max-width: 100%;
+			}
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				border-radius: 18px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__extra-space {
+		flex: auto;
+	}
+
+	// ##################################################
+
+	.location-marker {
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		border: 1px solid $cgp_red_400;
+		background-color: $cgp_red_500;
+		box-shadow: 0 4px 8px -2px rgba(10, 13, 18, 0.1), 0 2px 4px -2px rgba(10, 13, 18, 0.06);
+
+		&:before {
+			content: '';
+			background: url('data:image/svg+xml,#{$icon_alpina}') no-repeat center / 100%;
+			position: absolute;
+			inset: 0;
+			width: 10px;
+			height: 10px;
+			margin: auto;
+		}
+
+		// ##################################################
+
+		&--active {
+			background-color: $cgp_gray_900;
+			border-color: $cgp_gray_800;
+		}
+
+		// ##################################################
+
+		&--retailer {
+			background-color: $cgp_white;
+			border-color: $cgp_gray_200;
+
+			&:before {
+				content: '';
+				background: url('data:image/svg+xml,#{$retailer}') no-repeat center / 100%;
+			}
+
+			&-active {
+				background-color: $cgp_gray_900;
+				border-color: $cgp_gray_800;
+
+				&:before {
+					content: '';
+					background: url('data:image/svg+xml,#{$retailer_white}') no-repeat center / 100%;
+				}
+			}
+		}
+	}
+}

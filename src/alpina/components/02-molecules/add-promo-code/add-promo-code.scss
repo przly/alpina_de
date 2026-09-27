@@ -1,0 +1,161 @@
+//**********************************************************
+// Add Promo Code
+//**********************************************************
+
+@import '../../../scss/import';
+
+.add-promo-code {
+	max-width: 568px;
+	width: 100%;
+	display: grid;
+	grid-gap: 14px;
+	margin: 0 auto;
+	@include placeholder($cgp_gray_400, 1);
+	padding: 24px;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__label {
+		margin-bottom: 6px;
+	}
+
+	// ##################################################
+
+	&__input {
+		width: 100%;
+		border: 0.5px solid var(--color-gray-200);
+		background-color: var(--color-white);
+		height: 40px;
+		font-size: 14px;
+		font-weight: 500;
+		border-radius: 8px;
+		padding: 4px 16px;
+		color: var(--color-gray-900);
+		letter-spacing: 0.02em;
+		text-overflow: ellipsis;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			font-size: 16px;
+		}
+
+		&:focus {
+			outline: none;
+			border-color: var(--color-gray-950);
+		}
+
+		// ##################################################
+
+		&-wrapper {
+			display: grid;
+			flex: auto;
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		position: relative;
+		display: grid;
+		grid-gap: 10px;
+
+		// ##################################################
+
+		&-init {
+			// ##################################################
+
+			// stylelint-disable-next-line
+			&.#{$class_validation_failed} {
+				// stylelint-disable-next-line
+				.add-promo-code__error-message {
+					display: block;
+				}
+				// stylelint-disable-next-line
+				.add-promo-code__input {
+					border-color: var(--color-red-500);
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-inner {
+			display: flex;
+			gap: 12px;
+			align-items: flex-end;
+			width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	.btn {
+		flex-shrink: 0;
+		min-height: 40px;
+	}
+
+	// ##################################################
+
+	&__data {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		position: absolute;
+		width: 100%;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	// ##################################################
+
+	&__button {
+		position: relative;
+
+		// ##################################################
+
+		&-group {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.btn {
+			padding: 4px 18px;
+			min-height: 34px;
+			font-size: 12px;
+			gap: 8px;
+		}
+
+		.icon {
+			width: 16px;
+			height: 16px;
+		}
+	}
+
+	// ##################################################
+
+	&__code {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		text-transform: uppercase;
+	}
+
+	// ##################################################
+
+	&__error-message {
+		color: var(--color-validation-failed);
+		margin-top: 6px;
+		display: none;
+	}
+}

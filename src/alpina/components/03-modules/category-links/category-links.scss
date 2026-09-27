@@ -1,0 +1,40 @@
+@import '../../../scss/import';
+
+.category-links {
+	&__title {
+		margin-bottom: 36px;
+	}
+
+	&__items {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-gap: 20px;
+
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	&__col {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+
+		@media #{$breakpoint-xs-only} {
+			gap: 12px;
+		}
+	}
+
+	.category-link {
+		color: var(--color-gray-500);
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.5;
+		letter-spacing: 0.28px;
+
+		&:hover {
+			color: $cgp_gray_950;
+		}
+	}
+}

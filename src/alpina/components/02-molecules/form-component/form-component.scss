@@ -1,0 +1,305 @@
+// **************************************************
+// Form Component
+// **************************************************
+
+@import '../../../scss/import';
+
+.form-component {
+	width: 100%;
+	position: relative;
+
+	// ##################################################
+
+	&__header {
+		margin-bottom: 36px;
+	}
+
+	// ##################################################
+
+	&__body {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-gap: 24px 20px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			grid-gap: 16px;
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		grid-column: span 2;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			grid-column: span 1;
+		}
+
+		// ##################################################
+
+		&-sub-title {
+			margin-top: 8px;
+		}
+
+		// ##################################################
+
+		&.full {
+			grid-column: span 4;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				grid-column: span 1;
+			}
+		}
+
+		// ##################################################
+
+		&.one-third {
+			grid-column: span 1;
+		}
+
+		// ##################################################
+
+		&.two-third {
+			grid-column: span 3;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				grid-column: span 1;
+			}
+		}
+
+		// ##################################################
+
+		&--checkboxes {
+			display: grid;
+			grid-gap: 12px;
+			margin-top: 10px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				margin-top: 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__required-info-text {
+		margin-bottom: 12px;
+	}
+
+	// ##################################################
+
+	&__divider {
+		display: block;
+		width: 100%;
+		height: 1px;
+		border-top: 0.5px solid var(--color-gray-200);
+	}
+
+	// ##################################################
+
+	&__form {
+		position: relative;
+		margin: 0 auto;
+		max-width: 738px;
+	}
+
+	// ##################################################
+
+	&__submit {
+		grid-column: span 4;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			grid-column: span 1;
+		}
+	}
+
+	// ##################################################
+
+	&__success {
+		display: none;
+		margin: 0 auto;
+		flex-direction: column;
+		gap: 16px;
+
+		// ##################################################
+
+		&-text {
+			max-width: 480px;
+		}
+
+		// ##################################################
+
+		&-button {
+			margin-top: auto;
+		}
+	}
+
+	// ##################################################
+
+	&__alert {
+		padding: 8px 16px;
+		width: 100%;
+		border-radius: 10px;
+		text-align: left;
+		margin-top: 20px;
+		border: 1px solid currentColor;
+		font-size: 16px;
+
+		// ##################################################
+
+		&-error {
+			color: #721c24;
+			background-color: #f8d7da;
+			border-color: #f5c6cb;
+		}
+
+		// ##################################################
+
+		&-success {
+			color: #155724;
+			background-color: #d4edda;
+			border-color: #c3e6cb;
+		}
+	}
+
+	// ##################################################
+
+	.upload-box {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	[data-validator] + [data-validator] {
+		display: none;
+	}
+
+	// ##################################################
+
+	&__checkboxes {
+		&-input {
+			width: 100%;
+
+			&.is-hidden {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.has-checkbox + .has-checkbox {
+		margin-top: -10px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-top: -4px;
+		}
+	}
+
+	// ##################################################
+
+	&__info {
+		&-text {
+			margin-top: 8px;
+		}
+
+		&-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+		}
+	}
+
+	// ##################################################
+
+	&--newsletter-form {
+		.radio-button-group__list-item {
+			flex: 1;
+		}
+	}
+
+	// ##################################################
+
+	strong {
+		font-weight: 600;
+	}
+
+	// ##################################################
+
+	&.has-toaster {
+		.form-component__success {
+			position: fixed;
+			left: 50%;
+			top: 16px;
+			z-index: $zindex_modal;
+			border: 0.5px solid var(--color-gray-200);
+			background-color: var(--color-white);
+			border-radius: 16px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			padding: 16px;
+			max-width: 356px;
+			gap: 8px;
+			pointer-events: none;
+			opacity: 0;
+			transform: translate(-50%, -100px);
+			display: block;
+			transition: transform 0.3s ease, opacity 0.3s ease;
+		}
+
+		.form-component__success-title {
+			font-size: 16px;
+		}
+
+		.form-component__success-text {
+			max-width: 100%;
+			font-size: 14px;
+			color: var(--color-gray-500);
+		}
+	}
+
+	// ##################################################
+
+	&.show-thankyou {
+		// ##################################################
+
+		.section-header,
+		.form-component__form {
+			display: none;
+		}
+
+		// ##################################################
+
+		.form-component__success {
+			display: flex;
+		}
+
+		&.has-toaster {
+			.form-component__form {
+				display: block;
+			}
+
+			.form-component__success {
+				opacity: 1;
+				pointer-events: all;
+				transform: translate(-50%, 0);
+			}
+		}
+	}
+
+	&.sms-email-only {
+		.checkbox-group__list {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 12px 20px;
+		}
+	}
+}

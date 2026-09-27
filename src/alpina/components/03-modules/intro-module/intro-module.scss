@@ -1,0 +1,33 @@
+//**********************************************************
+// Intro Module
+//**********************************************************
+
+@import '../../../scss/import';
+
+.intro-module {
+	&__inner {
+		display: grid;
+		grid-gap: 48px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-gap: 32px;
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		max-width: 520px;
+		width: 100%;
+		display: grid;
+		grid-gap: 32px;
+		justify-items: flex-start;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-gap: 20px;
+			max-width: 100%;
+		}
+	}
+}

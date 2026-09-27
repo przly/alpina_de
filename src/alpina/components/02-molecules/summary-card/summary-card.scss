@@ -1,0 +1,50 @@
+// **************************************************
+// Summary Card
+// **************************************************
+
+@import '../../../scss/import';
+
+.summary-card {
+	position: relative;
+	display: grid;
+	padding: 16px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-gap: 32px 20px;
+	box-shadow: var(--shadow-soft);
+	width: 100%;
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		grid-template-columns: 1fr;
+		grid-gap: 20px;
+	}
+
+	// ##################################################
+
+	&__item {
+		display: grid;
+		grid-gap: 8px;
+	}
+
+	// ##################################################
+
+	&__text {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		img {
+			width: 35px;
+			object-fit: contain;
+			height: auto;
+		}
+	}
+
+	// ##################################################
+
+	.editor-text {
+		p {
+			margin: 0 0 8px;
+		}
+	}
+}

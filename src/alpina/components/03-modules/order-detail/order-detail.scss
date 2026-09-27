@@ -1,0 +1,87 @@
+// **************************************************
+// Order Detail
+// **************************************************
+
+@import '../../../scss/import';
+
+.order-detail {
+	&__info {
+		display: grid;
+		grid-gap: 5px;
+		margin-bottom: 24px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			height: auto !important;
+		}
+
+		// ##################################################
+
+		&-row {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+	}
+
+	// ##################################################
+
+	&__right,
+	&__left {
+		&-inner {
+			display: grid;
+			grid-gap: 20px;
+		}
+	}
+
+	// ##################################################
+
+	&__right {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-top: 50px;
+		}
+	}
+
+	// ##################################################
+
+	.order-card-list__inner {
+		grid-gap: 20px;
+	}
+
+	// ##################################################
+
+	.summary-card {
+		padding: 24px;
+		align-items: flex-start;
+	}
+
+	// ##################################################
+
+	.cart-view {
+		max-width: 100%;
+		margin: 0;
+
+		// ##################################################
+
+		&__item {
+			&:first-child {
+				border-top: 0;
+				padding-top: 0;
+			}
+
+			// ##################################################
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.purchase-process-sidebar__prices .tag {
+		padding-left: 10px;
+	}
+}

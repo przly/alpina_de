@@ -1,0 +1,153 @@
+// **************************************************
+// Search Results
+// **************************************************
+
+@import '../../../scss/import';
+
+.search-results {
+	width: 100%;
+	overflow: hidden;
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		justify-content: space-between;
+		margin-bottom: 18px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+			gap: 8px;
+			align-items: flex-start;
+			margin-bottom: 24px;
+		}
+
+		// ##################################################
+
+		&-right {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				gap: 0;
+				width: 100%;
+				position: relative;
+			}
+		}
+
+		// ##################################################
+
+		&-separator {
+			width: 0.5px;
+			height: 20px;
+			background-color: var(--color-gray-200);
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__buttons {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-wrap: nowrap;
+			overflow: auto;
+			width: calc(100% + 40px);
+			padding: 0 20px;
+			margin-left: -20px;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		// ##################################################
+
+		.btn {
+			flex-shrink: 0;
+			min-width: 50px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				white-space: nowrap;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__list {
+		margin-top: 34px;
+		display: grid;
+		grid-gap: 160px;
+
+		// Tablet L and down
+		@media #{$breakpoint-md-down} {
+			grid-gap: 130px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-gap: 80px;
+		}
+	}
+
+	// ##################################################
+
+	&__results-text {
+		letter-spacing: 0.02em;
+	}
+
+	// ##################################################
+
+	&__item {
+		min-width: 1px;
+	}
+
+	// ##################################################
+
+	.main-products {
+		&__items {
+			grid-gap: 56px 20px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				grid-gap: 40px 20px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.seo-module {
+		.editor-text {
+			a {
+				color: var(--color-black);
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	.help-slider {
+		overflow: visible;
+	}
+}

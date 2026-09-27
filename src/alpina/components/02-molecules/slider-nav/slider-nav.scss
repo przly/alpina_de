@@ -1,0 +1,213 @@
+//*******************************************************************************
+// Slider Nav
+//*******************************************************************************
+
+@import '../../../scss/import';
+
+.slider-nav {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+
+	// Tablet P and down
+	@media #{$breakpoint-sm-down} {
+		gap: 20px;
+	}
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		width: 100%;
+	}
+
+	// ##################################################
+
+	&__button {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	// ##################################################
+
+	&__arrow {
+		position: relative;
+		width: 36px;
+		height: 36px;
+		border-radius: 100%;
+		flex-shrink: 0;
+		border: 0;
+		pointer-events: all;
+		background-color: var(--color-gray-100);
+		margin-top: 0;
+
+		// ##################################################
+
+		.icon {
+			height: 16px;
+			width: 16px;
+
+			&::before {
+				background-color: currentColor;
+			}
+		}
+
+		// ##################################################
+
+		&:hover {
+			background-color: var(--color-gray-200);
+		}
+
+		// ##################################################
+
+		svg {
+			display: none;
+		}
+
+		// ##################################################
+
+		&.swiper-button-disabled {
+			opacity: 0.33;
+			pointer-events: none;
+		}
+	}
+
+	// ##################################################
+
+	.swiper-horizontal > .swiper-scrollbar,
+	.swiper-scrollbar.swiper-scrollbar-horizontal,
+	.swiper-scrollbar {
+		height: 4px;
+		background-color: var(--color-gray-100);
+		position: relative;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		margin: 0;
+		width: 215px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 100%;
+			flex: auto;
+		}
+	}
+
+	// ##################################################
+
+	.swiper-scrollbar {
+		@extend %enable_scrollbar_sync;
+	}
+
+	// ##################################################
+
+	.swiper-scrollbar-drag {
+		cursor: grab;
+		background-color: var(--color-gray-950);
+
+		// Clickable Area
+		&::before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transform: scaleY(2);
+		}
+	}
+
+	// ##################################################
+
+	.swiper-scrollbar.swiper-scrollbar-vertical {
+		width: 2px;
+		position: relative;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		margin-top: 0;
+		height: 100%;
+		border-radius: 4px;
+		background-color: var(--color-gray-100);
+
+		// ##################################################
+
+		.swiper-scrollbar-drag {
+			border-radius: 4px;
+			background-color: var(--color-gray-950);
+
+			// Clickable Area
+			&::before {
+				transform: scaleX(2);
+			}
+		}
+	}
+
+	// ##################################################
+
+	.swiper-pagination {
+		position: relative;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 100%;
+			flex: auto;
+		}
+
+		// ##################################################
+
+		&:has(.swiper-pagination-progressbar-fill) {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				height: 4px;
+				background: var(--color-gray-100);
+				border-radius: 40px;
+				overflow: hidden;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.swiper-pagination-progressbar {
+		height: 4px;
+		background: var(--color-gray-100);
+		position: relative;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		margin: 0;
+		width: 215px;
+		border-radius: 40px;
+		overflow: hidden;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 100%;
+			flex: auto;
+		}
+
+		&-fill {
+			background-color: var(--color-gray-950);
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				border-radius: 20px;
+				display: block;
+				height: 100%;
+				transition: none !important;
+				transform: scale(1) !important;
+				width: calc((100% - var(--slider-fill-width)) * var(--slider-progress) + var(--slider-fill-width));
+			}
+		}
+	}
+
+	// ##################################################
+
+	&:has(.swiper-pagination-lock),
+	&:has(.swiper-scrollbar-lock) {
+		display: none;
+	}
+}

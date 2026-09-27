@@ -1,0 +1,116 @@
+// **************************************************
+// Profile Wishlist
+// **************************************************
+
+@import '../../../scss/import';
+
+.profile-wishlist {
+	max-width: 1040px;
+	width: 100%;
+	position: relative;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		flex-wrap: wrap;
+		margin-bottom: 24px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+		}
+
+		// ##################################################
+
+		&-nav-only {
+			&:has(.swiper-button-lock) {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.product-card {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.slider-nav {
+		margin-left: auto;
+		flex-shrink: 0;
+		justify-content: flex-end;
+	}
+
+	// ##################################################
+
+	&--list-view {
+		.profile-wishlist__header-nav-only {
+			display: none;
+		}
+
+		// ##################################################
+
+		.swiper {
+			width: 100%;
+
+			// ##################################################
+
+			&-wrapper {
+				display: grid !important;
+				grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+				gap: 0 !important;
+				grid-gap: 56px 20px !important;
+				transform: translate3d(0, 0, 0) !important;
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+					grid-gap: 40px 20px !important;
+				}
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					grid-template-columns: 1fr !important;
+					grid-gap: 30px 40px !important;
+				}
+			}
+
+			// ##################################################
+
+			&-slide {
+				width: 100% !important;
+				margin: 0 !important;
+				opacity: 1 !important;
+				display: block !important;
+			}
+		}
+
+		// ##################################################
+
+		.swiper:not(.swiper-initialized) .swiper-pagination,
+		.swiper:not(.swiper-initialized) .swiper-slide:not(:first-of-type) {
+			display: block !important;
+		}
+
+		// ##################################################
+
+		.product-card__thumbnail {
+			// Tablet L Only
+			@media #{$breakpoint-md-only} {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+}

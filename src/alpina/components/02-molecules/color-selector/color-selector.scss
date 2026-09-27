@@ -1,0 +1,111 @@
+// **************************************************
+// Color Selector
+// **************************************************
+
+@import '../../../scss/import';
+
+.color-selector {
+	max-width: 452px;
+	width: 100%;
+
+	// ##################################################
+
+	&__title {
+		margin-bottom: 8px;
+	}
+
+	// ##################################################
+
+	&__selected {
+		margin-left: 5px;
+	}
+
+	// ##################################################
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	// ##################################################
+
+	&__item {
+		position: relative;
+
+		&-label {
+			width: 44px;
+			height: 44px;
+			padding: 4px;
+			transition: transform 80ms ease;
+			border: 1px solid var(--color-gray-100);
+			border-radius: 6px;
+			margin: 0;
+			background-color: var(--color-gray-100);
+			font-size: 0;
+			line-height: 0;
+			@include user-select;
+
+			// ##################################################
+
+			img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+				mix-blend-mode: multiply;
+			}
+
+			// ##################################################
+
+			// stylelint-disable-next-line
+			&.#{$class_out_of_stock} {
+				background-color: var(--color-gray-100);
+				border-color: var(--color-gray-100);
+				color: var(--color-gray-400);
+				pointer-events: none;
+
+				// stylelint-disable-next-line
+				img {
+					opacity: 0.2;
+				}
+			}
+		}
+
+		// ##################################################
+
+		input {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 3;
+			opacity: 0;
+			cursor: pointer;
+
+			// ##################################################
+
+			&:hover ~ .color-selector__item-label {
+				border-color: var(--color-gray-400);
+				background-color: rgba($cgp_black, 0.05);
+			}
+
+			// ##################################################
+
+			&:checked ~ .color-selector__item-label {
+				border-color: var(--color-gray-400);
+				background-color: rgba($cgp_black, 0.05);
+			}
+
+			// ##################################################
+
+			&:disabled {
+				pointer-events: none;
+			}
+
+			&:active ~ .color-selector__item-label {
+				transform: scale(0.96);
+			}
+		}
+	}
+}

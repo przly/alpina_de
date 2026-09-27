@@ -1,0 +1,57 @@
+// **************************************************
+// Checkbox Group
+// **************************************************
+
+@import '../../../scss/import';
+
+.checkbox-group {
+	// ##################################################
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px 20px;
+	}
+
+	// ##################################################
+
+	&--horizontal {
+		.checkbox-group__list {
+			grid-gap: 12px;
+			flex-direction: column;
+		}
+	}
+
+	// ##################################################
+
+	.checkbox {
+		.fv-plugins-message-container,
+		.validation-message {
+			display: none;
+		}
+	}
+
+	// ##################################################
+
+	.fv-plugins-message-container,
+	.validation-message {
+		display: none;
+		margin-top: 0;
+		font-size: 12px;
+		font-weight: 500;
+	}
+
+	&.failed {
+		.fv-plugins-message-container.group-error,
+		.validation-message {
+			display: block;
+			margin-top: 8px;
+		}
+
+		// ##################################################
+
+		.checkbox__label::before {
+			border-color: var(--color-validation-failed);
+		}
+	}
+}

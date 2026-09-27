@@ -1,0 +1,114 @@
+// **************************************************
+// Free Shipping Indicator
+// **************************************************
+
+@import '../../../scss/import';
+
+.free-shipping-indicator {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 24px;
+	max-width: 525px;
+	position: relative;
+	box-shadow: var(--shadow-soft);
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		padding: 24px;
+	}
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&::before {
+		@extend %content;
+		opacity: 0.5;
+		background: repeating-linear-gradient(-45deg, white 0px, white 10px, transparent 10px, transparent 20px);
+	}
+
+	// ##################################################
+
+	&__text {
+		margin-bottom: 20px;
+		line-height: 1.5;
+
+		strong {
+			font-weight: 600;
+		}
+	}
+
+	// ##################################################
+
+	&__texts {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 6px;
+	}
+
+	// ##################################################
+
+	&__current-value {
+		transition: color 0.3s ease, transform 0.3s ease;
+	}
+
+	// ##################################################
+
+	&__progress-bar {
+		width: 100%;
+		height: 20px;
+		background-color: var(--color-white);
+		border-radius: 100px;
+		overflow: hidden;
+		padding: 2px;
+		white-space: nowrap;
+
+		// ##################################################
+
+		&-inner {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			height: 100%;
+			border-radius: 100px;
+			background-color: var(--color-red-500);
+			transition: width 300ms var(--easing-slow);
+			color: var(--color-white);
+			padding: 0 6px;
+
+			&.is-small {
+				.free-shipping-indicator__current-value {
+					color: var(--color-red-500);
+					position: absolute;
+					right: 0;
+					top: 0;
+					z-index: 1;
+					transform: translate(100%, 0);
+					padding-left: 5px;
+					line-height: 1.6;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__amount {
+		position: relative;
+		z-index: 2;
+		line-height: normal;
+		display: flex;
+		gap: 4px;
+
+		.icon {
+			width: 10px;
+			height: 10px;
+			flex-shrink: 0;
+		}
+	}
+}

@@ -1,0 +1,109 @@
+@import '../../../scss/import';
+
+.latest-news {
+	&__top {
+		margin-bottom: 48px;
+		display: flex;
+		gap: 20px;
+		align-items: center;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+			align-items: flex-start;
+			margin-bottom: 20px;
+		}
+
+		// ##################################################
+
+		.latest-news__ui {
+			margin: 0;
+			margin-left: auto;
+			flex-shrink: 0;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				width: 100%;
+			}
+		}
+
+		// ##################################################
+
+		&-button {
+			flex-shrink: 0;
+			margin-left: auto;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				margin: 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__items {
+		// Tablet P and up
+		@media #{$breakpoint-sm-up} {
+			width: calc(100% + 8px);
+			padding: 4px;
+			left: -4px;
+			position: relative;
+			padding-top: 8px;
+			top: -4px;
+		}
+
+		// ##################################################
+
+		.news-card {
+			@media #{$breakpoint-sm-down} {
+				max-width: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__main {
+		margin-bottom: 20px;
+	}
+
+	// ##################################################
+
+	.slider-nav {
+		margin-left: auto;
+		justify-content: flex-end;
+		margin-bottom: 20px;
+	}
+
+	// ##################################################
+
+	.swiper-slide {
+		height: auto;
+
+		.news-card {
+			height: 100%;
+		}
+	}
+
+	// ##################################################
+
+	&.secondary {
+		.latest-news__top-button {
+			margin: 0;
+			gap: 24px;
+		}
+
+		// ##################################################
+
+		.latest-news__top {
+			margin-bottom: 20px;
+		}
+
+		// ##################################################
+
+		.slider-nav {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,0 +1,146 @@
+// **************************************************
+// Nearby Stores
+// **************************************************
+
+@import '../../../scss/import';
+
+.nearby-stores {
+	position: relative;
+
+	// ##################################################
+	.section-header {
+		margin-bottom: 40px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			padding: 0 20px;
+		}
+	}
+
+	// ##################################################
+
+	.container {
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			max-width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	&__map {
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			border-radius: 0;
+			overflow: hidden;
+			height: 0;
+			padding-bottom: 58%;
+		}
+
+		// ##################################################
+
+		img {
+			width: 100%;
+			height: auto;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__button {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			position: absolute;
+			z-index: 3;
+			bottom: 48px;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+
+		// Small desktop and down
+		@media #{$breakpoint-lg-down} {
+			bottom: 32px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			bottom: 0;
+			margin-top: 24px;
+			text-align: center;
+		}
+	}
+
+	// ##################################################
+
+	&__pin {
+		width: 32px;
+		height: 32px;
+		background-color: var(--color-red-500);
+		border-radius: 100%;
+		color: var(--color-white);
+		box-shadow: 0 0 0 rgba($cgp_red_500, 0.4);
+		animation: pulse-effect 2s infinite;
+
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 3;
+
+		&:nth-child(1) {
+			left: 21.6%;
+			top: 35%;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				left: 1.6%;
+				top: 30%;
+			}
+		}
+
+		&:nth-child(2) {
+			left: 28.8%;
+			top: 64.6%;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				left: 13%;
+				top: 64%;
+			}
+		}
+
+		&:nth-child(3) {
+			left: 49.2%;
+			top: 28.4%;
+		}
+
+		&:nth-child(4) {
+			top: 37%;
+			left: 69%;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				top: 37%;
+				left: 75%;
+			}
+		}
+		&:nth-child(5) {
+			top: 36.5%;
+			left: 82%;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				top: 36.5%;
+				left: 90%;
+			}
+		}
+	}
+}

@@ -1,0 +1,29 @@
+// **************************************************
+// Customer Support List
+// **************************************************
+
+@import '../../../scss/import';
+
+.customer-support-list {
+	max-width: 920px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-gap: 20px;
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		grid-template-columns: 1fr;
+	}
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.help-card {
+		max-width: 100%;
+		min-height: 254px;
+	}
+}

@@ -1,0 +1,532 @@
+//**********************************************************
+// Purchase process form
+//**********************************************************
+
+@import '../../../scss/import';
+
+.purchase-process-form {
+	width: 100%;
+	max-width: 694px;
+
+	// Tablet P and Down
+	@media #{$breakpoint-sm-down} {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.purchase-process & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__fast-payment {
+		margin-top: 20px;
+		position: relative;
+
+		// ##################################################
+
+		&__title {
+			margin-bottom: 28px;
+		}
+
+		// ##################################################
+
+		&__items {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-gap: 20px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				grid-template-columns: 1fr;
+				grid-gap: 8px;
+			}
+		}
+
+		// ##################################################
+
+		&__item {
+			&__a-pay {
+				grid-column: span 2;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					grid-column: span 1;
+				}
+			}
+
+			// ##################################################
+
+			&__paypal.btn {
+				background-color: #ffc439;
+
+				&:hover {
+					background-color: darken($color: #ffc439, $amount: 10%);
+				}
+			}
+		}
+
+		// ##################################################
+
+		.btn {
+			&__text {
+				font-size: 20px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__separator {
+		width: 100%;
+		height: 1px;
+		background-color: var(--color-gray-200);
+		margin: 48px 0;
+		position: relative;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			margin: 36px 0;
+		}
+
+		span {
+			font-size: 12px;
+			color: var(--color-gray-500);
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%, 0);
+			top: -10px;
+			background-color: var(--color-white);
+			padding: 0 30px;
+			z-index: 3;
+		}
+	}
+
+	// ##################################################
+
+	&__main-input {
+		margin-top: 20px;
+
+		.mod-input {
+			// stylelint-disable-next-line
+			&.#{$class_validation_failed} {
+				// stylelint-disable-next-line
+				.mod-input__field {
+					background: url('data:image/svg+xml,#{$icon_close}') no-repeat right 20px center / 12px;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__addresses {
+		margin-top: 24px;
+
+		&__right {
+			font-weight: 400;
+		}
+
+		// ##################################################
+
+		&-main {
+			display: grid;
+			grid-template-columns: 80px 1fr;
+			grid-gap: 40px;
+			position: relative;
+			cursor: pointer;
+			z-index: 1;
+
+			.icon {
+				position: absolute;
+				top: 0;
+				right: 0;
+				transition: transform 150ms ease;
+			}
+
+			// stylelint-disable-next-line
+			&.#{$class_active} {
+				// stylelint-disable-next-line
+				.icon {
+					transform: scaleY(-1);
+				}
+			}
+			// stylelint-disable-next-line
+			&.#{$class_validation_failed} {
+				// stylelint-disable-next-line
+				border: 1px solid var(--color-validation-failed);
+			}
+		}
+
+		// ##################################################
+
+		&-other {
+			display: none;
+			flex-direction: column;
+		}
+	}
+
+	// ##################################################
+
+	&__address {
+		@include user-select;
+		background-color: var(--color-gray-50);
+		position: relative;
+		transition: 0.3s ease;
+
+		// stylelint-disable-next-line
+		&.#{$class_active} {
+			// stylelint-disable-next-line
+			.purchase-process-form__address-icon {
+				background-color: var(--color-gray-950);
+
+				// stylelint-disable-next-line
+				.icon {
+					opacity: 1;
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-inner {
+			display: flex;
+			gap: 12px;
+			align-items: flex-start;
+			padding: 20px 0;
+			border-bottom: 0.5px solid var(--color-gray-200);
+			cursor: pointer;
+		}
+
+		// ##################################################
+
+		&-right {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+
+		// ##################################################
+
+		&:last-child {
+			.edit-address-form,
+			.purchase-process-form__address-inner {
+				border-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
+
+		// ##################################################
+
+		&-edit-button.btn {
+			white-space: nowrap;
+			margin-left: auto;
+
+			.icon {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+		// ##################################################
+
+		&-edit-hidden-form {
+			display: none;
+			grid-column: span 3;
+
+			.edit-address-form {
+				padding: 20px 0;
+				border-bottom: 0.5px solid var(--color-gray-200);
+			}
+		}
+
+		// ##################################################
+
+		&-icon {
+			height: 16px;
+			width: 16px;
+			border-radius: 100%;
+			background-color: var(--color-white);
+			border: 0.5px solid var(--color-gray-950);
+			color: var(--color-white);
+			position: relative;
+			top: 3px;
+			margin-right: 10px;
+			flex-shrink: 0;
+
+			.icon {
+				width: 12px;
+				height: 12px;
+				opacity: 0;
+				transition: opacity 150ms var(--easing-default);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__delivery-message {
+		margin-top: 44px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			margin-top: 24px;
+		}
+
+		.title {
+			margin-bottom: 16px;
+		}
+	}
+
+	// ##################################################
+
+	&__checkboxes {
+		margin-top: 12px;
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 12px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			margin-top: 12px;
+		}
+	}
+
+	// ##################################################
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin: 40px 0 20px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 100%;
+		}
+
+		@media (max-width: 420px) {
+			flex-direction: column;
+
+			.btn {
+				width: 100%;
+			}
+		}
+
+		// ##################################################
+
+		&-btns {
+			flex: auto;
+
+			@media (max-width: 420px) {
+				flex: 0 0 100%;
+				width: 100%;
+			}
+
+			.btn {
+				width: 100%;
+			}
+
+			// ##################################################
+
+			.btn-paypal {
+				display: none;
+
+				& > div {
+					height: 44px !important;
+					width: auto !important;
+					margin-left: auto;
+				}
+			}
+
+			// ##################################################
+
+			&.show-paypal {
+				.btn-normal {
+					display: none;
+				}
+
+				// ##################################################
+
+				.btn-paypal {
+					display: flex;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__inputs {
+		margin-top: 24px;
+
+		// ##################################################
+
+		&-repeater {
+			display: flex;
+			gap: 24px 20px;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		// ##################################################
+
+		&-checkboxes {
+			margin-top: 16px;
+		}
+
+		// ##################################################
+
+		&-item {
+			flex: 0 0 100%;
+
+			&.half-width {
+				flex: 0 0 calc(50% - 10px);
+			}
+
+			.checkbox {
+				margin-top: -12px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__business-invoice {
+		margin-top: 26px;
+	}
+
+	// ##################################################
+
+	&__different-address {
+		margin-top: 8px;
+	}
+
+	// ##################################################
+
+	&__checkbox-dropdown {
+		margin-top: 12px;
+
+		// ##################################################
+
+		&__inputs {
+			display: none;
+			will-change: height, padding;
+			padding: 24px 0 8px;
+		}
+	}
+
+	.dropdown {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__save-address {
+		margin-top: 24px;
+	}
+
+	// ##################################################
+
+	&__privacy-policy {
+		margin-top: 24px;
+		display: grid;
+		grid-gap: 12px;
+	}
+
+	// ##################################################
+
+	&__title {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+
+	// ##################################################
+
+	&__company {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+
+		.btn {
+			margin-top: 24px;
+			flex-shrink: 0;
+			min-height: 40px;
+		}
+	}
+
+	// ##################################################
+
+	&__account-exists {
+		font-size: 14px;
+		font-weight: 500;
+		flex-shrink: 0;
+
+		span {
+			font-weight: 500;
+
+			cursor: pointer;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__send-newsletter-checkbox {
+		margin-top: 16px;
+		display: inline-block;
+
+		.checkbox__label {
+			font-size: 14px;
+		}
+	}
+
+	// ##################################################
+
+	.fv-plugins-message-container {
+		font-size: 12px;
+		text-align: left;
+		padding-left: 0;
+	}
+
+	// ##################################################
+
+	.mod-input {
+		textarea {
+			min-height: 178px;
+		}
+
+		// stylelint-disable-next-line
+		&.#{$class_validation_passed} {
+			// stylelint-disable-next-line
+			.mod-input__field {
+				border: 1px solid var(--color-green);
+				background: url('data:image/svg+xml,#{$icon_check}') no-repeat right 18px center / 16px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	[data-validator='emailAddress'] {
+		display: none;
+	}
+
+	.margin--40 {
+		height: 40px;
+	}
+}
+
+#payment-message {
+	text-align: center;
+	padding: 16px;
+	border-radius: 16px;
+	background-color: var(--color-gray-50);
+	border: 0.5px solid var(--color-gray-100);
+}

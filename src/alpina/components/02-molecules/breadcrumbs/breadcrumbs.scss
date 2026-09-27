@@ -1,0 +1,72 @@
+// **************************************************
+// Breadcrumbs
+// **************************************************
+
+@import '../../../scss/import';
+
+.breadcrumbs {
+	width: 100%;
+	position: relative;
+	font-size: 10px;
+
+	// ##################################################
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px;
+	}
+
+	// ##################################################
+
+	&__item {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+
+		&:last-child {
+			color: var(--color-gray-950);
+		}
+	}
+
+	// ##################################################
+
+	&__link {
+		position: relative;
+		white-space: nowrap;
+		overflow: hidden;
+		max-width: 260px;
+		text-overflow: ellipsis;
+		color: currentColor;
+		transition: opacity 80ms ease-out;
+
+		&[href] {
+			&:hover {
+				color: var(--color-terra-cotta);
+			}
+		}
+	}
+
+	// ##################################################
+
+	.icon {
+		width: 12px;
+		height: 12px;
+		margin-top: 1px;
+	}
+
+	// ##################################################
+
+	&.d-md-block {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: block !important;
+		}
+	}
+}
+
+.container > .breadcrumbs {
+	margin: 16px 0;
+}

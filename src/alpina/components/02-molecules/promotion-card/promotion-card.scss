@@ -1,0 +1,140 @@
+// **************************************************
+// Promotion Card
+// **************************************************
+
+@import '../../../scss/import';
+
+.promotion-card {
+	position: relative;
+	width: 100%;
+	max-width: 450px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 8px 20px 8px 8px;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__image {
+		border-radius: 6px;
+		overflow: hidden;
+		width: 72px;
+		aspect-ratio: 1/1;
+		background-color: var(--color-white);
+
+		// ##################################################
+		img {
+			transition: transform 0.3s ease;
+			transform: scale(1.00001);
+		}
+	}
+
+	// ##################################################
+
+	&__price {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		white-space: nowrap;
+		margin-top: 4px;
+
+		&-old {
+			opacity: 0.5;
+			text-decoration-line: line-through;
+		}
+	}
+
+	// ##################################################
+
+	&__button {
+		margin-left: auto;
+	}
+
+	.btn {
+		z-index: 3;
+		white-space: nowrap;
+	}
+
+	// ##################################################
+
+	&__svg {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+	}
+
+	// ##################################################
+
+	.stretched-link {
+		z-index: 3;
+	}
+
+	// ##################################################
+
+	.checkbox {
+		// ##################################################
+
+		input {
+			width: 100%;
+			left: 0;
+			top: 0;
+			height: 100%;
+			z-index: 3;
+			cursor: pointer;
+			clip: initial;
+		}
+
+		// ##################################################
+
+		&__label {
+			span {
+				position: absolute;
+				overflow: hidden;
+				opacity: 0;
+				width: 1px;
+				height: 1px;
+			}
+
+			&::after,
+			&:before {
+				width: 24px;
+				height: 24px;
+				border-radius: 6px;
+			}
+
+			&:before {
+				background-color: var(--color-white);
+				border: 0.5px solid var(--color-blue-100);
+			}
+		}
+
+		&:hover .checkbox__label:not(.has-bg-color)::before {
+			background-color: var(--color-white);
+		}
+	}
+
+	// ##################################################
+
+	&:hover {
+		background-color: var(--color-blue-100);
+	}
+
+	// ##################################################
+
+	&:has(input:checked) {
+		animation: newCartItem 300ms cubic-bezier(0.12, 0.4, 1, 0.99) 1;
+		animation-direction: alternate;
+	}
+
+	// ##################################################
+
+	&--secondary {
+		padding: 20px;
+		min-height: 104px;
+	}
+}

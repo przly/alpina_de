@@ -1,0 +1,68 @@
+@import '../../../scss/import';
+
+.main-products {
+	&__top {
+		margin-bottom: 36px;
+		display: flex;
+		justify-content: space-between;
+		gap: 40px;
+		align-items: center;
+
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+			gap: 20px;
+			margin-bottom: 20px;
+			align-items: flex-start;
+		}
+	}
+
+	// ##################################################
+
+	&__items {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 20px;
+
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr 1fr;
+
+			.product-card {
+				max-width: 100%;
+			}
+		}
+
+		@media #{$breakpoint-xs-only} {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// ##################################################
+
+	&__text {
+		color: var(--color-gray-500);
+		margin-top: 8px;
+	}
+
+	// ##################################################
+
+	&--center-title {
+		.main-products__top {
+			justify-content: center;
+			flex-direction: column;
+		}
+	}
+
+	// ##################################################
+
+	&--inner {
+		.main-products__top {
+			margin-bottom: 25px;
+			flex-wrap: wrap;
+			gap: 20px 40px;
+
+			.title {
+				@extend %title_h5;
+			}
+		}
+	}
+}

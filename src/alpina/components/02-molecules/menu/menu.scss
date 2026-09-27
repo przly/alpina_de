@@ -1,0 +1,241 @@
+// **************************************************
+// Menu
+// **************************************************
+
+@import '../../../scss/import';
+
+.menu {
+	// Tablet P and down
+	@media #{$breakpoint-sm-down} {
+		position: fixed;
+		top: var(--header-height, 0px);
+		height: calc(100vh - var(--header-height, 0px));
+		z-index: 99;
+		left: 0;
+		width: 100%;
+		background-color: var(--color-white);
+		opacity: 0;
+		pointer-events: none;
+		transform: scaleY(0.95) translateY(-8px);
+		transform-origin: top center;
+		transition: all 330ms cubic-bezier(0.23, 1, 0.32, 1);
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		overflow-y: auto;
+
+		// stylelint-disable-next-line
+		.#{$class_open_menu} & {
+			opacity: 1;
+			pointer-events: all;
+			transform: scaleY(1) translateY(0);
+		}
+	}
+
+	// ##################################################
+
+	nav {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			display: block;
+			max-width: calc(100% - 40px);
+			margin: 0 auto;
+			width: 100%;
+		}
+
+		// ##################################################
+
+		& > ul {
+			@media #{$breakpoint-md-up} {
+				display: flex;
+				gap: 8px;
+				margin-left: -16px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		position: relative;
+		display: inline-block;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			width: 100%;
+		}
+
+		// stylelint-disable-next-line
+		&.#{$class_active} {
+			// stylelint-disable-next-line
+			.menu__link {
+				background-color: $cgp_red_500;
+				color: $cgp_white;
+
+				@media #{$breakpoint-sm-down} {
+					background-color: $cgp_white;
+					color: $cgp_red_500;
+				}
+			}
+		}
+
+		&.is-open-megamenu {
+			// stylelint-disable-next-line
+			.menu__link {
+				background-color: $cgp_red_500;
+				color: $cgp_white;
+
+				@media #{$breakpoint-sm-down} {
+					background-color: $cgp_white;
+					color: $cgp_red_500;
+				}
+			}
+
+			// stylelint-disable-next-line
+			.megamenu {
+				opacity: 1;
+				pointer-events: auto;
+				visibility: visible;
+				transform: scaleY(1) translateY(0);
+
+				@media #{$breakpoint-sm-down} {
+					transform: translateX(0);
+				}
+			}
+		}
+
+		&.has-megamenu {
+			@media #{$breakpoint-sm-down} {
+				position: relative;
+
+				&:after {
+					content: '';
+					position: absolute;
+					top: 0;
+					right: 0;
+					height: 100%;
+					width: 20px;
+					display: block;
+					background-image: url('data:image/svg+xml,#{$chevron_right}');
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: 100%;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__link {
+		font-weight: 500;
+		position: relative;
+		z-index: 2;
+		font-size: 14px;
+		color: $cgp_gray_900;
+		padding: 4px 16px;
+		border-radius: 80px;
+		min-height: 36px;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			background-color: $cgp_gray_200;
+
+			@media #{$breakpoint-sm-down} {
+				background-color: $cgp_white;
+			}
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			border-radius: 0;
+			min-height: 0;
+			font-size: 16px;
+			padding: 16px 0;
+			border-bottom: 1px solid $cgp_gray_200;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		& > .icon {
+			display: none;
+
+			@media #{$breakpoint-sm-down} {
+				display: flex;
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__dropdown {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: block !important;
+			position: absolute;
+			left: -20px;
+			top: 100%;
+			z-index: 9;
+			padding-top: 30px;
+			will-change: opacity;
+			opacity: 0;
+			margin-top: -1px;
+			pointer-events: none;
+			transition: opacity 0.3s ease;
+
+			// ##################################################
+
+			ul {
+				background-color: var(--color-white);
+				padding: 8px 20px;
+				box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			display: none;
+			padding: 0 0 10px 15px;
+		}
+
+		// ##################################################
+
+		// stylelint-disable-next-line
+		.#{$class_open_submenu} & {
+			display: block;
+		}
+	}
+
+	// ##################################################
+
+	&__extra {
+		display: none;
+
+		@media #{$breakpoint-sm-down} {
+			display: flex;
+			justify-content: center;
+			gap: 12px;
+			margin: 20px 0;
+		}
+	}
+
+	// ##################################################
+
+	&__bottom-bar {
+		display: flex;
+		gap: 8px;
+		justify-content: center;
+		background-color: var(--color-red-500);
+		margin-top: auto;
+		padding: 10px 0;
+
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: none;
+		}
+	}
+}

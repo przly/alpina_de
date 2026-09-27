@@ -1,0 +1,165 @@
+// **************************************************
+// Store Card
+// **************************************************
+
+@import '../../../scss/import';
+
+.store-card {
+	padding: 16px;
+	background-color: var(--color-white);
+	border-radius: 12px;
+	max-width: 640px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		flex-direction: column-reverse;
+	}
+
+	&:hover {
+		background-color: var(--color-gray-50);
+	}
+
+	// stylelint-disable-next-line
+	&.#{$class_active} {
+		background-color: var(--color-gray-100);
+	}
+
+	// ##################################################
+
+	&__pickup {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-bottom: 8px;
+
+		&-logo {
+			position: relative;
+			width: 18px;
+			height: 18px;
+			border-radius: 2px;
+			flex-shrink: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		margin-bottom: 2px;
+	}
+
+	// ##################################################
+
+	&__info {
+		margin-top: 2px;
+
+		// ##################################################
+
+		span {
+			&::after {
+				content: '•';
+				position: relative;
+				display: inline-block;
+				margin: 0 2px 0 4px;
+				top: 0;
+				left: 0;
+				font-family: inherit;
+				font-size: inherit;
+				font-weight: inherit;
+				line-height: inherit;
+				color: var(--color-gray);
+				pointer-events: none;
+			}
+
+			// ##################################################
+
+			&:last-child::after {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__sizes {
+		margin-top: 8px;
+
+		// ##################################################
+
+		&-title {
+			letter-spacing: 0.2px;
+			margin-bottom: 2px;
+		}
+
+		// ##################################################
+
+		&-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+	}
+
+	// ##################################################
+
+	&__size {
+		min-width: 28px;
+		min-height: 20px;
+		border-radius: 4px;
+		color: var(--color-green);
+		border: 0.5px solid var(--color-green-500);
+		background-color: var(--color-green-100);
+
+		// stylelint-disable-next-line
+		&.#{$class_stock_low} {
+			background-color: var(--color-orange-100);
+			border-color: var(--color-orange-500);
+			color: var(--color-orange);
+		}
+
+		// stylelint-disable-next-line
+		&.#{$class_stock_out} {
+			background-color: var(--color-gray-100);
+			border-color: var(--color-gray-100);
+			color: var(--color-gray-400);
+		}
+	}
+
+	// ##################################################
+
+	&__right,
+	&__status {
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+
+	// ##################################################
+
+	.tag {
+		padding: 4px 6px;
+		gap: 6px;
+		margin-bottom: 10px;
+	}
+
+	// ##################################################
+
+	&__button-group {
+		margin-top: 10px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	// ##################################################
+
+	&--pickup {
+		flex-direction: row;
+
+		.store-card__content {
+			flex: auto;
+		}
+	}
+}

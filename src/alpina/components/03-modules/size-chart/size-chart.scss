@@ -1,0 +1,188 @@
+// **************************************************
+// Size Chart
+// **************************************************
+
+@import '../../../scss/import';
+
+.size-chart {
+	&__left {
+		display: grid;
+		grid-gap: 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 30px;
+		}
+	}
+
+	// ##################################################
+
+	&__tab {
+		&-nav {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+			margin-bottom: 20px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				flex-wrap: nowrap;
+				width: calc(100% + 40px);
+				margin-left: -20px;
+				padding: 0 20px;
+				overflow-x: auto;
+				scrollbar-width: none;
+				-ms-overflow-style: none;
+				&::-webkit-scrollbar {
+					display: none;
+				}
+			}
+
+			// ##################################################
+
+			.btn {
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					flex-shrink: 0;
+				}
+
+				// stylelint-disable-next-line
+				&.#{$class_active} {
+					background-color: var(--color-gray-900);
+					color: var(--color-white);
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		display: none;
+
+		// stylelint-disable-next-line
+		&.#{$class_active} {
+			display: block;
+		}
+	}
+
+	// ##################################################
+
+	&__table {
+		background-color: var(--color-gray-50);
+		border: 0.5px solid var(--color-gray-200);
+		border-radius: 16px;
+		overflow: hidden;
+		font-weight: 600;
+		font-size: 14px;
+		box-shadow: 0px 2px 4px 0px rgba($cgp_black, 0.06), 0px 1px 2px 0px rgba($cgp_black, 0.05);
+		width: 100%;
+		margin: 30px 0;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			overflow: auto;
+			overflow-x: auto;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// ##################################################
+
+	.editor-text {
+		table {
+			text-align: center;
+			table-layout: fixed;
+			width: 100%;
+			border: 0;
+			margin: 0;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				width: 800px;
+			}
+
+			// ##################################################
+
+			tr {
+				border-bottom: 0.5px solid var(--color-gray-200);
+
+				// ##################################################
+
+				&:last-child {
+					border-bottom: none;
+
+					// ##################################################
+
+					td {
+						// Mobile
+						@media #{$breakpoint-xs-only} {
+							&:first-child {
+								border-bottom-left-radius: 16px;
+							}
+
+							&:last-child {
+								border-bottom-right-radius: 16px;
+							}
+						}
+					}
+				}
+
+				// ##################################################
+
+				&:nth-child(even) {
+					background-color: var(--color-white);
+				}
+			}
+
+			// ##################################################
+
+			th,
+			td {
+				padding: 8px 12px;
+			}
+
+			// ##################################################
+
+			th {
+				background-color: var(--color-red-500);
+				color: var(--color-white);
+
+				// ##################################################
+
+				&:not(:first-child) {
+					border-left: 0.5px solid rgba($cgp_white, 0.5);
+				}
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					&:first-child {
+						border-top-left-radius: 16px;
+					}
+
+					&:last-child {
+						border-top-right-radius: 16px;
+					}
+				}
+			}
+
+			// ##################################################
+
+			td:not(:first-child) {
+				border-left: 0.5px solid var(--color-gray-200);
+			}
+		}
+	}
+}

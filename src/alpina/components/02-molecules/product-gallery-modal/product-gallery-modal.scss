@@ -1,0 +1,375 @@
+// **************************************************
+// Product Gallery Modal
+// **************************************************
+
+@import '../../../scss/import';
+
+.product-gallery-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-white);
+	z-index: #{$zindex_modal};
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.3s var(--easing-spring-slow), visibility 0.3s var(--easing-spring-slow);
+
+	// Tablet P and down
+	@media #{$breakpoint-sm-down} {
+		overflow: auto;
+	}
+
+	// ###########################################################
+
+	// stylelint-disable-next-line
+	&.#{$class_open_modal} {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+	}
+
+	// ##################################################
+
+	&__close,
+	&__close.btn {
+		position: fixed;
+		right: 40px;
+		top: 40px;
+		z-index: 9;
+
+		// Tablet P and Down
+		@media #{$breakpoint-sm-down} {
+			right: 20px;
+			top: 20px;
+		}
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			right: 16px;
+			top: 16px;
+		}
+	}
+
+	// ##################################################
+
+	&__inner {
+		position: relative;
+		width: 100%;
+		margin: auto;
+		padding: 80px 180px;
+
+		// Tablet L and Down
+		@media #{$breakpoint-md-down} {
+			padding: 60px 160px;
+		}
+
+		// Tablet P and Down
+		@media #{$breakpoint-sm-down} {
+			padding: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__main {
+		.swiper {
+			overflow: visible;
+			height: calc(100vh - 60px);
+			padding-bottom: 20vh;
+
+			// Tablet P and Down
+			@media #{$breakpoint-sm-down} {
+				padding: 0 20px;
+				height: calc(100vh - 160px);
+			}
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				padding: 0 16px;
+			}
+
+			// Landscape Mobile
+			@media screen and (min-width: 568px) and (max-width: 932px) and (orientation: landscape) {
+				height: 100vh;
+			}
+
+			// ##################################################
+
+			&-slide {
+				display: flex;
+				flex-direction: column;
+				height: auto;
+				max-height: calc(100vh - 60px);
+
+				// Tablet L and down
+				@media #{$breakpoint-md-down} {
+					max-height: 652px;
+				}
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					max-height: 100%;
+				}
+
+				// ##################################################
+
+				&:last-child {
+					// Tablet P and down
+					@media #{$breakpoint-sm-down} {
+						padding-bottom: 60px;
+					}
+				}
+			}
+
+			// ##################################################
+
+			&-wrapper {
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					display: flex;
+					flex-direction: column;
+					gap: 60px;
+				}
+			}
+		}
+
+		// ##################################################
+
+		.swiper:not(.swiper-initialized) .swiper-pagination,
+		.swiper:not(.swiper-initialized) .swiper-slide:not(:first-of-type) {
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				display: block !important;
+			}
+		}
+	}
+
+	// ##################################################
+
+	[data-slider-parent] .swiper {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			width: 100%;
+			margin-left: 0;
+			padding-left: 0;
+			padding-right: 0;
+
+			&::before,
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__image {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 652px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			height: auto;
+		}
+
+		// Landscape Mobile
+		@media screen and (min-width: 568px) and (max-width: 932px) and (orientation: landscape) {
+			max-width: 300px;
+			margin: 0 auto;
+		}
+
+		// ##################################################
+
+		&-wrap {
+			position: relative;
+		}
+
+		// ##################################################
+
+		&-inner {
+			text-align: center;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				position: relative;
+			}
+
+			// ##################################################
+
+			img {
+				border-radius: 6px;
+				width: auto;
+				max-height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		// ##################################################
+
+		&--cropped {
+			img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__thumb {
+		width: 98px;
+		flex: 0 0 98px;
+		padding-left: 8px;
+		position: absolute;
+		top: 50%;
+		left: 24px;
+		transform: translateY(-50%);
+		z-index: 8;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			display: none;
+		}
+
+		// ##################################################
+
+		.swiper {
+			height: 652px;
+
+			// Tablet L and down
+			@media #{$breakpoint-md-down} {
+				height: 500px;
+			}
+		}
+
+		// ##################################################
+
+		.swiper-scrollbar {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			top: 0;
+			right: 0;
+			margin-top: 0;
+			height: 100%;
+			width: 4px;
+			border-radius: 4px;
+			background-color: var(--color-gray-100);
+
+			// ##################################################
+
+			.swiper-scrollbar-drag {
+				border-radius: 4px;
+				background-color: var(--color-gray-950);
+
+				// Clickable Area
+				&::before {
+					transform: scaleX(2);
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__thumb-image {
+		width: 90px;
+		height: 100%;
+		cursor: pointer;
+		position: relative;
+		border-radius: 6px;
+		transition: transform 50ms var(--easing-slow);
+		background-color: var(--color-gray-100);
+		border: 0.5px solid var(--color-gray-100);
+
+		// ##################################################
+
+		&:hover {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				border-color: var(--color-gray-400);
+			}
+		}
+
+		// ##################################################
+
+		&:active {
+			transform: scale(0.95);
+		}
+
+		// ##################################################
+		// Animated Border
+
+		&::before {
+			@extend %content;
+			border: 2px solid var(--color-gray-400);
+			opacity: 0;
+			pointer-events: none;
+			border-radius: inherit;
+			z-index: 3;
+
+			// stylelint-disable-next-line
+			.#{$class_active_thumb_slide} & {
+				opacity: 1;
+			}
+		}
+
+		// ##################################################
+
+		img {
+			mix-blend-mode: multiply;
+		}
+
+		// ##################################################
+
+		&:not(.product-gallery-modal__image--cropped) {
+			img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+
+	// ##################################################
+
+	img {
+		mix-blend-mode: multiply;
+	}
+
+	// ##################################################
+
+	&--single-slide {
+		.swiper {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				padding: 0;
+				height: 100%;
+			}
+
+			// ##################################################
+
+			&-wrapper {
+				justify-content: center;
+			}
+
+			// ##################################################
+
+			&-slide {
+				margin: 0 !important;
+			}
+		}
+	}
+}

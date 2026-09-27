@@ -1,0 +1,199 @@
+//**********************************************************
+// Purchase process sidebar
+//**********************************************************
+
+@import '../../../scss/import';
+
+.purchase-process-sidebar {
+	width: 100%;
+	max-width: 564px;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 20px;
+		padding: 20px 0;
+
+		// ##################################################
+
+		.icon {
+			flex-shrink: 0;
+			transition: transform 150ms var(--easing-slow);
+
+			&-chevron-down {
+				.purchase-process-sidebar.is-open & {
+					transform: scaleY(-1);
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-title {
+			width: 100%;
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+			font-size: 24px;
+		}
+
+		// ##################################################
+
+		&-price {
+			white-space: nowrap;
+			font-size: 18px;
+			margin-left: auto;
+			flex-shrink: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		display: grid;
+		grid-gap: 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			// display: none;
+			will-change: height, padding;
+		}
+	}
+
+	// ##################################################
+
+	&__prices {
+		display: grid;
+		grid-gap: 10px;
+
+		// ##################################################
+
+		&__wrap {
+			width: 100%;
+			padding: 20px;
+			display: grid;
+			max-width: 568px;
+			box-shadow: var(--shadow-soft);
+
+			[data-component^='mod-'] & {
+				max-width: 100%;
+			}
+		}
+
+		// ##################################################
+
+		&-left {
+			flex-shrink: 0;
+		}
+
+		// ##################################################
+
+		&-right {
+			display: grid;
+			justify-content: flex-end;
+			text-align: right;
+			gap: 4px;
+		}
+
+		// ##################################################
+
+		&-item {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+		}
+
+		// ##################################################
+
+		&-row {
+			border-top: 0.5px solid var(--color-gray-200);
+			padding-top: 16px;
+			margin-top: 16px;
+			display: grid;
+			grid-template-columns: 1fr auto;
+			grid-gap: 8px;
+			align-items: center;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				padding-top: 16px;
+			}
+
+			&:first-child {
+				border-top: 0;
+				margin-top: 0;
+				padding-top: 0;
+			}
+		}
+
+		.tag {
+			padding: 4px 10px 4px 6px;
+			gap: 6px;
+		}
+	}
+
+	// ##################################################
+
+	&__reward {
+		grid-column: span 2;
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		align-items: center;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			justify-content: flex-start;
+			gap: 8px;
+		}
+
+		strong {
+			color: var(--color-red-500);
+		}
+	}
+
+	// ##################################################
+
+	&__bottom {
+		margin-top: 32px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-top: 24px;
+		}
+	}
+
+	// ##################################################
+
+	.loyalty-card,
+	.add-promo-code {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__footer {
+		display: grid;
+		grid-gap: 8px;
+		justify-content: center;
+		margin-top: 12px;
+
+		// ##################################################
+
+		&-images {
+			display: flex;
+			gap: 4px 12px;
+			justify-content: center;
+			margin-bottom: 10px;
+		}
+	}
+}

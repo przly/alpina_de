@@ -1,0 +1,95 @@
+//**********************************************************
+// Profile Module
+//**********************************************************
+
+@import '../../../scss/import';
+
+.profile-module {
+	.mod-sidebar {
+		padding: 0 24px;
+
+		// Tablet L and down
+		@media #{$breakpoint-md-down} {
+			padding: 0 16px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 40px;
+		}
+
+		// ##################################################
+
+		ul {
+			grid-gap: 0;
+		}
+
+		// ##################################################
+
+		&__item {
+			&:not(:last-child) {
+				border-bottom: 0.5px solid var(--color-gray-200);
+			}
+		}
+
+		// ##################################################
+
+		&__link {
+			padding: 24px 0;
+
+			// Tablet L and down
+			@media #{$breakpoint-md-down} {
+				padding: 16px 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		margin-bottom: 32px;
+	}
+
+	// ##################################################
+
+	&__inner {
+		display: grid;
+		grid-gap: 80px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-gap: 50px;
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		min-width: 1px;
+	}
+
+	// ##################################################
+
+	&__divider {
+		display: flex;
+		gap: 30px;
+		align-items: center;
+
+		// ##################################################
+
+		&-line {
+			height: 1px;
+			flex: auto;
+			background-color: var(--color-gray-200);
+		}
+	}
+
+	// ##################################################
+
+	.loyalty-card__title.title--h4 {
+		// Tablet L Only
+		@media #{$breakpoint-md-only} {
+			font-size: 26px;
+		}
+	}
+}

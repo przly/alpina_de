@@ -1,0 +1,45 @@
+// **************************************************
+// Radio Button
+// **************************************************
+
+@import '../../../scss/import';
+
+.pattern-animation {
+	&__group {
+		transform-box: fill-box;
+		transform-origin: center;
+
+		// ##################################################
+
+		[data-animated-pattern] & {
+			opacity: 0;
+			will-change: transform, opacity;
+			transform: translate(200px, 200px);
+		}
+	}
+
+	// ##################################################
+
+	svg {
+		width: 100%;
+		height: auto;
+	}
+
+	// ##################################################
+
+	&--from-left {
+		.pattern-animation__group {
+			[data-animated-pattern] & {
+				transform: translate(0px, 200px);
+			}
+		}
+
+		&.pattern-animation--five-lines {
+			.pattern-animation__group {
+				[data-animated-pattern] & {
+					transform: translate(-200px, 200px);
+				}
+			}
+		}
+	}
+}

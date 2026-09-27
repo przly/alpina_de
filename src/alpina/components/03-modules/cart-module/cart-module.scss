@@ -1,0 +1,212 @@
+//**********************************************************
+// Cart Module
+//**********************************************************
+
+@import '../../../scss/import';
+
+.cart-module {
+	padding-top: 26px;
+
+	// ##################################################
+
+	&__title {
+		margin-bottom: 16px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 8px;
+		}
+	}
+
+	// ##################################################
+
+	.cart-view {
+		padding-bottom: 12px;
+		border-bottom: 0.5px solid var(--color-gray-200);
+		margin-bottom: 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 36px;
+		}
+
+		// ##################################################
+
+		&__item {
+			&:first-child {
+				border-top: 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__sidebar {
+		position: relative;
+		display: grid;
+		grid-gap: 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-top: 40px;
+		}
+
+		// ##################################################
+
+		&-box {
+			box-shadow: var(--shadow-soft);
+			padding: 24px;
+		}
+
+		// ##################################################
+
+		&-button {
+			.btn {
+				width: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__summary {
+		padding: 20px 0;
+		display: grid;
+		grid-gap: 10px;
+		margin-top: 20px;
+		border-top: 0.5px solid var(--color-gray-200);
+	}
+
+	// ##################################################
+
+	&__amount-row {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-gap: 20px;
+		align-items: center;
+
+		// ##################################################
+
+		&-left {
+			display: grid;
+			gap: 6px;
+		}
+
+		// ##################################################
+
+		&--total,
+		&--sub-total {
+			border-top: 0.5px solid var(--color-gray-200);
+			padding-top: 20px;
+		}
+
+		// ##################################################
+
+		&--sub-total {
+			// ##################################################
+
+			.animated-price {
+				&-char {
+					height: 14px;
+				}
+
+				// ##################################################
+
+				&-static-char,
+				&-wheel-item {
+					height: 14px;
+					line-height: 14px;
+				}
+			}
+		}
+
+		// ##################################################
+
+		&--total {
+			margin: 20px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			// ##################################################
+
+			.cart-module__amount-row-right {
+				margin-bottom: auto;
+			}
+
+			// ##################################################
+
+			.animated-price {
+				&-char {
+					height: 24px;
+				}
+
+				// ##################################################
+
+				&-static-char,
+				&-wheel-item {
+					height: 24px;
+					line-height: 24px;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__empty {
+		display: none;
+
+		&-inner {
+			flex-direction: column;
+			max-width: 400px;
+			margin: 100px auto;
+			gap: 16px;
+			display: flex;
+		}
+
+		// ##################################################
+
+		&-icon {
+			width: 60px;
+			height: 60px;
+			border-radius: 100%;
+
+			// ##################################################
+
+			.icon {
+				width: 30px;
+				height: 30px;
+			}
+		}
+
+		// ##################################################
+
+		.btn {
+			width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	.add-promo-code {
+		border: 0;
+		background: transparent;
+		padding: 0;
+	}
+
+	// ##################################################
+
+	&--empty {
+		.cart-module__inner {
+			display: none;
+		}
+
+		// ##################################################
+
+		.cart-module__empty {
+			display: flex;
+		}
+	}
+}

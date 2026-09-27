@@ -1,0 +1,97 @@
+// **************************************************
+// Property Card
+// **************************************************
+
+@import '../../../scss/import';
+
+.property-card {
+	position: relative;
+	width: 100%;
+	max-width: 686px;
+	display: grid;
+	grid-gap: 22px;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__image {
+		overflow: hidden;
+		height: 449px;
+		margin-bottom: 0;
+
+		// ##################################################
+		// Overlay
+
+		&::before {
+			@extend %content;
+			background-color: rgba($cgp_black, 0.2);
+			z-index: 1;
+			transition: opacity 0.2s ease-in-out;
+		}
+
+		// ##################################################
+
+		img {
+			transition: transform 0.2s ease-in-out;
+			transform: scale(1.00001);
+		}
+	}
+
+	// ##################################################
+
+	&__bars {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		z-index: 2;
+	}
+
+	// ##################################################
+
+	&__content {
+		display: grid;
+		grid-gap: 8px;
+	}
+
+	// ##################################################
+
+	&__buttons {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	// ##################################################
+
+	&:hover {
+		.property-card__image {
+			&::before {
+				opacity: 0;
+			}
+
+			// ##################################################
+
+			img {
+				transform: scale(1.02);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&--small {
+		max-width: 270px;
+
+		.property-card__image {
+			height: auto;
+			aspect-ratio: 1/1;
+		}
+
+		.title {
+			font-size: 20px;
+		}
+	}
+}

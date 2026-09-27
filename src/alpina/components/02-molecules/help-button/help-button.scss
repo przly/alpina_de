@@ -1,0 +1,52 @@
+@import '../../../scss/import';
+
+.help-button {
+	border-radius: 16px;
+	border: 0.5px solid $cgp_gray_200;
+	background: $cgp_gray_25;
+	box-shadow: 0 1px 2px 0 rgba($cgp_black, 0.06), 0 2px 4px 0 rgba($cgp_black, 0.04);
+	font-size: 16px;
+	font-weight: 600;
+	position: relative;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 88px;
+	padding: 16px 32px;
+	width: 100%;
+
+	@media #{$breakpoint-xs-only} {
+		border-radius: 12px;
+		min-height: 64px;
+		padding: 8px 20px;
+	}
+
+	&:hover {
+		background: $cgp_gray_100;
+	}
+
+	& > span {
+		margin-right: auto;
+	}
+
+	img {
+		width: 16px;
+		height: 16px;
+		object-fit: contain;
+	}
+
+	img,
+	.icon {
+		flex-shrink: 0;
+		transition: 0.3s ease;
+	}
+
+	.icon-chevron-down {
+		transform: rotate(-90deg);
+
+		&:before {
+			background-color: $cgp_gray_300;
+		}
+	}
+}

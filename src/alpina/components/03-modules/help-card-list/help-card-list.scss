@@ -1,0 +1,26 @@
+@import '../../../scss/import';
+
+.help-card-list {
+	&__top {
+		margin-bottom: 24px;
+	}
+
+	.title {
+		color: $cgp_black;
+		margin-bottom: 24px;
+	}
+
+	&__items {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 20px;
+
+		@media #{$breakpoint-xs-only} {
+			grid-template-columns: 1fr;
+		}
+
+		.help-card {
+			min-height: 268px;
+		}
+	}
+}

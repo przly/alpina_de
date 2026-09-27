@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "alpina:css": "node scripts/build-alpina-css.mjs",
+    "predev": "npm run alpina:css",
     "dev": "vite",
+    "prebuild": "npm run alpina:css",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -12,7 +15,8 @@
   "dependencies": {
     "lucide-react": "^1.47.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "swiper": "^14.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -23,6 +27,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "sass-embedded": "^1.105.0",
     "vite": "^8.0.10"
   }
 }

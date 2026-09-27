@@ -1,0 +1,135 @@
+@import '../../../scss/import';
+
+.location-details {
+	position: relative;
+	max-width: 386px;
+	width: 100%;
+	border-radius: 16px;
+	padding: 16px;
+	background-color: var(--color-white);
+
+	&:hover {
+		background-color: var(--color-gray-100);
+	}
+
+	// stylelint-disable-next-line
+	&.#{$class_active} {
+		background-color: var(--color-gray-100);
+	}
+
+	// ##################################################
+
+	&__trigger {
+		pointer-events: all;
+	}
+
+	// ##################################################
+
+	&__tag {
+		padding: 4px 6px !important;
+		margin-bottom: 10px;
+
+		.icon {
+			width: 12px;
+			height: 12px;
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	// ##################################################
+
+	&__header {
+		margin-bottom: 4px;
+	}
+
+	// ##################################################
+
+	&__content {
+		position: relative;
+		z-index: 1;
+		pointer-events: none;
+
+		.btn {
+			pointer-events: auto;
+		}
+	}
+
+	// ##################################################
+
+	address {
+		margin: 0;
+		color: var(--color-gray-500);
+		font-size: 12px;
+		font-weight: 500;
+		margin-bottom: 2px;
+	}
+
+	// ##################################################
+
+	&__infos {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 12px;
+		color: $cgp_gray_950;
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0.24px;
+
+		div {
+			position: relative;
+
+			&:not(:last-of-type):after {
+				content: '·';
+				color: #a4a7ae;
+				position: absolute;
+				top: -6px;
+				bottom: 0;
+				margin: auto;
+				right: -8px;
+				font-size: 20px;
+			}
+		}
+	}
+
+	&__links {
+		margin-top: 12px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 8px;
+
+		.btn {
+			.btn__icon {
+				order: 1;
+			}
+
+			.btn__text {
+				order: 2;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__contact {
+		display: grid;
+		grid-gap: 4px;
+
+		// ##################################################
+
+		a {
+			text-decoration: underline;
+			position: relative;
+			z-index: 4;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}

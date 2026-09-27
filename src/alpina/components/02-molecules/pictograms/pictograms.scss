@@ -1,0 +1,128 @@
+// **************************************************
+// Pictograms
+// **************************************************
+
+@import '../../../scss/import';
+
+.pictograms {
+	max-width: 1328px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-gap: 20px;
+
+	// Tablet L and down
+	@media #{$breakpoint-md-down} {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		grid-template-columns: 1fr;
+	}
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__item {
+		padding: 32px;
+		display: flex;
+		gap: 24px 56px;
+		background-color: var(--color-white);
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			gap: 24px 32px;
+			padding: 24px;
+		}
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+		}
+
+		// ##################################################
+
+		&-sub {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 15px;
+			text-align: center;
+			position: relative;
+
+			// ##################################################
+
+			&:nth-child(2) {
+				flex: auto;
+			}
+
+			// ##################################################
+
+			&:first-child {
+				min-width: 96px;
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					min-width: 75px;
+				}
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					min-width: 100%;
+				}
+			}
+
+			// ##################################################
+
+			&:not(:first-child) {
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: -28px;
+					width: 0.5px;
+					height: 100%;
+					background-color: var(--color-gray-200);
+
+					// Tablet P and down
+					@media #{$breakpoint-sm-down} {
+						left: -16px;
+					}
+
+					// Mobile
+					@media #{$breakpoint-xs-only} {
+						left: 0;
+						top: -12px;
+						width: 100%;
+						height: 0.5px;
+					}
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__image {
+		display: flex;
+		justify-content: center;
+		max-width: 96px;
+		width: 100%;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			max-width: 75px;
+		}
+
+		img {
+			width: auto;
+			height: 50px;
+			object-fit: contain;
+		}
+	}
+}

@@ -1,0 +1,278 @@
+// **************************************************
+// Order Card
+// **************************************************
+
+@import '../../../scss/import';
+
+.order-card {
+	padding: 24px;
+	max-width: 1000px;
+	width: 100%;
+	box-shadow: var(--shadow-soft);
+	border: 0.5px solid var(--color-gray-200);
+	display: grid;
+	grid-gap: 24px;
+
+	&:hover {
+		border-color: var(--color-gray-100);
+		background-color: var(--color-gray-100);
+	}
+
+	// ##################################################
+
+	&__header {
+		display: grid;
+		grid-gap: 12px;
+	}
+
+	// ##################################################
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+		}
+	}
+
+	// ##################################################
+
+	&__order-number {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin-left: auto;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			justify-content: space-between;
+			width: 100%;
+			flex-wrap: wrap;
+			margin-left: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__super-title {
+		margin-bottom: 6px;
+	}
+
+	// ##################################################
+
+	&__info {
+		&-inner {
+			margin-top: 12px;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+		}
+
+		// ##################################################
+
+		&-item {
+			display: flex;
+			align-items: center;
+
+			// ##################################################
+
+			&:not(:first-child) {
+				&::before {
+					content: '\2022';
+					@extend %inherit_textstyles;
+					position: relative;
+					display: inline-block;
+					margin-right: 10px;
+				}
+			}
+
+			// ##################################################
+
+			.icon {
+				width: 20px;
+				height: 10px;
+				margin-right: 5px;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__inner {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+
+	// ##################################################
+
+	&__order {
+		border-radius: 20px;
+		border: 0.5px solid var(--color-gray-200);
+		box-shadow: var(--shadow-soft);
+		padding: 12px;
+		display: grid;
+		grid-gap: 12px;
+		background-color: var(--color-white);
+		justify-items: flex-start;
+		position: relative;
+
+		// ##################################################
+
+		&-product {
+			width: 108px;
+			height: 108px;
+			border-radius: 8px;
+			padding: 10px;
+			background-color: var(--color-gray-100);
+			position: relative;
+			border: 1px solid var(--color-gray-100);
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				width: 75px;
+				height: 75px;
+			}
+
+			// ##################################################
+
+			img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+				mix-blend-mode: multiply;
+			}
+
+			&[href] {
+				z-index: 4;
+
+				&:hover {
+					border-color: rgba(255, 32, 86, 0.1);
+				}
+			}
+
+			// ##################################################
+
+			&-list {
+				display: flex;
+				gap: 6px;
+				flex-wrap: wrap;
+			}
+		}
+
+		// ##################################################
+
+		&:has(.stretched-link):hover {
+			background-color: var(--color-gray-25);
+		}
+
+		// ##################################################
+
+		&.is-cancelled {
+			border-color: var(--color-rose-100);
+			background-color: var(--color-rose-25);
+
+			// ##################################################
+
+			.order-card__order-product {
+				background-color: var(--color-gray-100);
+				border-color: rgba(255, 32, 86, 0.1);
+			}
+
+			// ##################################################
+
+			&:has(.stretched-link):hover {
+				background-color: var(--color-rose-25);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	// ##################################################
+
+	&__track-number {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin-left: auto;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			justify-content: space-between;
+			width: 100%;
+			flex-wrap: wrap;
+			margin-left: 0;
+		}
+	}
+
+	// ##################################################
+
+	.btn--white {
+		border: 0.5px solid var(--color-gray-200);
+	}
+
+	// ##################################################
+
+	&.is-single-product {
+		background-color: var(--color-white);
+
+		// ##################################################
+
+		.order-card__header {
+			grid-gap: 24px;
+		}
+
+		// ##################################################
+
+		.order-card__super-title {
+			margin-bottom: 4px;
+		}
+
+		// ##################################################
+
+		.order-card__order {
+			background-color: transparent;
+			border: 0;
+			padding: 0;
+			box-shadow: none;
+		}
+
+		// ##################################################
+
+		.order-card__order-product {
+			background-color: var(--color-gray-100);
+			border-color: var(--color-gray-200);
+
+			&[href]:hover {
+				background-color: var(--color-white);
+			}
+		}
+
+		// ##################################################
+
+		&.is-cancelled {
+			border-color: var(--color-rose-100);
+			background-color: var(--color-rose-25);
+		}
+	}
+}

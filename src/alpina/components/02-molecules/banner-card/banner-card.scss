@@ -1,0 +1,123 @@
+@import '../../../scss/import';
+
+.banner-card {
+	max-width: 686px;
+	width: 100%;
+	position: relative;
+	transition: 0.3s ease;
+	aspect-ratio: 686 / 704;
+	clip-path: inset(0 round 12px);
+	overflow: hidden;
+	background-color: $cgp_gray_950;
+
+	&:hover {
+		.banner-card__img {
+			img {
+				transform: scale(1.03);
+			}
+
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__img {
+		img {
+			transition: transform 0.3s ease;
+		}
+
+		&:after {
+			content: '';
+			background-color: rgba($cgp_white, 0.2);
+			position: absolute;
+			inset: 0;
+			height: 100%;
+			width: 100%;
+			mix-blend-mode: soft-light;
+			pointer-events: none;
+			opacity: 0;
+			transition: 0.3s ease;
+		}
+	}
+
+	&__title {
+		color: $cgp_white;
+		font-size: 30px;
+		font-weight: 600;
+		line-height: 1;
+
+		@media #{$breakpoint-xs-only} {
+			font-size: 28px;
+		}
+	}
+	&__content {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		max-width: 412px;
+		width: 100%;
+		padding: 32px;
+		padding-top: 72px;
+		pointer-events: none;
+
+		@media #{$breakpoint-sm-down} {
+			max-width: 100%;
+			padding: 24px;
+			padding-top: 24px;
+		}
+
+		// ##################################################
+		// Blur Effect
+		&::after,
+		&::before {
+			@extend %content;
+			left: initial;
+			top: 0;
+			right: 0;
+			width: 100%;
+			height: 113%;
+			clip-path: polygon(0% 0%, 100% 22.5%, 86.7% 100%, 0% 100%);
+
+			@media #{$breakpoint-sm-down} {
+				clip-path: none;
+				height: 100%;
+			}
+		}
+
+		// ##################################################
+
+		&::before {
+			background: rgba(237, 28, 36, 0.5);
+			backdrop-filter: blur(10px) saturate(120%);
+			-webkit-backdrop-filter: blur(10px) saturate(120%);
+			z-index: 1;
+		}
+
+		// ##################################################
+
+		&::after {
+			background: var(--color-red-500);
+			mix-blend-mode: multiply;
+		}
+
+		&-inner {
+			color: $cgp_white;
+			position: relative;
+			z-index: 3;
+		}
+	}
+
+	&__btn {
+		position: relative;
+		z-index: 1;
+		pointer-events: auto;
+		display: inline-flex;
+	}
+
+	&__text {
+		color: $cgp_white;
+		font-size: 10px;
+		margin: 4px 0 20px;
+	}
+}

@@ -1,0 +1,57 @@
+@import '../../../scss/import';
+
+.detail-module {
+	max-width: 1156px;
+	margin: 0 auto;
+
+	&__header {
+		max-width: 686px;
+		margin: 0 auto;
+
+		.title,
+		.tag {
+			margin-bottom: 12px;
+		}
+	}
+
+	&__date {
+		color: var(--color-gray-500);
+		font-size: 10px;
+	}
+
+	&__main-img {
+		margin: 32px 0;
+
+		img {
+			width: 100%;
+			aspect-ratio: 1158 / 686;
+			border-radius: 6px;
+		}
+	}
+
+	&__items {
+		max-width: 686px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 32px;
+		margin-top: 32px;
+
+		.editor-text {
+			color: var(--color-gray-900);
+		}
+	}
+
+	&__gallery {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 20px;
+
+		img {
+			width: 100%;
+			aspect-ratio: 1 / 1;
+			border-radius: 6px;
+			mix-blend-mode: multiply;
+		}
+	}
+}

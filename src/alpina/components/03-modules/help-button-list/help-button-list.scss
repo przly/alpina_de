@@ -1,0 +1,25 @@
+@import '../../../scss/import';
+
+.help-button-list {
+	&__top {
+		margin-bottom: 32px;
+	}
+
+	.title {
+		color: $cgp_black;
+	}
+
+	&__items {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 8px 20px;
+
+		@media #{$breakpoint-sm-down} {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@media #{$breakpoint-xs-only} {
+			grid-template-columns: 1fr;
+		}
+	}
+}

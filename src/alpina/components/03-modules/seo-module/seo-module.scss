@@ -1,0 +1,66 @@
+// **************************************************
+// SEO Module
+// **************************************************
+
+@import '../../../scss/import';
+
+.seo-module {
+	// ##################################################
+
+	&__row {
+		display: flex;
+		gap: 24px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+		}
+
+		& + .seo-module__row {
+			margin-top: 48px;
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		flex: 1;
+	}
+
+	.editor-text {
+		font-size: 14px;
+		color: var(--color-gray-500);
+		letter-spacing: 0.02em;
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-size: 18px;
+			letter-spacing: 0;
+			line-height: 1.5;
+			margin-bottom: 16px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				margin-bottom: 8px;
+			}
+		}
+
+		p,
+		ul,
+		ol {
+			margin: 0 0 16px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			strong {
+				color: var(--color-gray-900);
+				font-weight: 400;
+			}
+		}
+	}
+}

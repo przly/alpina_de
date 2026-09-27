@@ -1,0 +1,83 @@
+//**********************************************************
+// Quantity Counter
+//**********************************************************
+
+@import '../../../scss/import';
+
+.quantity-counter {
+	display: inline-flex;
+	align-items: center;
+	grid-gap: 0;
+	height: 26px;
+	background-color: var(--color-gray-100);
+	border-radius: 6px;
+	padding: 2px;
+
+	// ##################################################
+
+	&__button {
+		position: relative;
+		height: 22px;
+		width: 22px;
+		transition: transform 50ms var(--easing-slow);
+		color: var(--color-gray-500);
+		border-radius: 6px;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 3;
+			width: 150%;
+			height: 150%;
+		}
+
+		// ##################################################
+
+		.icon {
+			width: 10px;
+			height: 10px;
+		}
+
+		// ##################################################
+
+		&:hover {
+			background-color: var(--color-gray-200);
+			color: var(--color-gray-950);
+		}
+
+		// ##################################################
+
+		&:active {
+			transform: scale(0.95);
+		}
+
+		// ##################################################
+
+		// stylelint-disable-next-line
+		&.#{$class_disabled} {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+	}
+
+	// ##################################################
+
+	&__input {
+		height: 22px;
+		width: 18px;
+		font-weight: 600;
+		text-align: center;
+		opacity: 1;
+		color: var(--color-gray-900);
+		border: 0;
+		background-color: transparent;
+		font-size: 10px;
+
+		&:disabled {
+			opacity: 1;
+		}
+	}
+}

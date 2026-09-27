@@ -1,0 +1,195 @@
+// **************************************************
+// Sort Dropdown
+// **************************************************
+
+@import '../../../scss/import';
+
+.sort-dropdown {
+	@include user-select;
+	position: relative;
+	margin-left: auto;
+	font-size: 14px;
+	font-weight: 500;
+
+	// ##################################################
+
+	&__placeholder {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 36px;
+		padding: 4px 16px;
+		font-weight: 500;
+		background-color: var(--color-gray-100);
+		font-family: var(--font-primary);
+		border-radius: 50px;
+		cursor: pointer;
+		transition: transform 50ms var(--easing-slow);
+
+		&:hover {
+			background-color: var(--color-gray-200);
+		}
+
+		&:active {
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				transform: scale(0.98);
+			}
+		}
+
+		@media (hover: none) {
+			&:active {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					transform: scale(0.98);
+				}
+			}
+		}
+
+		.icon {
+			flex-shrink: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__list {
+		position: absolute;
+		top: 100%;
+		width: 334px;
+		z-index: 9;
+		margin-top: 10px;
+		right: -4px;
+		overflow: hidden;
+		background-color: var(--color-gray-50);
+		border: 0.5px solid var(--color-gray-100);
+		border-radius: 16px;
+		opacity: 0;
+		pointer-events: none;
+		transition: transform 0.3s var(--easing-default), opacity 0.3s var(--easing-default);
+		box-shadow: 0px 3px 6px 0px #00000005, 0px 11px 11px 0px #00000005, 0px 25px 15px 0px #00000003,
+			0px 44px 18px 0px #00000000, 0px 69px 19px 0px #00000000;
+		padding: 4px 0;
+		font-size: 14px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: calc(100vw - 32px);
+			right: 0;
+		}
+
+		// ##################################################
+
+		&-inner {
+			overflow: auto;
+			max-height: 336px;
+			padding: 0 4px;
+
+			// Max Height
+			@media (min-width: 1024px) and (max-height: 550px) {
+				max-height: calc(100vh - 178px);
+				min-height: 160px;
+			}
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				max-height: 246px;
+			}
+
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				@include scrollbar(4px, rgba($cgp_gray_400, 0.5), transparent, 8px);
+			}
+		}
+
+		// ##################################################
+
+		&-item {
+			position: relative;
+		}
+
+		// ##################################################
+
+		input:not([type='submit']):not(.input-field__input) {
+			position: absolute;
+			width: 0;
+			height: 0;
+			opacity: 0;
+
+			// ##################################################
+
+			&:checked + .sort-dropdown__list-option {
+				&::after {
+					transform: translateY(-50%) scale(1);
+				}
+			}
+		}
+
+		// ##################################################
+
+		&-option {
+			position: relative;
+			cursor: pointer;
+			margin: 0;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 40px 10px 10px;
+			border-radius: 12px;
+			background-color: transparent;
+			margin-bottom: 0;
+
+			// ##################################################
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%) scale(0);
+				right: 10px;
+				width: 20px;
+				height: 20px;
+				transition: transform 0.3s var(--easing-default);
+				background: url('data:image/svg+xml, #{$icon_check}') no-repeat center / 20px;
+			}
+
+			// ##################################################
+
+			.icon {
+				width: 20px;
+				height: 20px;
+				flex-shrink: 0;
+				pointer-events: none;
+			}
+
+			// ##################################################
+
+			&:hover {
+				// Tablet L and up
+				@media #{$breakpoint-md-up} {
+					background-color: var(--color-gray-100);
+				}
+			}
+
+			// ##################################################
+
+			// stylelint-disable-next-line
+			&.#{$class_disabled} {
+				background-color: var(--color-gray-200);
+				pointer-events: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	// stylelint-disable-next-line
+	&.#{$class_open} {
+		// stylelint-disable-next-line
+		.sort-dropdown__list {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+}

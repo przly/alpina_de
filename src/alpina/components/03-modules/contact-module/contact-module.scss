@@ -1,0 +1,81 @@
+@import '../../../scss/import';
+
+.contact-module {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+	align-items: start;
+
+	@media #{$breakpoint-sm-down} {
+		grid-template-columns: 1fr;
+	}
+
+	&__title {
+		margin-bottom: 48px;
+	}
+
+	.help-card {
+		margin-top: 84px;
+		min-height: 268px;
+
+		@media #{$breakpoint-sm-down} {
+			margin-top: 40px;
+		}
+	}
+
+	&__left {
+		.editor-text {
+			p {
+				font-size: 14px;
+				color: var(--color-gray-500);
+				margin: 0;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-bottom: 12px;
+				margin-top: 24px;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+	&__right {
+		display: flex;
+		justify-content: flex-end;
+		grid-column: 2 / 4;
+
+		@media #{$breakpoint-sm-down} {
+			grid-column: 1 / 2;
+		}
+	}
+
+	&__form {
+		border-radius: 16px;
+		border: 0.5px solid $cgp_gray_200;
+		background-color: $cgp_gray_50;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+		padding: 24px;
+		max-width: 686px;
+		width: 100%;
+
+		@media #{$breakpoint-sm-down} {
+			max-width: 100%;
+		}
+	}
+
+	.form-component__submit {
+		text-align: left;
+	}
+
+	.radio-button-group__list {
+		gap: 10px 6px;
+	}
+}

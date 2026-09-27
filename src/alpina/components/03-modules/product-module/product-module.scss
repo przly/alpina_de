@@ -1,0 +1,571 @@
+//**********************************************************
+// Product Module
+//**********************************************************
+
+@import '../../../scss/import';
+
+.product-module {
+	padding-top: 16px;
+
+	// Dynamic store inventory cards
+	.find-store-modal {
+		.modal__store-list-inner {
+			.store-card[hidden] {
+				display: none;
+			}
+
+			.store-card__content {
+				min-width: 0;
+			}
+		}
+
+		.modal__store-list-not-found {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+			text-align: center;
+
+			&-inner {
+				font-size: 16px;
+				line-height: 1.4;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.product-showcase {
+		max-width: 100%;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 26px;
+		}
+
+		// Tablet P Only
+		@media #{$breakpoint-sm-only} {
+			width: calc(100% + 40px);
+			max-width: calc(100% + 40px);
+			padding: 0 20px;
+			margin-left: -20px;
+			overflow: hidden;
+		}
+
+		// ##################################################
+
+		.swiper {
+			// Tablet P Only
+			@media #{$breakpoint-sm-only} {
+				overflow: visible;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.breadcrumbs {
+		margin-bottom: 24px;
+	}
+
+	// ##################################################
+
+	.tag-list {
+		margin-bottom: 10px;
+	}
+
+	// ##################################################
+
+	&__sku,
+	&__sub-title {
+		margin-top: 5px;
+		letter-spacing: 0.24px;
+		color: var(--color-gray-500);
+	}
+
+	// ##################################################
+
+	&__header {
+		display: grid;
+		grid-gap: 24px;
+		margin-bottom: 44px;
+	}
+
+	// ##################################################
+
+	&__price-info {
+		display: grid;
+		grid-gap: 8px;
+	}
+
+	// ##################################################
+
+	&__price-details {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+
+		.product-module__lowest-price {
+			justify-content: flex-end;
+			text-align: right;
+		}
+	}
+
+	// ##################################################
+
+	&__current-price {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+
+		// ##################################################
+
+		.title--h6 {
+			letter-spacing: 0.4px;
+		}
+	}
+
+	// ##################################################
+
+	&__old-price,
+	&__lowest-price {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 10px;
+
+		&-value {
+			text-decoration: line-through;
+		}
+	}
+
+	// ##################################################
+
+	.size-selector,
+	.color-selector {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.color-selector {
+		margin-bottom: 24px;
+	}
+
+	// ##################################################
+
+	&__find-store {
+		margin-top: 12px;
+		border-top: 0.5px solid var(--color-gray-200);
+		padding-top: 12px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		justify-content: space-between;
+
+		// ##################################################
+
+		&-title {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		&-inner {
+			display: grid;
+			grid-gap: 36px;
+		}
+	}
+
+	// ##################################################
+
+	&__promotion {
+		display: grid;
+		grid-gap: 8px;
+	}
+
+	// ##################################################
+
+	.promotion-card {
+		max-width: 100%;
+
+		// ##################################################
+
+		&__button {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				margin-left: 0;
+			}
+		}
+
+		// ##################################################
+
+		&--secondary {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				flex-direction: column;
+				gap: 10px;
+				align-items: flex-start;
+			}
+		}
+
+		// ##################################################
+
+		&--addon {
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				padding: 36px 8px 8px 8px;
+			}
+
+			// ##################################################
+
+			.promotion-card__button {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					position: absolute;
+					top: 8px;
+					right: 4px;
+				}
+			}
+
+			// ##################################################
+
+			.promotion-card__image {
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					width: 60px;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__button-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+		}
+
+		// ##################################################
+
+		.btn {
+			flex: 1;
+		}
+	}
+
+	// ##################################################
+
+	&__dealer-btn.btn,
+	&__add-to-cart-wrapper {
+		width: 100%;
+		flex: auto;
+	}
+
+	// ##################################################
+
+	&__add-to-cart {
+		flex: auto;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			width: 100%;
+		}
+
+		// ##################################################
+
+		&-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			width: 100%;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			// ##################################################
+
+			.btn {
+				width: 100%;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.quantity-counter {
+		height: 48px;
+		border-radius: 40px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			height: 36px;
+		}
+
+		// ##################################################
+
+		&__input {
+			width: 30px;
+			height: 44px;
+			font-size: 16px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				width: 32px;
+				height: 32px;
+				font-size: 14px;
+			}
+		}
+
+		// ##################################################
+
+		&__button {
+			width: 44px;
+			height: 44px;
+			border-radius: 50px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				width: 32px;
+				height: 32px;
+			}
+
+			// ##################################################
+
+			.icon {
+				width: 16px;
+				height: 16px;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					width: 12px;
+					height: 12px;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__gift-voucher {
+		display: grid;
+		grid-gap: 24px;
+
+		// ##################################################
+
+		.dropdown {
+			max-width: 100%;
+
+			// ##################################################
+
+			&__placeholder {
+				height: 48px;
+				justify-content: space-between;
+				padding: 4px 20px;
+				font-size: 16px;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					height: 36px;
+					padding: 4px 16px;
+					font-size: 14px;
+				}
+
+				// ##################################################
+
+				&-text {
+					font-size: 16px;
+
+					// Mobile
+					@media #{$breakpoint-xs-only} {
+						font-size: 14px;
+					}
+				}
+			}
+
+			// ##################################################
+
+			&__list {
+				width: 100%;
+
+				&-option {
+					min-height: 48px;
+					padding: 4px 10px;
+
+					// Mobile
+					@media #{$breakpoint-xs-only} {
+						min-height: 36px;
+					}
+				}
+			}
+		}
+
+		// ##################################################
+
+		.radio-button-group {
+			.label {
+				font-size: 10px;
+				color: var(--color-gray-900);
+				margin-bottom: 12px;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					margin-bottom: 8px;
+				}
+			}
+
+			// ##################################################
+
+			&__list {
+				gap: 8px;
+
+				// ##################################################
+
+				&-item {
+					flex: 1;
+				}
+			}
+
+			// ##################################################
+
+			&__text {
+				margin-top: 8px;
+				color: var(--color-gray-500);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__wishlist {
+		&.is-active {
+			.icon-heart {
+				&::before {
+					-webkit-mask-image: url('data:image/svg+xml,#{$icon_heart_filled}');
+					mask-image: url('data:image/svg+xml,#{$icon_heart_filled}');
+					background-color: $cgp_red_500;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__info-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+
+		// ##################################################
+
+		&:not(:first-child) {
+			margin-top: 16px;
+			padding-top: 16px;
+			border-top: 0.5px solid var(--color-gray-200);
+		}
+
+		// ##################################################
+
+		&-text {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				flex-wrap: wrap;
+			}
+
+			// ##################################################
+
+			strong {
+				color: var(--color-gray-900);
+				font-weight: 600;
+			}
+		}
+
+		// ##################################################
+
+		img {
+			height: 16px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		// ##################################################
+
+		.icon {
+			width: 16px;
+			height: 10px;
+		}
+	}
+
+	// ##################################################
+
+	&__info-text {
+		margin-top: 16px;
+		border: 0.5px solid var(--color-gray-200);
+		padding: 20px;
+		background-color: var(--color-gray-25);
+		border-radius: 12px;
+		color: var(--color-gray-900);
+		letter-spacing: 0.28px;
+		line-height: 1.5;
+
+		// ##################################################
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	// ##################################################
+
+	&--gift-card {
+		.product-showcase--single-slide {
+			.no-cropping img,
+			img {
+				mix-blend-mode: normal;
+				object-fit: cover !important;
+				max-height: 100%;
+			}
+
+			.product-showcase__image {
+				border-radius: 6px;
+				height: 0;
+				padding-bottom: 100%;
+			}
+		}
+
+		.product-gallery-modal__image {
+			background-color: transparent;
+
+			// Desktop and Up
+			@media #{$breakpoint-xl-up} {
+				height: 922px;
+			}
+		}
+	}
+}

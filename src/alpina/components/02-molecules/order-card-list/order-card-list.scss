@@ -1,0 +1,47 @@
+// **************************************************
+// Order Card List
+// **************************************************
+
+@import '../../../scss/import';
+
+.order-card-list {
+	max-width: 1040px;
+	width: 100%;
+	margin: 0 auto;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		flex-wrap: wrap;
+		margin-bottom: 24px;
+
+		// ##################################################
+
+		&-btn-only {
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.order-card {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__inner {
+		display: grid;
+		grid-gap: 24px;
+	}
+}

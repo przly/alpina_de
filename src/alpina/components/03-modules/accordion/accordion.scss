@@ -1,0 +1,166 @@
+// **************************************************
+// Accordion
+// **************************************************
+
+@import '../../../scss/import';
+
+// Style
+.accordion {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 24px;
+
+	// ##################################################
+
+	&__wrap {
+		max-width: 920px;
+		margin: 0 auto;
+
+		// ##################################################
+
+		&:has(.accordion--full-width) {
+			max-width: 100%;
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		color: $cgp_black;
+		margin-bottom: 24px;
+	}
+
+	// ##################################################
+
+	&__item {
+		border-radius: 16px;
+		border: 0.5px solid $cgp_gray_200;
+		background: $cgp_gray_25;
+		box-shadow: 0 1px 2px 0 rgba($cgp_black, 0.06), 0 2px 4px 0 rgba($cgp_black, 0.04);
+
+		@media #{$breakpoint-xs-only} {
+			border-radius: 12px;
+		}
+
+		&:hover {
+			background: $cgp_gray_100;
+		}
+
+		&:target {
+			.accordion__item__content {
+				display: block;
+			}
+		}
+
+		// ##################################################
+
+		&-title {
+			font-size: 16px;
+			font-weight: 600;
+			position: relative;
+			cursor: pointer;
+			display: flex;
+			gap: 20px;
+			align-items: center;
+			justify-content: space-between;
+			min-height: 88px;
+			width: 100%;
+			padding: 16px 32px;
+
+			@media #{$breakpoint-xs-only} {
+				min-height: 64px;
+				padding: 8px 20px;
+			}
+		}
+
+		// ##################################################
+
+		.icon {
+			flex-shrink: 0;
+			transition: 0.3s ease;
+		}
+
+		// ##################################################
+
+		// Accordion item content
+		&-content {
+			display: none;
+			padding: 0 32px 32px 32px;
+			will-change: height, padding;
+			font-size: 14px;
+			font-weight: 500;
+
+			@media #{$breakpoint-xs-only} {
+				padding: 0 20px 20px 20px;
+			}
+		}
+
+		&-list {
+			&__item {
+				border-top: 1px solid $cgp_gray_200;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-gap: 20px;
+				font-size: 12px;
+				font-weight: 500;
+				color: $cgp_gray_900;
+				text-align: left;
+				padding: 10px 0;
+
+				div {
+					&:nth-of-type(2n) {
+						color: var(--color-gray-500);
+						text-align: right;
+					}
+				}
+
+				&:first-of-type {
+					padding-top: 0;
+					border-top: none;
+				}
+
+				&:last-of-type {
+					padding-bottom: 0;
+				}
+			}
+		}
+
+		// ##################################################
+
+		// Open accordion
+		// stylelint-disable-next-line
+		&.#{$class_open} {
+			// stylelint-disable-next-line
+			.icon {
+				// stylelint-disable-next-line
+				&:before {
+					transform: scaleY(-1);
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	.pictograms {
+		margin-top: 30px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	// ##################################################
+
+	&--default {
+		.pictograms {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				grid-template-columns: 1fr;
+			}
+		}
+	}
+}

@@ -1,0 +1,176 @@
+// **************************************************
+// Checkbox
+// **************************************************
+
+@import '../../../scss/import';
+
+.checkbox {
+	user-select: none;
+	transition: opacity 0.3s ease;
+	font-size: 14px;
+	font-weight: 500;
+
+	// stylelint-disable-next-line
+	&.#{$class_disabled} {
+		opacity: 0.5;
+		pointer-events: none;
+
+		// stylelint-disable-next-line
+		input {
+			pointer-events: none;
+		}
+	}
+
+	// ##################################################
+
+	&__label {
+		position: relative;
+		padding-left: 30px;
+		cursor: pointer;
+		margin: 0;
+		min-height: 20px;
+		display: block;
+
+		// ##################################################
+
+		&::after,
+		&:before {
+			content: '';
+			left: 0;
+			top: 0;
+			position: absolute;
+			pointer-events: none;
+			width: 20px;
+			height: 20px;
+			border-radius: 4px;
+		}
+
+		// ##################################################
+		// Unchecked
+
+		&:before {
+			background-color: var(--bg-color, $cgp_white);
+			border: 0.5px solid var(--color-gray-200);
+		}
+
+		// ##################################################
+		// Checked
+
+		&::after {
+			transform: scale(0);
+			background: url('data:image/svg+xml, #{$icon_check}') no-repeat center / 14px auto;
+		}
+
+		&.light-check-mark {
+			&::after {
+				filter: brightness(0) invert(1);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&:hover {
+		.checkbox__label {
+			&::before {
+				border-color: var(--color-gray-200);
+			}
+
+			&:not(.has-bg-color)::before {
+				background-color: var(--color-gray-200);
+			}
+		}
+	}
+
+	// ##################################################
+
+	input {
+		@extend %sr_only;
+
+		// ##################################################
+
+		&:checked ~ label {
+			&::after {
+				transform: scale(1);
+			}
+		}
+	}
+
+	// ##################################################
+
+	a {
+		text-decoration: underline;
+	}
+
+	// ##################################################
+
+	// stylelint-disable-next-line
+	&.#{$class_validation_failed},
+	.#{$class_validation_failed} & {
+		// stylelint-disable-next-line
+		.checkbox__label {
+			// stylelint-disable-next-line
+			&::before {
+				border-color: var(--color-validation-failed);
+			}
+		}
+	}
+
+	// ##################################################
+
+	.fv-plugins-message-container {
+		text-align: left;
+		padding-left: 30px;
+	}
+
+	// ##################################################
+
+	&.button {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		.checkbox__label {
+			font-size: 14px;
+			font-weight: 600;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			min-height: 36px;
+			padding: 4px 24px;
+			border-radius: 6px;
+			border: 0.5px solid var(--color-gray-200);
+			margin: 0 !important;
+			width: 100%;
+			background-color: var(--color-white);
+
+			&:before,
+			&:after {
+				display: none;
+			}
+
+			.failed & {
+				border-color: var(--color-validation-failed);
+			}
+		}
+
+		&:hover .checkbox__label {
+			background-color: var(--color-gray-100);
+		}
+
+		input:checked ~ .checkbox__label {
+			background-color: var(--color-gray-900) !important;
+			color: var(--color-white);
+		}
+
+		.fv-plugins-message-container {
+			width: 100%;
+			padding-left: 0;
+
+			@media #{$breakpoint-sm-down} {
+				padding-left: 0;
+			}
+		}
+	}
+}

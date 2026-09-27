@@ -1,0 +1,78 @@
+@import '../../../scss/import';
+
+.product-card-slider {
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+
+		// ##################################################
+
+		.title,
+		.slider-nav {
+			margin-bottom: 48px;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				margin-bottom: 20px;
+			}
+		}
+
+		// ##################################################
+
+		.slider-nav {
+			margin-left: auto;
+		}
+	}
+
+	// ##################################################
+
+	&__items {
+		// Tablet P and up
+		@media #{$breakpoint-sm-up} {
+			width: calc(100% + 8px);
+			padding: 4px;
+			left: -4px;
+			position: relative;
+			overflow: visible;
+		}
+	}
+
+	// ##################################################
+
+	.swiper-slide {
+		height: auto;
+
+		.product-card {
+			height: 100%;
+		}
+	}
+
+	// ##################################################
+
+	&.has-small-title {
+		.product-card-slider__top {
+			.title,
+			.slider-nav {
+				margin-bottom: 34px;
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
+}
+
+.sc-product-card-slider {
+	overflow: hidden;
+}

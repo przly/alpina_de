@@ -1,0 +1,215 @@
+//**********************************************************
+// Activities Module
+//**********************************************************
+
+@import '../../../scss/import';
+
+.activities-module {
+	&__main-title {
+		color: var(--color-gray-500);
+		letter-spacing: 0.28px;
+		margin-bottom: 36px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			margin-bottom: 30px;
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		position: relative;
+		z-index: 3;
+
+		// ##################################################
+
+		&.title {
+			letter-spacing: -0.01em;
+			color: var(--color-gray-300);
+			cursor: pointer;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				color: var(--color-white);
+			}
+
+			// stylelint-disable-next-line
+			&:hover,
+			&.#{$class_active} {
+				color: var(--color-red-500);
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					color: var(--color-white);
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__left {
+		&-inner {
+			display: grid;
+			grid-gap: 12px;
+			justify-items: flex-start;
+
+			// Tablet P and down
+			@media #{$breakpoint-sm-down} {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__item {
+		.activities-module__title {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__right {
+		position: relative;
+
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			height: 0;
+			padding-bottom: 102.5%;
+			border-radius: 12px;
+			overflow: hidden;
+		}
+
+		// ##################################################
+
+		&-inner {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				overflow: hidden;
+			}
+		}
+
+		// ##################################################
+
+		.swiper {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				@include user-select;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__image {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			position: relative;
+			min-height: 250px;
+			border-radius: 12px;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-end;
+			padding: 20px;
+			gap: 12px;
+		}
+
+		// ##################################################
+		// Overlay
+		&::before {
+			@extend %content;
+			background-color: rgba($cgp_black, 0.5);
+			z-index: 2;
+
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				display: none;
+			}
+		}
+
+		// ##################################################
+
+		img {
+			border-radius: 12px;
+		}
+	}
+
+	// ##################################################
+
+	&__buttons {
+		position: absolute;
+		bottom: 20px;
+		left: 20px;
+		z-index: 4;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		flex-shrink: 0;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			position: relative;
+			bottom: 0;
+			left: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__pattern {
+		position: absolute;
+		z-index: 3;
+		right: 0;
+		bottom: 0;
+		width: 630px;
+		pointer-events: none;
+		transform: translate(32%, 43%);
+		transform-origin: bottom right;
+
+		// Small desktop and down
+		@media #{$breakpoint-lg-down} {
+			width: 400px;
+		}
+
+		// Tablet L and down
+		@media #{$breakpoint-md-down} {
+			width: 250px;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			width: 150px;
+			bottom: initial;
+			top: 0;
+			transform: translate(58%, -8%);
+		}
+
+		// ##################################################
+
+		.pattern-animation {
+			width: 100%;
+			height: 100%;
+
+			&__group {
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					opacity: 1;
+					transform: translate(0, 0);
+				}
+			}
+		}
+	}
+}

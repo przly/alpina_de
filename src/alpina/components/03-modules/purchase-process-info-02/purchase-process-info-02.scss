@@ -1,0 +1,65 @@
+//**********************************************************
+// Purchase process info 02
+//**********************************************************
+
+@import '../../../scss/import';
+
+.purchase-process {
+	&__address-contact {
+		display: grid;
+		grid-gap: 16px;
+
+		// ##################################################
+
+		&-item {
+			display: grid;
+			grid-template-columns: 100px 1fr auto;
+			grid-gap: 20px;
+			align-items: start;
+			padding: 20px;
+			position: relative;
+
+			// Tablet P and Down
+			@media #{$breakpoint-sm-down} {
+				grid-template-columns: 80px 1fr auto;
+			}
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				grid-template-columns: 1fr;
+				padding: 16px;
+				grid-gap: 0;
+			}
+		}
+
+		// ##################################################
+
+		&__change {
+			display: flex;
+			gap: 6px;
+			align-items: center;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				font-size: 10px;
+				position: absolute;
+				top: 8px;
+				right: 12px;
+			}
+
+			.icon {
+				flex-shrink: 0;
+
+				// Mobile
+				@media #{$breakpoint-xs-only} {
+					width: 12px;
+					height: 12px;
+				}
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

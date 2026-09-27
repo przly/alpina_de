@@ -1,0 +1,5 @@
+/* The Alpina stylesheet lays out `body > main` (body is a flex column). React's #root sits
+   in between, so take it out of the layout tree to keep the site's structure intact. */
+#root {
+  display: contents;
+}

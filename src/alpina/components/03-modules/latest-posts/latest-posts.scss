@@ -1,0 +1,54 @@
+// **************************************************
+// Latest Posts
+// **************************************************
+
+@import '../../../scss/import';
+
+.latest-posts {
+	// ##################################################
+
+	&__list {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			overflow: hidden;
+		}
+	}
+
+	// ##################################################
+
+	&__row {
+		display: grid;
+		grid-gap: 20px;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			display: flex;
+			gap: 20px;
+			overflow: auto;
+			width: calc(100% + 40px);
+			margin-left: -20px;
+			padding: 0 20px;
+			overflow-x: scroll;
+			-webkit-overflow-scrolling: touch;
+			min-width: 0;
+
+			// Hide the scrollbars
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+	}
+
+	// ##################################################
+
+	.social-card {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			width: 284px;
+			flex-shrink: 0;
+		}
+	}
+}

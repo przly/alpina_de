@@ -1,0 +1,108 @@
+// **************************************************
+// Card Slider
+// **************************************************
+
+@import '../../../scss/import';
+
+.card-slider {
+	overflow: hidden;
+
+	// ##################################################
+
+	.showcase-card {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.slider-nav {
+		margin-left: auto;
+	}
+
+	// ##################################################
+
+	.swiper {
+		// Tablet P and up
+		@media #{$breakpoint-sm-up} {
+			overflow: visible;
+		}
+	}
+
+	// ##################################################
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 20px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+
+		.title,
+		.slider-nav {
+			margin-bottom: 25px;
+		}
+	}
+
+	// ##################################################
+
+	&[data-select-col='4'] {
+		.showcase-card__content {
+			margin-top: 12px;
+		}
+	}
+
+	// ##################################################
+
+	&[data-select-col='1'] {
+		.showcase-card__image {
+			padding-bottom: 49.3%;
+		}
+	}
+
+	// ##################################################
+
+	&--measurement-cards {
+		.showcase-card__image {
+			background-color: var(--color-gray-50);
+			border: 0.5px solid var(--color-gray-200);
+			box-shadow: 0px 1px 2px 0px #0000000f, 0px 2px 4px 0px #0000000a;
+			border-radius: 16px;
+		}
+
+		// ##################################################
+
+		.showcase-card__content {
+			margin-top: 26px;
+			grid-gap: 8px;
+		}
+
+		// ##################################################
+
+		.showcase-card__text,
+		.showcase-card__title {
+			font-size: 16px;
+			letter-spacing: 0.02em;
+
+			// Tablet L and down
+			@media #{$breakpoint-md-down} {
+				font-size: 14px;
+			}
+		}
+
+		// ##################################################
+
+		.title,
+		.slider-nav {
+			// Small desktop and up
+			@media #{$breakpoint-lg-up} {
+				margin-bottom: 36px;
+			}
+		}
+	}
+}

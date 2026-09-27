@@ -1,0 +1,132 @@
+// **************************************************
+// Loyalty Card Forms
+// **************************************************
+
+@import '../../../scss/import';
+
+.loyalty-card-form {
+	position: relative;
+	padding: 48px 24px 24px;
+	width: 100%;
+	max-width: 1040px;
+	box-shadow: var(--shadow-soft);
+	margin: 0 auto;
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		padding-top: 24px;
+	}
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	&:has(.form-component.show-thankyou) {
+		padding-top: 24px;
+
+		.form-component {
+			margin-top: 0;
+		}
+	}
+
+	// ##################################################
+
+	&__header {
+		padding-bottom: 48px;
+		border-bottom: 0.5px solid var(--color-gray-200);
+		margin-bottom: 48px;
+		display: grid;
+		grid-gap: 8px;
+
+		// Mobile
+		@media #{$breakpoint-xs-only} {
+			margin-bottom: 24px;
+			padding-bottom: 24px;
+		}
+
+		.loyalty-card-form:has(.form-component.show-thankyou) & {
+			display: none;
+		}
+	}
+
+	// ##################################################
+
+	&__title {
+		margin-bottom: 4px;
+	}
+
+	// ##################################################
+
+	.form-component {
+		margin-top: 24px;
+
+		// ##################################################
+
+		&__body {
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				grid-template-columns: repeat(12, minmax(0, 1fr));
+			}
+		}
+
+		// ##################################################
+
+		&__item {
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				grid-column: span 4;
+
+				&.full {
+					grid-column: span 12;
+				}
+
+				&.half {
+					grid-column: span 6;
+				}
+			}
+		}
+
+		&__submit {
+			margin: 24px 0;
+
+			// Tablet P and up
+			@media #{$breakpoint-sm-up} {
+				grid-column: span 12;
+			}
+		}
+
+		// ##################################################
+
+		&__form {
+			max-width: 100%;
+		}
+
+		// ##################################################
+
+		&__divider {
+			margin: 24px 0;
+		}
+	}
+
+	// ##################################################
+
+	.radio-button.button .radio-button__label {
+		min-width: 62px;
+		padding: 4px 8px;
+	}
+
+	// ##################################################
+
+	.radio-button-group,
+	.checkbox-group {
+		&__list {
+			grid-gap: 8px;
+		}
+	}
+
+	// ##################################################
+
+	.mod-loader {
+		background-color: var(--color-gray-50);
+	}
+}

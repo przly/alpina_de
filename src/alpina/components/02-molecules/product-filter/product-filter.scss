@@ -1,0 +1,336 @@
+// **************************************************
+// Product Filter
+// **************************************************
+
+@import '../../../scss/import';
+
+.product-filter {
+	position: relative;
+	padding-right: 20px;
+	width: 352px;
+	flex-shrink: 0;
+	display: none;
+
+	// Tablet P and down
+	@media #{$breakpoint-sm-down} {
+		z-index: $zindex_modal;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		pointer-events: none;
+	}
+
+	// stylelint-disable-next-line
+	.#{$class_open_filter} & {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: block;
+		}
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			pointer-events: all;
+		}
+	}
+
+	// ##################################################
+
+	&__header {
+		padding: 16px 25px 16px 20px;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		display: flex;
+		border-bottom: 0.5px solid var(--color-gray-200);
+		min-height: 68px;
+	}
+
+	// ##################################################
+
+	&__footer {
+		padding: 14px 16px;
+		border-top: 0.5px solid var(--color-gray-200);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		width: 100%;
+	}
+
+	// ##################################################
+
+	&__list {
+		display: grid;
+		grid-gap: 32px;
+
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			grid-gap: 16px;
+			padding: 16px;
+			overflow: auto;
+			flex: auto;
+		}
+
+		// ##################################################
+
+		&-item {
+			&:not(:last-child) {
+				padding-bottom: 32px;
+				border-bottom: 0.5px solid var(--color-gray-200);
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					padding-bottom: 20px;
+				}
+			}
+
+			&-title {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				justify-content: space-between;
+				min-height: 24px;
+				cursor: pointer;
+				width: 100%;
+				user-select: none;
+
+				.icon {
+					transition: transform 300ms var(--easing-default);
+				}
+			}
+
+			// ##################################################
+
+			&-content {
+				display: none;
+			}
+
+			&.is-open {
+				.product-filter__list-item-title .icon {
+					transform: scaleY(-1);
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__form {
+		// Tablet P and down
+		@media #{$breakpoint-sm-down} {
+			overflow: hidden;
+			z-index: 4;
+			background-color: var(--color-white);
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: auto;
+			max-height: 67.6vh;
+			border-radius: 0;
+			border-radius: 24px 24px 0 0;
+			transform: translate(0, 150%);
+			max-width: 100%;
+			transition: transform 500ms var(--easing-default);
+
+			// stylelint-disable-next-line
+			.#{$class_open_filter} & {
+				transform: translate(0, 0);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__row {
+		&--selected-items {
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: 0.5px;
+				height: 20px;
+				left: -12px;
+				background-color: var(--color-gray-200);
+				top: 3px;
+
+				// Tablet P and down
+				@media #{$breakpoint-sm-down} {
+					display: none;
+				}
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__selected-list {
+		display: flex;
+		align-items: flex-start;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	// ##################################################
+
+	&__btn {
+		flex-shrink: 0;
+		border-radius: 50px;
+		padding: 4px 12px;
+		min-height: 26px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		transition: transform 50ms var(--easing-slow);
+		background-color: var(--color-gray-100);
+		color: var(--color-gray-900);
+
+		&:active,
+		&:hover {
+			background-color: var(--color-gray-200);
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+
+		// ##################################################
+
+		.icon {
+			width: 12px;
+			height: 12px;
+			pointer-events: none;
+		}
+
+		// ##################################################
+
+		strong {
+			font-weight: 500;
+		}
+	}
+
+	// ##################################################
+
+	&__toggle-button {
+		// ##################################################
+
+		// stylelint-disable-next-line
+		.#{$class_open_filter} & {
+			// stylelint-disable-next-line
+			.product-filter__toggle-button-hide {
+				display: block;
+			}
+
+			// stylelint-disable-next-line
+			.product-filter__toggle-button-show {
+				display: none;
+			}
+
+			// stylelint-disable-next-line
+			.icon {
+				transform: scaleX(-1);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__selected {
+		background-color: var(--color-red-500);
+		color: var(--color-white);
+
+		&:hover {
+			background-color: var(--color-red-600);
+		}
+	}
+
+	// ##################################################
+
+	&__reset-btn {
+		// ##################################################
+
+		&-wrapper {
+			flex-shrink: 0;
+			position: relative;
+			padding-left: 10px;
+			margin-left: 5px;
+
+			// Divider
+			&::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				left: 0;
+				width: 2px;
+				height: 20px;
+				pointer-events: none;
+				border-left: 0.5px solid var(--color-gray-200);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__overlay {
+		position: fixed;
+		z-index: 3;
+		background-color: rgba(0, 0, 0, 0.3);
+		transition: opacity 500ms var(--easing-default), visibility 500ms var(--easing-default);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		width: 100%;
+
+		// stylelint-disable-next-line
+		.#{$class_open_filter} & {
+			opacity: 1;
+			pointer-events: all;
+			visibility: visible;
+		}
+	}
+
+	[data-filter-title] {
+		font-size: 20px;
+		font-weight: 600;
+		color: var(--color-gray-950);
+	}
+
+	.size-selector,
+	.checkbox-group {
+		max-width: 100%;
+		padding-top: 15px;
+	}
+
+	// Keep unavailable choices muted without dimming selected choices.
+	.checkbox {
+		input:disabled:not(:checked) ~ .checkbox__label {
+			color: var(--color-gray-400);
+			cursor: not-allowed;
+			opacity: 0.55;
+			pointer-events: none;
+		}
+	}
+
+	/* stylelint-disable plugin/stylelint-bem-namics */
+	.checkbox-group__list-item:has(input:disabled:not(:checked)),
+	.size-selector__item:has(input:disabled:not(:checked)) {
+		display: none;
+	}
+	/* stylelint-enable plugin/stylelint-bem-namics */
+
+	.range-slider {
+		padding-top: 20px;
+	}
+}

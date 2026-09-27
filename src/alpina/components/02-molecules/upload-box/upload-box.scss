@@ -1,0 +1,206 @@
+// **************************************************
+// Upload Box
+// **************************************************
+
+@import '../../../scss/import';
+
+// Style
+.upload-box {
+	width: 100%;
+	max-width: 850px;
+	display: flex;
+	font-weight: 500;
+	flex-direction: column;
+
+	// Mobile
+	@media #{$breakpoint-xs-only} {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	&__label {
+		position: relative;
+		display: block;
+		z-index: 4;
+		font-weight: 500;
+		margin-bottom: 8px;
+	}
+
+	// ##################################################
+
+	&__inner {
+		position: relative;
+		gap: 4px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		height: 164px;
+		width: 100%;
+		border-radius: 0;
+		background-color: var(--color-white);
+		overflow: hidden;
+
+		&-border {
+			path {
+				fill: none;
+				stroke: rgba($cgp_black, 0.2);
+				stroke-width: 2;
+				stroke-dasharray: 4, 4;
+			}
+		}
+
+		.is-hovered & {
+			background-color: #fff5c2;
+
+			path {
+				stroke: #c2a01f;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__main {
+		// stylelint-disable-next-line
+		&.#{$class_validation_failed} {
+			// stylelint-disable-next-line
+			path {
+				stroke: var(--color-validation-failed);
+			}
+		}
+	}
+
+	// ##################################################
+
+	&__text {
+		text-align: center;
+
+		span {
+			text-decoration: underline;
+		}
+	}
+
+	// ##################################################
+
+	&__info-text {
+		opacity: 0.64;
+	}
+
+	// ##################################################
+
+	input[type='file'] {
+		font-size: 0;
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+	}
+
+	// ##################################################
+
+	.icon {
+		pointer-events: none;
+	}
+
+	// ##################################################
+
+	&__list {
+		font-size: 16px;
+		line-height: 1.2;
+
+		// ##################################################
+
+		.icon {
+			pointer-events: none;
+
+			&::before {
+				background-color: currentColor;
+			}
+		}
+
+		// ##################################################
+
+		li {
+			position: relative;
+			display: grid;
+			grid-template-columns: 64px 1fr 24px;
+			align-items: center;
+			grid-gap: 16px;
+
+			// ##################################################
+
+			&:first-child {
+				margin-top: 24px;
+			}
+
+			// ##################################################
+
+			& + li {
+				margin-top: 10px;
+			}
+		}
+
+		// ##################################################
+
+		&-icon {
+			width: 64px;
+			height: 64px;
+			border: 1px solid #b0adaa;
+		}
+
+		// ##################################################
+
+		&-uploaded {
+			margin-top: 10px;
+		}
+
+		// ##################################################
+
+		&-text {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+			font-weight: 700;
+			max-width: 450px;
+
+			// Mobile
+			@media #{$breakpoint-xs-only} {
+				max-width: calc(100vw - 180px);
+			}
+		}
+
+		// ##################################################
+
+		&-size {
+			font-size: 12px;
+			font-weight: 400;
+		}
+
+		// ##################################################
+
+		&-middle {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+	}
+
+	// ##################################################
+
+	// stylelint-disable-next-line
+	.#{$class_validation_failed} &,
+	&.#{$class_validation_failed} {
+		// stylelint-disable-next-line
+		.upload-box__title {
+			color: $cgp_validation_failed;
+		}
+	}
+}

@@ -1,0 +1,47 @@
+// **************************************************
+// Order Status
+// **************************************************
+
+@import '../../../scss/import';
+
+.order-status {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 24px;
+	padding: 24px;
+	box-shadow: var(--shadow-soft);
+	width: 100%;
+	max-width: 920px;
+	margin: 0 auto;
+
+	[data-component^='mod-'] & {
+		max-width: 100%;
+	}
+
+	// ##################################################
+
+	.editor-text {
+		p {
+			margin: 0 0 8px;
+		}
+	}
+
+	// ##################################################
+
+	&__text {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+
+		.icon {
+			flex-shrink: 0;
+		}
+	}
+
+	&__footer {
+		display: grid;
+		grid-gap: 2px;
+	}
+}

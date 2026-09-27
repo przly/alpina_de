@@ -1,0 +1,115 @@
+//*******************************************************************************
+// Showcase Card
+//*******************************************************************************
+
+@import '../../../scss/import';
+
+.showcase-card {
+	max-width: 450px;
+	width: 100%;
+	position: relative;
+
+	// ##################################################
+
+	&__image {
+		position: relative;
+		height: 0;
+		padding-bottom: 100%;
+
+		// ##################################################
+
+		img {
+			transition: transform 0.2s ease-in-out;
+			transform: scale(1.00001);
+		}
+	}
+
+	// ##################################################
+
+	&__content {
+		margin-top: 20px;
+		display: grid;
+		grid-gap: 12px;
+	}
+
+	// ##################################################
+
+	&__title {
+		letter-spacing: normal;
+		line-height: 1.2;
+	}
+
+	// ##################################################
+
+	&__text {
+		letter-spacing: 0.24px;
+	}
+
+	// ##################################################
+
+	&:has(.stretched-link):hover {
+		.showcase-card__image img {
+			transform: scale(1.02);
+		}
+	}
+
+	// ##################################################
+
+	&__index {
+		width: 32px;
+		height: 32px;
+		border-radius: 100%;
+		border: 0.25px solid var(--color-red-400);
+		background-color: var(--color-red-500);
+		color: var(--color-red-50);
+		position: absolute;
+		top: 16px;
+		left: 16px;
+		z-index: 4;
+		pointer-events: none;
+	}
+
+	// ##################################################
+
+	&--horizontal {
+		// Tablet L and up
+		@media #{$breakpoint-md-up} {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			align-items: flex-start;
+			grid-gap: 20px;
+		}
+
+		// ##################################################
+
+		.showcase-card__content {
+			// Tablet L and up
+			@media #{$breakpoint-md-up} {
+				margin-top: 0;
+			}
+		}
+	}
+
+	// ##################################################
+
+	&--loyalty {
+		max-width: 332px;
+		width: 100%;
+
+		// ##################################################
+
+		.showcase-card__image {
+			box-shadow: var(--shadow-soft);
+			background-color: var(--color-gray-50);
+			border: 0.5px solid var(--color-gray-200);
+			border-radius: 16px;
+		}
+
+		// ##################################################
+
+		.showcase-card__content {
+			margin-top: 16px;
+			grid-gap: 4px;
+		}
+	}
+}

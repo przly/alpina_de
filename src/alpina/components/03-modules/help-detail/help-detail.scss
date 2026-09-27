@@ -1,0 +1,33 @@
+@import '../../../scss/import';
+
+.help-detail {
+	display: grid;
+	grid-template-columns: 333px 1fr;
+	grid-gap: 40px;
+
+	@media #{$breakpoint-sm-down} {
+		display: block;
+	}
+
+	&__right {
+		max-width: 920px;
+		margin-left: auto;
+		width: 100%;
+
+		@media #{$breakpoint-sm-down} {
+			margin-top: 40px;
+		}
+
+		.title {
+			margin-bottom: 36px;
+
+			@media #{$breakpoint-sm-down} {
+				margin-bottom: 24px;
+			}
+		}
+
+		.editor-text {
+			color: var(--color-gray-900);
+		}
+	}
+}
