@@ -8,19 +8,22 @@
   justify-content: center;
 }
 
+/* Popup rules are scoped under .language-popup-page so they beat the Alpina bundle on specificity:
+   the production build loads this file before the bundle, dev loads it after. */
+
 /* Options are buttons here instead of radio labels, so they need to fill the row */
-.language-switch__form .dropdown__list-option {
+.language-popup-page .language-switch__form .dropdown__list-option {
   text-align: left;
 }
 
-.language-switch__form .dropdown__placeholder {
+.language-popup-page .language-switch__form .dropdown__placeholder {
   text-align: left;
 }
 
 /* Open/close motion from ngen_design's /modal-demo (`.t-modal` + `.t-modal-backdrop`):
    scale 0.96 → 1 with a fade, 250ms in / 150ms out on one curve. The Alpina form fades
    backdrop and panel together, so its opacity drives both and the inner panel only scales. */
-.language-switch__form {
+.language-popup-page .language-switch__form {
   --modal-open-dur: 250ms;
   --modal-close-dur: 150ms;
   --modal-scale: 0.96;
@@ -31,26 +34,26 @@
     visibility 0s linear var(--modal-close-dur);
 }
 
-.language-switch__form.is-open {
+.language-popup-page .language-switch__form.is-open {
   transition:
     opacity var(--modal-open-dur) var(--modal-ease),
     visibility 0s;
 }
 
-.language-switch__form-inner {
+.language-popup-page .language-switch__form-inner {
   transform: scale(var(--modal-scale));
   transition: transform var(--modal-close-dur) var(--modal-ease);
   will-change: transform;
 }
 
-.language-switch__form.is-open .language-switch__form-inner {
+.language-popup-page .language-switch__form.is-open .language-switch__form-inner {
   transform: scale(1);
   transition: transform var(--modal-open-dur) var(--modal-ease);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .language-switch__form,
-  .language-switch__form-inner {
+  .language-popup-page .language-switch__form,
+  .language-popup-page .language-switch__form-inner {
     transition: none !important;
   }
 }

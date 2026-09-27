@@ -1,35 +1,36 @@
-/* Overrides on top of the Alpina stylesheet */
+/* Overrides on top of the Alpina stylesheet. Scoped under .sc-activities-module so they win on
+   specificity: the production build loads this file before the Alpina bundle, dev loads it after. */
 
 /* Desktop: the per-slide patterns are replaced by one static pattern over the slider */
-.activities-module__pattern--static {
+.sc-activities-module .activities-module__pattern--static {
   display: none;
 }
 
 @media only screen and (min-width: 1023px) {
-  .activities-module__pattern--static {
+  .sc-activities-module .activities-module__pattern--static {
     display: block;
   }
 
-  .activities-module__item .activities-module__pattern {
+  .sc-activities-module .activities-module__item .activities-module__pattern {
     display: none;
   }
 }
 
 /* Half the repo's desktop sizes (630 / 400 / 250px) */
 @media only screen and (min-width: 1023px) {
-  .activities-module__pattern--static {
+  .sc-activities-module .activities-module__pattern--static {
     width: 315px;
   }
 }
 
 @media only screen and (min-width: 1023px) and (max-width: 1439px) {
-  .activities-module__pattern--static {
+  .sc-activities-module .activities-module__pattern--static {
     width: 200px;
   }
 }
 
 @media only screen and (min-width: 1023px) and (max-width: 1200px) {
-  .activities-module__pattern--static {
+  .sc-activities-module .activities-module__pattern--static {
     width: 125px;
   }
 }
@@ -37,13 +38,13 @@
 /* Desktop: the image overscans the frame by 56px top and bottom, so the directional
    fade can shift it without exposing an edge */
 @media only screen and (min-width: 1023px) {
-  .activities-module__item,
-  .activities-module__image {
+  .sc-activities-module .activities-module__item,
+  .sc-activities-module .activities-module__image {
     position: relative;
     height: 100%;
   }
 
-  .activities-module__image img {
+  .sc-activities-module .activities-module__image img {
     position: absolute;
     top: -56px;
     left: 0;
@@ -56,14 +57,14 @@
 }
 
 /* One curve for all motion in the module: image shift (FADE_EASING in the JSX), desktop fade and tablet slide */
-.activities-module {
+.sc-activities-module .activities-module {
   --activities-ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.activities-module .swiper {
+.sc-activities-module .activities-module .swiper {
   --swiper-wrapper-transition-timing-function: var(--activities-ease);
 }
 
-.activities-module .swiper-fade .swiper-slide {
+.sc-activities-module .activities-module .swiper-fade .swiper-slide {
   transition-timing-function: var(--activities-ease);
 }
