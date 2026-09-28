@@ -1,0 +1,15 @@
+/* Overrides on top of the Alpina stylesheet. Scoped under .sc-hero-module so they win on
+   specificity: the production build loads this file before the Alpina bundle, dev loads it after. */
+
+/* Pattern stripes stay fully opaque and only slide in (the repo also fades them from 0) */
+.sc-hero-module [data-animated-pattern] .pattern-animation__group {
+  opacity: 1;
+}
+
+/* Same diagonal as the repo, but twice as far back (200px → 400px) so the stripes start fully
+   out of frame. The frame shows roughly the first 358 × 496 SVG units of the pattern and the top
+   stripe starts at the origin, so anything past ~360 clears it. Units are SVG user units, so
+   this holds at every breakpoint. */
+.sc-hero-module [data-animated-pattern] .pattern-animation__group {
+  transform: translate(400px, 400px);
+}

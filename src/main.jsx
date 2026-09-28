@@ -6,6 +6,7 @@ import RouteMenu from './RouteMenu.jsx'
 
 // Lazy so the Alpina site stylesheet only loads on its own route and never touches the product card page
 const routes = {
+  '/hero-module': { label: 'Hero module', load: () => import('./HeroPage.jsx') },
   '/activities-module': { label: 'Activities module', load: () => import('./ActivitiesPage.jsx') },
   '/language-popup': { label: 'Language popup', load: () => import('./LanguagePopupPage.jsx') },
 }

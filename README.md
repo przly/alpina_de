@@ -9,9 +9,9 @@ npm run dev
 
 `npm run dev` / `npm run build` first compile the Alpina SCSS in
 `src/alpina` into `src/alpina/css/bundle.css` (gitignored), mirroring the
-repo's gulp CSS task. Routes: `/` (product card), `/activities-module`,
-`/language-popup`. A route switcher sits in the top-right corner of every
-page (sandbox-only, not part of Alpina).
+repo's gulp CSS task. Routes: `/` (product card), `/hero-module`,
+`/activities-module`, `/language-popup`. A route switcher sits in the
+top-right corner of every page (sandbox-only, not part of Alpina).
 
 ## product-card animation changes and fixes
 
@@ -44,6 +44,27 @@ Not a 1:1 port — the motion was redesigned. For porting back into
 
 Everything else (typography, spacing, tag variants, DOM structure) matches
 the original.
+
+## hero-module animation changes
+
+Rendered with the original markup (`hero-module.twig`, default variant
+content) and the site stylesheet; only the pattern motion differs. For
+porting back into `164-1-alpina-prenova`:
+
+- **No fade on the pattern stripes.** Was `opacity: 0 → 1` alongside the
+  slide; stripes now stay at 100% and only move.
+- **Starts further back on the same diagonal.** Was
+  `translate(200px, 200px)`, which runs along the stripes' own 45° angle, so
+  without the fade they stayed on screen. Now `translate(400px, 400px)`
+  (SVG user units, so it holds at every breakpoint): fully out of frame at
+  the start, same direction of travel.
+- **easeOutQuart** (`cubic-bezier(0.25, 1, 0.5, 1)`) instead of GSAP's
+  `power2.out`. Duration (`600ms`) and stagger (`100ms`) unchanged.
+- **Waits for the background image.** Plays once the module is in view
+  (same `top 80%` trigger) *and* the image has loaded and decoded; plays
+  anyway if the image fails.
+- **Not ported:** the video-background variant; Web Animations API instead
+  of GSAP.
 
 ## activities-module animation changes and fixes
 
