@@ -10,7 +10,7 @@ npm run dev
 `npm run dev` / `npm run build` first compile the Alpina SCSS in
 `src/alpina` into `src/alpina/css/bundle.css` (gitignored), mirroring the
 repo's gulp CSS task. Routes: `/` (product card), `/hero-module`,
-`/activities-module`, `/language-popup`. A route switcher sits in the
+`/activities-module`, `/language-popup`, `/side-cart`. A route switcher sits in the
 top-right corner of every page (sandbox-only, not part of Alpina).
 
 ## product-card animation changes and fixes
@@ -108,3 +108,58 @@ from the class names; content is placeholder. For porting back:
   time; focus returns to the trigger on close.
 - **Not ported:** flags load from flagcdn.com (no flag assets in this
   sandbox); Confirm only closes the popup.
+
+## side cart (`cart-popup`)
+
+Clone of the side cart on `/side-cart`, opened from a centred button.
+Markup follows `cart-popup.twig`, `cart-popup-content-axios.twig`,
+`cart-view.twig`, `free-shipping-indicator.twig` and
+`quantity-counter.twig` from `164-1-alpina-prenova` (`develop`, 2026-10-07);
+`cart-popup.scss` and `cart-view.scss` were re-synced from the same commit.
+Content is placeholder.
+
+- **Open/close motion replaced** with transitions.dev's panel reveal
+  (`.t-panel-slide` tokens). Was a flat `0.4s ease` slide with a `0.3s ease`
+  overlay fade. Now `400ms` open / `350ms` close on
+  `cubic-bezier(0.22, 1, 0.36, 1)`, overlay and panel on the same timing.
+  Desktop keeps the full-width slide from the right. Tablet P and down was
+  `scaleY(0.95) translateY(-8px)` on `transition: all 330ms`; now the panel
+  drops in `100px` from the top with a fade and a `2px` cross-blur, no squash. Tokens:
+  `--panel-open-dur`, `--panel-close-dur`, `--panel-translate-y`,
+  `--panel-blur`, `--panel-ease`. Disabled under `prefers-reduced-motion`.
+- **Footer anchored to the bottom.** Total and buttons sit in a `cart-popup__footer` wrapper pinned to the bottom of the
+  panel; the title and free shipping indicator stay fixed at the top and
+  only the items scroll between them, in `cart-popup__body` (both wrappers
+  are new, not Alpina classes). The panel becomes a flex column with
+  `overflow: hidden` to do this.
+- **Fades on the scrolling list.** The list has `24px` top and bottom
+  padding (`16px` up to `767px`), with white-to-transparent gradients of
+  the same height
+  over the top and bottom of the item list (`cart-popup__scroll`, also new),
+  each visible only while items are hidden behind that edge; `150ms` fade.
+- **Buttons stacked on mobile.** Up to `767px` the two buttons stack with
+  the red checkout button on top (`column-reverse`, `8px` gap). The
+  original only stacks at `390px` and below, with "Go to cart" first and a
+  `16px` gap.
+- **No divider under the last item** in the list (`border-bottom: 0`).
+- **Tighter panel padding on mobile.** Up to `767px` the panel has `16px`
+  top and bottom padding (was `40px`); close button moved to `top: 16px`.
+- **Indicator scrolls on mobile.** Up to `767px` the free shipping
+  indicator sits inside the scrolling list and scrolls away with the items;
+  above that it stays fixed under the title.
+- **White Safari bars.** `theme-color` is `#ffffff` (in `index.html`, so
+  every route), and where the panel is full screen (up to `1022px`) the
+  overlay behind it is white, not 50% black, so iOS Safari's status bar
+  and the area under its bottom bar stay white.
+- **Same row spacing on mobile.** Cart rows keep the desktop `7px` top and
+  bottom padding up to `767px` (the original uses `16px` there).
+- **Scrollbar in the gutter.** The list extends into the panel's side
+  padding so its scrollbar sits at the panel edge, not over the items;
+  styled like the panel's own `scrollbar` mixin (`4px`, gray-400 at 50%).
+- **No gap around the list.** Removed the indicator's `16px` bottom margin
+  and the total's `20px` top margin, so the list runs flush between them.
+- **Closing:** ✕, overlay click and Escape; focus returns to the trigger.
+- **Not ported:** quantity, remove and totals are local state only; no
+  `promotion-card`, reward row, product recommendations, button loaders or animated
+  total price; the empty state has a sandbox-only "Refill cart" button
+  instead of the shop link.

@@ -1,0 +1,276 @@
+/* No site header on this page, so drop the header offset and centre the trigger on screen */
+.side-cart-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart rules are scoped under .side-cart-page so they beat the Alpina bundle on specificity:
+   the production build loads this file before the bundle, dev loads it after. */
+
+/* Total and buttons stay anchored to the bottom of the cart; only the items scroll,
+   between the free shipping indicator and the footer. `cart-popup__scroll`, `cart-popup__body` and `cart-popup__footer`
+   are sandbox-only wrappers, not Alpina classes. */
+.side-cart-page .cart-popup__inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.side-cart-page .cart-popup:not(.cart-popup--empty) .cart-popup__content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-cart-page .cart-popup__scroll {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The list extends into the panel's side padding so its scrollbar sits in that gutter, at the panel's
+   edge, and not over the items. `--side-cart-gutter` mirrors the panel's horizontal padding. */
+.side-cart-page .cart-popup {
+  --side-cart-gutter: 18px;
+  /* Top and bottom padding of the list, and the height of its fades */
+  --side-cart-list-pad: 24px;
+}
+
+@media only screen and (max-width: 1022px) {
+  .side-cart-page .cart-popup {
+    --side-cart-gutter: 30px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .side-cart-page .cart-popup {
+    --side-cart-gutter: 16px;
+    --side-cart-list-pad: 16px;
+  }
+}
+
+/* A 4px scrollbar like the panel's `scrollbar` mixin (gray-400 at 50%). Whether the browser reserves
+   space for it or overlays it (iOS ignores the WebKit rules), the items keep the panel's content width:
+   they are sized from `cart-popup__scroll`, not from the scroller. */
+.side-cart-page .cart-popup__scroll {
+  container-type: inline-size;
+}
+
+.side-cart-page .cart-popup__body {
+  flex: 1;
+  min-height: 0;
+  margin-right: calc(-1 * var(--side-cart-gutter));
+  padding: var(--side-cart-list-pad) 0;
+  overflow: hidden auto;
+  /* The panel's mixin sets `scrollbar-color`, which inherits and would switch off the WebKit rules below */
+  scrollbar-color: auto;
+}
+
+.side-cart-page .cart-popup__body-inner {
+  width: 100cqw;
+}
+
+.side-cart-page .cart-popup__body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.side-cart-page .cart-popup__body::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 161, 0.5);
+  border-radius: 8px;
+}
+
+/* Firefox has no ::-webkit-scrollbar; the standard properties would override the rules above in Chrome */
+@supports not selector(::-webkit-scrollbar) {
+  .side-cart-page .cart-popup__body {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(161, 161, 161, 0.5) transparent;
+  }
+}
+
+/* Fades over the top and bottom of the list, as tall as the list's padding, each shown only while items
+   are hidden behind that edge.
+   Above the items' stretched link (z-index 6) so nothing pokes through. */
+.side-cart-page .cart-popup__scroll::before,
+.side-cart-page .cart-popup__scroll::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--side-cart-list-pad);
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.side-cart-page .cart-popup__scroll::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--color-white), transparent);
+}
+
+/* The list's height is fractional, so a fade ending exactly at its bottom edge can leave a sliver of the
+   items showing above the total's line. Overlap the line by 1px and keep the line on top of the fade. */
+.side-cart-page .cart-popup__scroll::after {
+  bottom: -1px;
+  height: calc(var(--side-cart-list-pad) + 1px);
+  background: linear-gradient(to top, var(--color-white) 1px, transparent);
+}
+
+.side-cart-page .cart-popup__total {
+  position: relative;
+  z-index: 8;
+}
+
+.side-cart-page .cart-popup__scroll[data-fade-top='true']::before,
+.side-cart-page .cart-popup__scroll[data-fade-bottom='true']::after {
+  opacity: 1;
+}
+
+.side-cart-page .cart-popup__header,
+.side-cart-page .cart-popup__content > .free-shipping-indicator,
+.side-cart-page .cart-popup__footer {
+  flex-shrink: 0;
+}
+
+/* The list runs flush from the free shipping indicator to the line above the total (was 16px and 20px
+   of margin); the indicator sits above the top fade so its shadow is not washed out */
+.side-cart-page .cart-popup .free-shipping-indicator {
+  margin-bottom: 0;
+  z-index: 8;
+}
+
+.side-cart-page .cart-popup__total {
+  margin-top: 0;
+}
+
+/* Open/close motion from transitions.dev's panel reveal (`.t-panel-slide`): slower in than out on one
+   smooth-out curve, replacing the flat `0.4s ease` slide and `0.3s ease` overlay fade. The overlay
+   fades on the same duration and curve as the panel so the two read as one move. */
+.side-cart-page .cart-popup {
+  --panel-open-dur: 400ms;
+  --panel-close-dur: 350ms;
+  --panel-translate-y: 100px;
+  --panel-blur: 2px;
+  --panel-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.side-cart-page .cart-popup__overlay {
+  transition:
+    opacity var(--panel-close-dur) var(--panel-ease),
+    visibility 0s linear var(--panel-close-dur);
+}
+
+.side-cart-page .cart-popup.is-cart-open .cart-popup__overlay {
+  transition:
+    opacity var(--panel-open-dur) var(--panel-ease),
+    visibility 0s;
+}
+
+/* Desktop: the panel travels its full width from the edge, so the slide alone carries it */
+.side-cart-page .cart-popup__inner {
+  transition:
+    transform var(--panel-close-dur) var(--panel-ease),
+    opacity var(--panel-close-dur) var(--panel-ease),
+    filter var(--panel-close-dur) var(--panel-ease),
+    visibility 0s linear var(--panel-close-dur);
+  will-change: transform, opacity, filter;
+}
+
+.side-cart-page .cart-popup.is-cart-open .cart-popup__inner {
+  filter: blur(0);
+  transition:
+    transform var(--panel-open-dur) var(--panel-ease),
+    opacity var(--panel-open-dur) var(--panel-ease),
+    filter var(--panel-open-dur) var(--panel-ease),
+    visibility 0s;
+}
+
+/* Tablet P and down: the full-screen panel drops in from the top, like the original, over a short
+   distance with a fade and a cross-blur
+   (was `scaleY(0.95) translateY(-8px)` on `transition: all`, which squashed the content) */
+@media only screen and (max-width: 1022px) {
+  .side-cart-page .cart-popup__inner {
+    transform: translateY(calc(-1 * var(--panel-translate-y)));
+    filter: blur(var(--panel-blur));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-cart-page .cart-popup__overlay,
+  .side-cart-page .cart-popup__inner {
+    transition: none !important;
+  }
+}
+
+/* Mobile: buttons stack with checkout on top (the original only stacks at 390px and below, cart first,
+   with a 16px gap). */
+@media only screen and (max-width: 767px) {
+  .side-cart-page .cart-popup__button-group {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+}
+
+/* No divider under the last item; the line above the total closes the list */
+.side-cart-page .cart-popup .cart-view__item:last-child {
+  border-bottom: 0;
+}
+
+/* Mobile: 16px above the title and below the buttons (was 40px), with the close button moved up to
+   stay level with the title */
+@media only screen and (max-width: 767px) {
+  .side-cart-page .cart-popup__inner {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .side-cart-page .cart-popup__close {
+    top: 16px;
+  }
+}
+
+/* Mobile: the free shipping indicator scrolls with the items, so the list starts right under the title
+   (no top padding) and the indicator goes under the top fade like the rest. The scroller also extends
+   into the left gutter so the indicator's shadow is not cut off. */
+@media only screen and (max-width: 767px) {
+  .side-cart-page .cart-popup__body {
+    margin-left: calc(-1 * var(--side-cart-gutter));
+    padding-top: 0;
+    padding-left: var(--side-cart-gutter);
+  }
+
+  /* 9px + the first row's 7px padding keeps 16px between the indicator and the first item */
+  .side-cart-page .cart-popup__body .free-shipping-indicator {
+    margin-bottom: 9px;
+    z-index: auto;
+  }
+}
+
+/* iOS Safari tints its status bar and the area under its bottom bar from the page background and from
+   whatever fixed layer sits at the screen edges. Keep both white: the page itself, and, where the panel
+   is full screen (tablet P and down), the overlay behind it, which also shows in the strip below the
+   `100svh` panel when Safari's bar is collapsed. */
+html,
+body {
+  background-color: #ffffff;
+}
+
+@media only screen and (max-width: 1022px) {
+  .side-cart-page .cart-popup__overlay {
+    background: #ffffff;
+  }
+}
+
+/* Mobile: same 7px row padding as desktop (the original uses 16px here) */
+@media only screen and (max-width: 767px) {
+  .side-cart-page .cart-popup .cart-view__item {
+    padding: 7px 0;
+  }
+}

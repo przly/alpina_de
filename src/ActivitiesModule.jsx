@@ -16,15 +16,19 @@ const FADE_EASING = 'cubic-bezier(0.23, 1, 0.32, 1)'
 const isDesktop = () => window.innerWidth > BREAKPOINT_MD
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// Moves an element to `toY`, starting from wherever it is now so an interrupted hover never jumps
-function shift(el, fromY, toY) {
+// Moves an element to `toY` (and optionally `toOpacity`). A `fromY` of null starts from wherever it is
+// now, so an interrupted hover never jumps. Current values are read before cancelling the running animation.
+function shift(el, fromY, toY, toOpacity) {
   if (!el) return
-  const current = getComputedStyle(el).transform
+  const { transform, opacity } = getComputedStyle(el)
   el.getAnimations().forEach((animation) => animation.cancel())
-  el.animate(
-    [{ transform: fromY === null && current !== 'none' ? current : `translateY(${fromY ?? 0}px)` }, { transform: `translateY(${toY}px)` }],
-    { duration: FADE_SPEED, easing: FADE_EASING, fill: 'forwards' },
-  )
+  const from = { transform: fromY === null && transform !== 'none' ? transform : `translateY(${fromY ?? 0}px)` }
+  const to = { transform: `translateY(${toY}px)` }
+  if (toOpacity !== undefined) {
+    from.opacity = opacity
+    to.opacity = toOpacity
+  }
+  el.animate([from, to], { duration: FADE_SPEED, easing: FADE_EASING, fill: 'forwards' })
 }
 
 // `section-margin` atom — the module's config sets no spacing size, so both resolve to margin--0
@@ -40,6 +44,8 @@ export function ActivitiesModule({ title, items }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const swiperElRef = useRef(null)
   const swiperRef = useRef(null)
+  // z-index handed to the most recently hovered slide, so slides stack in hover order, not DOM order
+  const stackRef = useRef(1)
 
   useEffect(() => {
     const el = swiperElRef.current
@@ -101,15 +107,50 @@ export function ActivitiesModule({ title, items }) {
     const swiper = swiperRef.current
     if (!isDesktop() || !swiper || index === swiper.activeIndex) return
 
+    const outgoing = swiper.slides[swiper.activeIndex]
+    const incoming = swiper.slides[index]
+    const opacities = swiper.slides.map((slide) => parseFloat(getComputedStyle(slide).opacity))
+    // How much of the incoming slide actually shows: its opacity times what the slides above let through.
+    // Fading in from there means a slide brought back from under another one never pops to the top.
+    const z = (slide) => Number(slide.style.zIndex) || 0
+    const startOpacity = swiper.slides.reduce((share, slide, i) => {
+      const above = z(slide) > z(incoming) || (z(slide) === z(incoming) && i > index)
+      return above ? share * (1 - opacities[i]) : share
+    }, opacities[index])
+    // Fast hovering can bring back a slide that is still on screen: continue it from where it is
+    const incomingVisible = startOpacity > 0.01
+
+    // Crossfade with no white gap and no stale images: the newest slide goes on top of everything and
+    // fades in, while every other slide is frozen as it is now. Once the new slide is fully opaque the
+    // rest are hidden behind it. Overrides Swiper's own crossfade, which fades both slides at once.
+    incoming.style.zIndex = ++stackRef.current
+    swiper.slides.forEach((slide, i) => {
+      slide.getAnimations().forEach((animation) => animation.cancel())
+      if (slide !== incoming) slide.animate({ opacity: [opacities[i], opacities[i]] }, { duration: 0, fill: 'forwards' })
+    })
+    const fadeIn = incoming.animate({ opacity: [startOpacity, 1] }, { duration: FADE_SPEED, easing: FADE_EASING, fill: 'forwards' })
+    fadeIn.onfinish = () => {
+      swiper.slides.forEach((slide) => {
+        if (slide === incoming) return
+        slide.getAnimations().forEach((animation) => animation.cancel())
+        slide.animate({ opacity: [0, 0] }, { duration: 0, fill: 'forwards' })
+      })
+    }
+
     // Hovering a lower link: old image and button drift down, new ones drop in from above. Reverse going up.
     if (!prefersReducedMotion()) {
       const direction = index > swiper.activeIndex ? 1 : -1
-      const outgoing = swiper.slides[swiper.activeIndex]
-      const incoming = swiper.slides[index]
       shift(outgoing.querySelector('img'), null, FADE_SHIFT * direction)
-      shift(incoming.querySelector('img'), -FADE_SHIFT * direction, 0)
-      shift(outgoing.querySelector('.activities-module__buttons'), null, BUTTON_SHIFT * direction)
-      shift(incoming.querySelector('.activities-module__buttons'), -BUTTON_SHIFT * direction, 0)
+      shift(incoming.querySelector('img'), incomingVisible ? null : -FADE_SHIFT * direction, 0)
+      // The outgoing slide stays opaque under the incoming one, so its buttons fade out on their own
+      // to avoid ghosted buttons, and fade back in if the slide returns while still visible
+      shift(outgoing.querySelector('.activities-module__buttons'), null, BUTTON_SHIFT * direction, 0)
+      shift(
+        incoming.querySelector('.activities-module__buttons'),
+        incomingVisible ? null : -BUTTON_SHIFT * direction,
+        0,
+        incomingVisible ? 1 : undefined,
+      )
     }
 
     setActiveIndex(index)

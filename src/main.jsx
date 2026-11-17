@@ -9,6 +9,7 @@ const routes = {
   '/hero-module': { label: 'Hero module', load: () => import('./HeroPage.jsx') },
   '/activities-module': { label: 'Activities module', load: () => import('./ActivitiesPage.jsx') },
   '/language-popup': { label: 'Language popup', load: () => import('./LanguagePopupPage.jsx') },
+  '/side-cart': { label: 'Side cart', load: () => import('./SideCartPage.jsx') },
 }
 
 const menuRoutes = [
