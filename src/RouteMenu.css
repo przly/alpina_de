@@ -131,3 +131,10 @@
     transition: none;
   }
 }
+
+/* Hidden on mobile: the Alpina header's mobile layout (≤1023px) puts the cart and hamburger where this sits */
+@media (max-width: 1023px) {
+  .route-menu {
+    display: none;
+  }
+}

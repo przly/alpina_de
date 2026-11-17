@@ -1,0 +1,324 @@
+/* Sandbox-only `is-leaving` state: during the close delay the panel stays up but the button looks idle.
+   Prefixed with .header-main so it beats `.menu__item.is-open-megamenu .menu__link` from the bundle. */
+.header-main .menu__item.is-leaving .menu__link {
+  background-color: transparent;
+  color: var(--color-gray-900);
+}
+
+/* ------------------------------------------------------------------
+   Megamenu panel + page overlay motion (desktop only; below 1024px the
+   megamenu keeps Alpina's slide-in).
+   - Enter 220ms, exit 150ms: the menu opens on hover many times a session,
+     so it stays in dropdown range and leaves faster than it arrives.
+   - Strong ease-out both ways: moves the moment the pointer arrives.
+   - Translate + fade only. A full-width panel isn't anchored to one point,
+     and scaleY squashed the link text while it opened.
+   ------------------------------------------------------------------ */
+:root {
+  --megamenu-enter-dur: 220ms;
+  --megamenu-exit-dur: 150ms;
+  --megamenu-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --megamenu-enter-y: -8px;
+  --megamenu-exit-y: -4px;
+  /* Content swap when hovering from one item straight to another (driven from JS).
+     Slide on a softer decelerating curve than the strong ease-out, so the slide reads as a glide rather than a snap;
+     the incoming fade waits 30ms so old and new text don't sit on top of each other, and 2px blur bridges the swap. */
+  --megamenu-swap-x: 16px;
+  --megamenu-swap-out-dur: 175ms;
+  --megamenu-swap-in-dur: 300ms;
+  --megamenu-swap-fade-in-dur: 225ms;
+  --megamenu-swap-fade-delay: 30ms;
+  --megamenu-swap-blur: 2px;
+  --megamenu-swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Closed: the transition defined here is the one used when leaving .is-open, so it carries the exit timing */
+  .header-main .megamenu.t-dropdown {
+    transform: translateY(var(--megamenu-enter-y));
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform var(--megamenu-exit-dur) var(--megamenu-ease),
+      opacity var(--megamenu-exit-dur) var(--megamenu-ease);
+    will-change: transform, opacity;
+  }
+
+  .header-main .megamenu.t-dropdown.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition:
+      transform var(--megamenu-enter-dur) var(--megamenu-ease),
+      opacity var(--megamenu-enter-dur) var(--megamenu-ease);
+  }
+
+  /* Exit travels half the entry distance, so the leave is quieter than the arrival.
+     Alpina hides the closed megamenu with visibility: hidden, which would cut the fade-out short. */
+  .header-main .megamenu.t-dropdown.is-closing {
+    transform: translateY(var(--megamenu-exit-y));
+    visibility: visible;
+  }
+
+  /* The panel starts 8px higher and its resting top touches the button row,
+     so lift every menu link above it (megamenu is z-index 10) or the moving panel clips their bottom edge */
+  .header-main .menu__item > .menu__link {
+    z-index: 11;
+  }
+
+  /* Hovering from one item straight to another swaps panels instantly.
+     Must out-rank the `.is-open` rule above, which sets its own (enter) transition. */
+  .header-main .megamenu.t-dropdown.t-dropdown--instant,
+  .header-main .megamenu.t-dropdown.is-open.t-dropdown--instant {
+    transition: none;
+  }
+
+  /* Alpina gives the panel overflow: auto (for its max-height). The ±32px content slide overflows sideways
+     and briefly triggered a horizontal scrollbar, so clip horizontally and keep vertical scrolling */
+  .header-main .megamenu.t-dropdown {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Outgoing panel during a content swap: stays put on top with no background, so only its content
+     (animated from JS) fades over the incoming panel, whose white background never drops out */
+  .header-main .megamenu.t-dropdown.is-swapping-out {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 11;
+    transition: none;
+  }
+
+  /* Page overlay fades with the panel instead of snapping on and off.
+     visibility waits for the fade-out to finish before hiding. */
+  body .header-main__overlay {
+    transition:
+      opacity var(--megamenu-exit-dur) var(--megamenu-ease),
+      visibility 0s linear var(--megamenu-exit-dur);
+  }
+
+  body:has(.is-open-megamenu) .header-main__overlay {
+    transition:
+      opacity var(--megamenu-enter-dur) var(--megamenu-ease),
+      visibility 0s;
+  }
+}
+
+/* Reduced motion: keep the fade (it tells you the panel appeared), drop the movement */
+@media (prefers-reduced-motion: reduce) {
+  .header-main .megamenu.t-dropdown,
+  .header-main .megamenu.t-dropdown.is-closing {
+    transform: none;
+  }
+}
+
+/* Mobile menu: the megamenu slides in over the whole menu panel, which covered the red bottom bar
+   (Find a store / Help / B2B / language). Keep the bar above the sliding panel, and pad the panel's
+   scroll area by the bar's height (10px + 18px + 10px) so its last links can scroll clear of it. */
+@media only screen and (max-width: 1023px) {
+  .header-main .menu__bottom-bar {
+    position: relative;
+    z-index: 11;
+  }
+
+  .header-main .megamenu {
+    padding-bottom: calc(24px + 38px);
+  }
+
+  /* 20px from the navbar's divider to the "Nazaj" button (matches the 20px side margin). The panel's own top
+     padding goes, and the inner padding is 22px because the panel starts 2px above the divider (the search
+     bar overhangs --header-height by 2px). */
+  .header-main .megamenu {
+    padding-top: 0;
+  }
+
+  .header-main .megamenu__inner {
+    padding-top: 22px;
+  }
+
+  /* 12px between links (Alpina's default is 8px); the two-column lists keep their own 8px column gap */
+  .header-main .megamenu__list {
+    gap: 12px;
+  }
+}
+
+/* Mobile menu: Wishlist and Profile use the large button size and split the row between them,
+   lined up with the menu links (Alpina's nav is 100% - 40px wide, centred) */
+@media only screen and (max-width: 1023px) {
+  .header-main .menu__extra {
+    width: 100%;
+    max-width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header-main .menu__extra .btn {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+}
+
+/* Mobile dropdown: the megamenu draws its own top hairline right next to the search bar's bottom border,
+   doubling the line between the header and the dropdown. Drop the megamenu's so a single divider remains. */
+@media only screen and (max-width: 1023px) {
+  .header-main .megamenu::before {
+    content: none;
+  }
+}
+
+/* "Nazaj" as the default-size gray button. Alpina's `.megamenu__back` styling (red text, -8px nudge, 20px icon)
+   was made for a text link, so reset it to the button's own look and keep it to its content width. */
+@media only screen and (min-width: 1024px) {
+  .header-main .megamenu__back.btn {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .header-main .megamenu__back.btn {
+    display: inline-flex;
+    justify-self: start;
+    margin-left: 0;
+    /* Same as the 40px gap between the link sections (`.megamenu__left` gap on mobile) */
+    margin-bottom: 40px;
+    padding-left: 12px;
+    padding-right: 16px;
+    color: var(--color-gray-900);
+  }
+
+  .header-main .megamenu__back.btn .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Mobile menu rows: the whole row fills gray-100 while pressed, running edge to edge (through the 20px page
+   margin on each side) while the text and divider keep their 20px inset. The fill is a pseudo-element behind
+   the link's content, because the link itself stops at the margin. Alpina's :hover on touch is white and
+   sticks after a tap, so press is the only state used here.
+   Motion: a colour change uses plain `ease`, not the strong ease-out used for movement. The strong curve covers
+   60% of the fill in the first frame, which reads as instant. The fill ramps in over 150ms and fades out over
+   250ms on release. A quick tap releases before the ramp finishes, so the transition retargets from wherever
+   it is and the row leaves a soft flash instead of nothing. Opacity only, so it stays off the main thread. */
+:root {
+  --menu-press-in-dur: 150ms;
+  --menu-press-out-dur: 250ms;
+  --menu-press-ease: ease;
+}
+
+@media only screen and (max-width: 1023px) {
+  .header-main .menu__link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    right: -20px;
+    z-index: -1;
+    background-color: var(--color-gray-100);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--menu-press-out-dur) var(--menu-press-ease);
+  }
+
+  .header-main .menu__link:active::before {
+    opacity: 1;
+    transition-duration: var(--menu-press-in-dur);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Mobile drill-in (Women / Men / Kids): the panel pushes in from the right
+   over the menu list, iOS-navigation style.
+   - Transform only (Alpina animated `all`). Opening eases out, closing
+     eases in (see --drill-ease-out / --drill-ease-in).
+   - Enter 320ms, exit 240ms; leaving is quicker than arriving.
+   - A black backdrop dims the menu list while the panel covers it, so the
+     layer change reads as depth. It sits under the panel, so it only shows
+     in the strip the panel hasn't reached yet, and fades back out as you go back.
+   - visibility waits for the exit slide to finish before hiding the panel.
+   ------------------------------------------------------------------ */
+:root {
+  --drill-enter-dur: 320ms;
+  --drill-exit-dur: 240ms;
+  /* Opening: a cubic bézier fitted to a critically damped spring (no overshoot) with a small initial
+     velocity, within 1.6px of it at every point. Per frame it moves 22 → 31 → 35 → 37px, then decelerates
+     evenly. That's a soft start with no crawl-then-lunge, and the biggest step is about 36px.
+     Closing: the standard "accelerate" ease-in. It builds up evenly (4, 10, 15 … 44px per frame) and leaves the
+     screen at full speed. Both are CSS transitions, so tapping mid-flight retargets from the current position. */
+  --drill-ease-out: cubic-bezier(0.2, 0.17, 0.36, 0.9);
+  --drill-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --drill-backdrop-opacity: 0.3;
+}
+
+@media only screen and (max-width: 1023px) {
+  .header-main .megamenu {
+    transition:
+      transform var(--drill-exit-dur) var(--drill-ease-in),
+      visibility 0s linear var(--drill-exit-dur);
+  }
+
+  .header-main .menu__item.is-open-megamenu .megamenu {
+    transition:
+      transform var(--drill-enter-dur) var(--drill-ease-out),
+      visibility 0s;
+  }
+
+  /* Prepare the panels' and backdrop's GPU layers as soon as the menu is open, so the first frame of a
+     drill-in doesn't have to draw a full-screen panel from scratch (which drops a frame on phones and shows
+     as a jump at the start). Only while the menu is open, since each layer costs memory. */
+  body.is-open-menu .header-main .megamenu {
+    will-change: transform;
+  }
+
+  body.is-open-menu .header-main .menu::after {
+    will-change: opacity;
+  }
+
+  /* Backdrop: a layer over the menu list, below the panel (z-index 10) and the red bottom bar (11) */
+  .header-main .menu::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    background-color: #000;
+    opacity: 0;
+    pointer-events: none;
+    /* Same curve as the panel, so the dimming tracks how far it has travelled */
+    transition: opacity var(--drill-exit-dur) var(--drill-ease-in);
+  }
+
+  .header-main .menu:has(.is-open-megamenu)::after {
+    opacity: var(--drill-backdrop-opacity);
+    transition: opacity var(--drill-enter-dur) var(--drill-ease-out);
+  }
+}
+
+/* Reduced motion: no sliding; the panel fades in place and the backdrop is skipped */
+@media only screen and (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .header-main .megamenu,
+  .header-main .menu__item.is-open-megamenu .megamenu {
+    transform: none;
+  }
+
+  .header-main .megamenu {
+    opacity: 0;
+    transition:
+      opacity 150ms ease,
+      visibility 0s linear 150ms;
+  }
+
+  .header-main .menu__item.is-open-megamenu .megamenu {
+    opacity: 1;
+    transition:
+      opacity 150ms ease,
+      visibility 0s;
+  }
+
+  .header-main .menu::after {
+    content: none;
+  }
+}

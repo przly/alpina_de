@@ -8,12 +8,11 @@
 	// Tablet P and down
 	@media #{$breakpoint-sm-down} {
 		position: fixed;
-		top: var(--header-height, 0px);
-		height: calc(100vh - var(--header-height, 0px));
+		top: calc(var(--header-height, 0px));
+		height: calc(100dvh - var(--header-height, 0px));
 		z-index: 99;
 		left: 0;
 		width: 100%;
-		background-color: var(--color-white);
 		opacity: 0;
 		pointer-events: none;
 		transform: scaleY(0.95) translateY(-8px);
@@ -23,12 +22,22 @@
 		flex-direction: column;
 		overflow: hidden;
 		overflow-y: auto;
+		visibility: hidden;
+		background-color: $cgp_white;
 
 		// stylelint-disable-next-line
 		.#{$class_open_menu} & {
 			opacity: 1;
 			pointer-events: all;
+			visibility: visible;
 			transform: scaleY(1) translateY(0);
+		}
+	}
+
+	body.full-header & {
+		@media #{$breakpoint-sm-down} {
+			top: calc(var(--header-height, 0px) + 72px);
+			height: calc(100dvh - var(--header-height, 0px) - 72px);
 		}
 	}
 
@@ -79,6 +88,23 @@
 			}
 		}
 
+		@media #{$breakpoint-md-up} {
+			&.has-megamenu:focus-within {
+				// stylelint-disable-next-line
+				.menu__link {
+					background-color: $cgp_red_500;
+					color: $cgp_white;
+				}
+
+				// stylelint-disable-next-line
+				.megamenu {
+					opacity: 1;
+					pointer-events: auto;
+					visibility: visible;
+				}
+			}
+		}
+
 		&.is-open-megamenu {
 			// stylelint-disable-next-line
 			.menu__link {
@@ -96,7 +122,6 @@
 				opacity: 1;
 				pointer-events: auto;
 				visibility: visible;
-				transform: scaleY(1) translateY(0);
 
 				@media #{$breakpoint-sm-down} {
 					transform: translateX(0);
@@ -151,9 +176,9 @@
 		@media #{$breakpoint-sm-down} {
 			border-radius: 0;
 			min-height: 0;
-			font-size: 16px;
-			padding: 16px 0;
-			border-bottom: 1px solid $cgp_gray_200;
+			font-size: 20px;
+			padding: 13px 0;
+			border-bottom: 0.5px solid $cgp_gray_200;
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
@@ -219,7 +244,12 @@
 			display: flex;
 			justify-content: center;
 			gap: 12px;
-			margin: 20px 0;
+			margin: 30px 0;
+		}
+
+		.btn__icon .icon {
+			height: 16px;
+			width: 16px;
 		}
 	}
 

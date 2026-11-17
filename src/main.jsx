@@ -10,6 +10,7 @@ const routes = {
   '/activities-module': { label: 'Activities module', load: () => import('./ActivitiesPage.jsx') },
   '/language-popup': { label: 'Language popup', load: () => import('./LanguagePopupPage.jsx') },
   '/side-cart': { label: 'Side cart', load: () => import('./SideCartPage.jsx') },
+  '/navigation': { label: 'Navigation', load: () => import('./NavigationPage.jsx') },
 }
 
 const menuRoutes = [

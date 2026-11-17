@@ -72,6 +72,11 @@
 	}
 
 	&__form {
+		--modal-open-dur: 250ms;
+		--modal-close-dur: 150ms;
+		--modal-scale: 0.96;
+		--modal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
 		position: fixed;
 		height: $vh_100;
 		width: 100%;
@@ -85,7 +90,7 @@
 		overflow: auto;
 		padding: 20px;
 		opacity: 0;
-		transition: 0.3s ease;
+		transition: opacity var(--modal-close-dur) var(--modal-ease), visibility 0s linear var(--modal-close-dur);
 		visibility: hidden;
 		pointer-events: none;
 
@@ -100,10 +105,12 @@
 			opacity: 1;
 			visibility: visible;
 			pointer-events: auto;
+			transition: opacity var(--modal-open-dur) var(--modal-ease), visibility 0s;
 
 			// stylelint-disable-next-line
 			.language-switch__form-inner {
 				transform: scale(1);
+				transition: transform var(--modal-open-dur) var(--modal-ease);
 			}
 		}
 
@@ -138,8 +145,9 @@
 			background: $cgp_white;
 			padding: 24px 0;
 			z-index: 2;
-			transition: 600ms cubic-bezier(0.23, 1, 0.32, 1);
-			transform: scale(0.9);
+			transition: transform var(--modal-close-dur) var(--modal-ease);
+			transform: scale(var(--modal-scale));
+			will-change: transform;
 
 			@media #{$breakpoint-xs-only} {
 				border-radius: 4px;
@@ -172,6 +180,42 @@
 			@media #{$breakpoint-xs-only} {
 				font-size: 16px;
 			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			&,
+			&-inner {
+				// stylelint-disable-next-line declaration-no-important
+				transition: none !important;
+			}
+		}
+	}
+}
+
+// ##################################################
+
+.language-switch__form.language-switch__form {
+	transition: opacity var(--modal-close-dur) var(--modal-ease), visibility 0s linear var(--modal-close-dur);
+
+	// stylelint-disable-next-line
+	&.#{$class_open} {
+		transition: opacity var(--modal-open-dur) var(--modal-ease), visibility 0s;
+	}
+
+	.language-switch__form-inner {
+		transition: transform var(--modal-close-dur) var(--modal-ease);
+	}
+
+	// stylelint-disable-next-line
+	&.#{$class_open} .language-switch__form-inner {
+		transition: transform var(--modal-open-dur) var(--modal-ease);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		&,
+		.language-switch__form-inner {
+			// stylelint-disable-next-line declaration-no-important
+			transition: none !important;
 		}
 	}
 }

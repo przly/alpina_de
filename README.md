@@ -10,8 +10,8 @@ npm run dev
 `npm run dev` / `npm run build` first compile the Alpina SCSS in
 `src/alpina` into `src/alpina/css/bundle.css` (gitignored), mirroring the
 repo's gulp CSS task. Routes: `/` (product card), `/hero-module`,
-`/activities-module`, `/language-popup`, `/side-cart`. A route switcher sits in the
-top-right corner of every page (sandbox-only, not part of Alpina).
+`/activities-module`, `/language-popup`, `/side-cart`, `/navigation`. A route switcher sits in the
+top-right corner of every page from `1024px` up (sandbox-only, not part of Alpina).
 
 ## product-card animation changes and fixes
 
@@ -163,3 +163,25 @@ Content is placeholder.
   `promotion-card`, reward row, product recommendations, button loaders or animated
   total price; the empty state has a sandbox-only "Refill cart" button
   instead of the shop link.
+
+## navigation (`site-header` + `menu` + `megamenu`)
+
+Clone of the site header on `/navigation`, from `164-1-alpina-prenova`'s
+`feature/menu-update` (hover-to-open megamenu), with the `site-header`,
+`menu`, `megamenu`, `header-search` and `language-switch` SCSS re-synced and
+the hero module underneath for context. On desktop the megamenu opens on hover
+and keeps a `150ms` grace period on hover-out. It slides down `8px` and fades in over `220ms`
+(`150ms` out, `cubic-bezier(0.23, 1, 0.32, 1)`) with the page overlay fading
+alongside, and moving between Women, Men and Kids keeps the panel open while
+only the content swaps: the old columns slide `16px` away and blur out as the
+new ones slide in from the other side, following the pointer's direction.
+Link content is placeholder Alpina-style categories, distinct per item.
+
+On mobile the dropdown pushes in from the right over the menu list (`320ms`,
+`cubic-bezier(0.2, 0.17, 0.36, 0.9)`, fitted to a no-overshoot spring) and
+leaves with an accelerating `240ms` `cubic-bezier(0.4, 0, 1, 1)`, while a 30%
+black backdrop dims the list underneath on the same timing. "Nazaj" is the gray
+`btn` atom, Wishlist and Profile are large buttons sharing the row, the red
+bottom bar stays visible over the dropdown, rows fill gray-100 edge to edge on
+press, and links sit `12px` apart. Not ported: the search results dropdown,
+the language popup trigger and real link targets.
