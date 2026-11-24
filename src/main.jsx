@@ -11,6 +11,7 @@ const routes = {
   '/language-popup': { label: 'Language popup', load: () => import('./LanguagePopupPage.jsx') },
   '/side-cart': { label: 'Side cart', load: () => import('./SideCartPage.jsx') },
   '/navigation': { label: 'Navigation', load: () => import('./NavigationPage.jsx') },
+  '/product': { label: 'Product detail', load: () => import('./ProductPage.jsx') },
 }
 
 const menuRoutes = [

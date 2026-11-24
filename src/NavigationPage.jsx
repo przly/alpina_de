@@ -439,7 +439,7 @@ function LanguageSwitch() {
 }
 
 // `site-header` module
-function SiteHeader() {
+export function SiteHeader() {
   const headerRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
 
