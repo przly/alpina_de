@@ -268,6 +268,8 @@
     z-index: 2;
     max-width: none;
     padding: 0 24px 0 20px;
+    /* White panel always reaches at least the bottom of the gallery, even when its content is shorter */
+    min-height: var(--slide-size);
   }
 
   /* Controls span the gallery area left of the buy box; arrows end 20px before it */
@@ -284,6 +286,11 @@
 /* ---------- Below Tablet L: slider on top with the next slide peeking, buy box underneath ---------- */
 
 @media (max-width: 1022px) {
+  /* The site adds 45px under the header below Tablet L; the gallery sits flush under the navbar instead */
+  main {
+    padding-top: var(--header-height, 102px) !important;
+  }
+
   .product-module .product-showcase__main .swiper {
     padding-left: 24px;
   }
