@@ -15,7 +15,7 @@
 }
 
 /* Tablet L and up: the gallery sticks while the buy box scrolls, then leaves with the description card */
-@media (min-width: 1024px) {
+@media (min-width: 1023px) {
   .product-module .col-lg-8 > .product-showcase {
     position: sticky;
     /* 16px matches .product-module's padding-top, the gap the gallery has under the navbar at rest */
@@ -30,4 +30,34 @@
   height: 100%;
   object-fit: cover !important;
   object-position: center;
+}
+
+/* No jumps at breakpoints: the Alpina grid steps the container (990 / 1240 / 1412px) and the
+   gallery column (7/12 to 8/12) at fixed widths. Make both continuous instead. */
+.container {
+  max-width: calc(100% - 40px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Above mobile the page keeps a constant 24px to the viewport edge, at any width */
+@media (min-width: 768px) {
+  .container {
+    max-width: calc(100% - 48px) !important;
+  }
+}
+
+@media (min-width: 1023px) {
+  /* Gallery column eases from 7/12 at 1023px to 8/12 at 1201px, buy box takes the rest */
+  .product-module .row > .col-lg-8 {
+    --gallery-col: clamp(58.3333%, calc(58.3333% + (100vw - 1023px) * 0.0468), 66.6667%);
+    flex: 0 0 var(--gallery-col);
+    max-width: var(--gallery-col);
+  }
+
+  .product-module .row > .col-lg-4 {
+    flex: 1 1 0;
+    max-width: none;
+    min-width: 0;
+  }
 }
