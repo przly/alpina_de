@@ -1,0 +1,304 @@
+/* Product detail v2, styled after the Figma "Product Detail" frame (Alpina, node 12958:53323):
+   a full-bleed horizontal row of square slides that runs behind a flat 495px buy box.
+   Scoped to this page; the Alpina bundle styles the individual components. */
+
+/* Continuous page gutters (20px on mobile, 24px above), no breakpoint steps */
+.container {
+  max-width: calc(100% - 40px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: calc(100% - 48px) !important;
+  }
+}
+
+.product-module {
+  --slide-gap: 4px;
+  --buy-box-width: 495px;
+  --slide-size: min(calc(100vw - 48px), 640px);
+  padding-top: 0;
+}
+
+/* ---------- Gallery ---------- */
+
+.product-module .product-showcase {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  display: block;
+}
+
+.product-module .product-showcase__main {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.product-module .product-showcase__main .swiper {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.product-module .product-showcase__main .swiper-slide {
+  width: var(--slide-size);
+  height: var(--slide-size);
+  flex-shrink: 0;
+}
+
+.product-module .product-showcase__image {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  border-radius: 0;
+  background-color: var(--color-gray-100, #f5f5f5);
+}
+
+.product-module .product-showcase__main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+/* Pagination pill + arrows (Figma "Action Bar") */
+/* The controls box spans the visible part of the gallery, so 50% is its centre */
+.pdp-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 37px;
+  padding: 0 20px 0 24px;
+  pointer-events: none;
+}
+
+.pdp-controls > * {
+  pointer-events: auto;
+}
+
+.pdp-controls .pdp-controls__pagination.swiper-pagination {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 80px;
+  background: var(--color-gray-200, #e5e5e5);
+}
+
+.pdp-controls .swiper-pagination-bullet {
+  width: 4px;
+  height: 4px;
+  margin: 0 !important;
+  border-radius: 80px;
+  background: var(--color-gray-400, #a1a1a1);
+  opacity: 1;
+  transition: width 0.3s var(--easing-ease, ease), background-color 0.3s var(--easing-ease, ease);
+}
+
+.pdp-controls .swiper-pagination-bullet-active {
+  width: 24px;
+  background: var(--color-gray-900, #171717);
+}
+
+.pdp-controls__arrows {
+  display: flex;
+  gap: 4px;
+}
+
+.pdp-controls__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 37px;
+  padding: 0;
+  border: 0;
+  border-radius: 50px;
+  background: var(--color-gray-900, #171717);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 80ms ease, opacity 0.2s ease;
+}
+
+.pdp-controls__arrow:active {
+  transform: scale(0.96);
+}
+
+.pdp-controls__arrow.swiper-button-disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pdp-controls__arrow .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Buy box ---------- */
+
+.product-module .row > .col-lg-4 {
+  background: var(--color-white, #fff);
+  padding: 24px;
+}
+
+/* Title 30/1 semi-bold, price 20 semi-bold */
+.product-module__title .title {
+  font-size: 30px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.6px !important;
+}
+
+.product-module__price {
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+}
+
+/* Sizes: seven equal columns, 8px gaps */
+.product-module .size-selector {
+  max-width: none;
+}
+
+.product-module .size-selector__list {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.product-module .size-selector__item-label {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Store availability and product number rows */
+.product-module__find-store-title {
+  color: var(--color-gray-500, #737373);
+}
+
+.product-module__find-store-title img {
+  width: 12px;
+  height: 12px;
+}
+
+/* Vertical rhythm from the design: size to button 16, button to rows 24, row to row 12, then 36.
+   The content column is a 36px grid, so the differences are taken off with negative margins. */
+.product-module .product-module__button-group {
+  margin-top: -20px;
+}
+
+.product-module__find-store {
+  margin-top: -12px;
+}
+
+.product-module__find-store.product-module__product-number {
+  margin-top: -24px;
+}
+
+/* Not part of the design */
+.product-module .color-selector,
+.product-module__content-footer .product-module__info-row {
+  display: none;
+}
+
+/* The product row bleeds to the viewport edges at every width */
+.product-module__inner > .container {
+  max-width: none !important;
+  width: 100%;
+}
+
+.product-module .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ---------- Tablet L and up: gallery and buy box share one grid cell ---------- */
+
+@media (min-width: 1023px) {
+  .product-module {
+    --slide-size: min(
+      calc(100svh - var(--header-height, 0px)),
+      calc(100vw - var(--buy-box-width) - 24px)
+    );
+  }
+
+  .product-module .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--buy-box-width);
+    margin: 0;
+  }
+
+  /* Gallery sticks under the navbar while the buy box scrolls over it; both leave together once the
+     buy box bottom reaches the gallery bottom (the end of their shared grid row) */
+  .product-module .row > .col-lg-8 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    max-width: none;
+    min-width: 0;
+    padding: 0;
+    align-self: start;
+    position: sticky;
+    top: var(--header-height, 0px);
+  }
+
+  .product-module .row > .col-lg-4 {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    padding: 0 24px 0 20px;
+  }
+
+  /* Controls span the gallery area left of the buy box; arrows end 20px before it */
+  .pdp-controls {
+    right: var(--buy-box-width);
+  }
+
+  /* The slider is as tall as the slide */
+  .product-module .product-showcase__main {
+    height: var(--slide-size);
+  }
+}
+
+/* ---------- Below Tablet L: slider on top with the next slide peeking, buy box underneath ---------- */
+
+@media (max-width: 1022px) {
+  .product-module .product-showcase__main .swiper {
+    padding-left: 24px;
+  }
+
+  .product-module .row > .col-lg-8 {
+    padding: 0;
+  }
+
+  .product-module__tag-list {
+    padding: 16px 24px 0;
+  }
+
+  .pdp-controls__arrows {
+    display: none;
+  }
+
+
+}

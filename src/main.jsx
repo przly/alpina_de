@@ -12,6 +12,7 @@ const routes = {
   '/side-cart': { label: 'Side cart', load: () => import('./SideCartPage.jsx') },
   '/navigation': { label: 'Navigation', load: () => import('./NavigationPage.jsx') },
   '/product': { label: 'Product detail', load: () => import('./ProductPage.jsx') },
+  '/product-2': { label: 'Product detail 2', load: () => import('./ProductPage2.jsx') },
 }
 
 const menuRoutes = [
