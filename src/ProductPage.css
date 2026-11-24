@@ -32,8 +32,8 @@
   object-position: center;
 }
 
-/* No jumps at breakpoints: the Alpina grid steps the container (990 / 1240 / 1412px) and the
-   gallery column (7/12 to 8/12) at fixed widths. Make both continuous instead. */
+/* No jumps at breakpoints: the Alpina grid steps the container (990 / 1240 / 1412px) at fixed
+   widths. Make it continuous instead. */
 .container {
   max-width: calc(100% - 40px) !important;
   padding-left: 0 !important;
@@ -48,14 +48,13 @@
 }
 
 @media (min-width: 1023px) {
-  /* Gallery column eases from 7/12 at 1023px to 8/12 at 1201px, buy box takes the rest */
-  .product-module .row > .col-lg-8 {
-    --gallery-col: clamp(58.3333%, calc(58.3333% + (100vw - 1023px) * 0.0468), 66.6667%);
-    flex: 0 0 var(--gallery-col);
-    max-width: var(--gallery-col);
+  /* Buy box keeps a fixed width (what it measures at 1440px); only the gallery stretches */
+  .product-module .row > .col-lg-4 {
+    flex: 0 0 464px;
+    max-width: 464px;
   }
 
-  .product-module .row > .col-lg-4 {
+  .product-module .row > .col-lg-8 {
     flex: 1 1 0;
     max-width: none;
     min-width: 0;
