@@ -35,7 +35,8 @@ function ProductPage() {
       })
   }, [])
 
-  return <div style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: markup }} />
+  // The class scopes this page's CSS so it beats the Alpina bundle, which loads after it in production
+  return <div className="pdp-v1" style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: markup }} />
 }
 
 export default ProductPage

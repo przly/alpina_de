@@ -1,22 +1,25 @@
+/* Every rule is scoped under .pdp-v1 (the page wrapper) so it wins on specificity: the production build
+   loads this file before the shared Alpina bundle, dev loads it after. */
+
 /* Sandbox tweak: hide the gallery pagination dots under the product showcase */
-.product-showcase .swiper-pagination {
+.pdp-v1 .product-showcase .swiper-pagination {
   display: none !important;
 }
 
 /* Gallery fills the viewport below the header, at every breakpoint */
-.product-showcase__image,
-.product-showcase__thumb .swiper {
+.pdp-v1 .product-showcase__image,
+.pdp-v1 .product-showcase__thumb .swiper {
   height: calc(100svh - var(--header-height, 0px) - 32px) !important;
   padding-bottom: 0 !important;
 }
 
-.product-showcase__thumb .swiper {
+.pdp-v1 .product-showcase__thumb .swiper {
   padding-bottom: 44px !important;
 }
 
 /* Tablet L and up: the gallery sticks while the buy box scrolls, then leaves with the description card */
 @media (min-width: 1023px) {
-  .product-module .col-lg-8 > .product-showcase {
+  .pdp-v1 .product-module .col-lg-8 > .product-showcase {
     position: sticky;
     /* 16px matches .product-module's padding-top, the gap the gallery has under the navbar at rest */
     top: calc(var(--header-height, 0px) + 16px);
@@ -24,8 +27,8 @@
 }
 
 /* Main gallery images always fill their container (cropping rather than letterboxing) */
-.product-showcase .product-showcase__main .no-cropping img,
-.product-showcase .product-showcase__main img {
+.pdp-v1 .product-showcase .product-showcase__main .no-cropping img,
+.pdp-v1 .product-showcase .product-showcase__main img {
   width: 100%;
   height: 100%;
   object-fit: cover !important;
@@ -34,7 +37,7 @@
 
 /* No jumps at breakpoints: the Alpina grid steps the container (990 / 1240 / 1412px) at fixed
    widths. Make it continuous instead. */
-.container {
+.pdp-v1 .container {
   max-width: calc(100% - 40px) !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -42,19 +45,19 @@
 
 /* Above mobile the page keeps a constant 24px to the viewport edge, at any width */
 @media (min-width: 768px) {
-  .container {
+  .pdp-v1 .container {
     max-width: calc(100% - 48px) !important;
   }
 }
 
 @media (min-width: 1023px) {
   /* Buy box keeps a fixed width (what it measures at 1440px); only the gallery stretches */
-  .product-module .row > .col-lg-4 {
+  .pdp-v1 .product-module .row > .col-lg-4 {
     flex: 0 0 464px;
     max-width: 464px;
   }
 
-  .product-module .row > .col-lg-8 {
+  .pdp-v1 .product-module .row > .col-lg-8 {
     flex: 1 1 0;
     max-width: none;
     min-width: 0;
